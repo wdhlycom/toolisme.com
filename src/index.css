@@ -10,7 +10,7 @@
   }
 
   body {
-    @apply bg-ink-50 text-ink-900 font-sans antialiased;
+    @apply bg-ink-50 text-ink-900 font-sans antialiased dark:bg-ink-950 dark:text-ink-100;
     text-rendering: optimizeLegibility;
   }
 
@@ -37,19 +37,19 @@
   }
 
   .btn-primary {
-    @apply btn bg-ink-900 text-white hover:bg-ink-800 hover:shadow-lg hover:shadow-ink-900/20 active:scale-[0.98];
+    @apply btn bg-ink-900 text-white hover:bg-ink-800 hover:shadow-lg hover:shadow-ink-900/20 active:scale-[0.98] dark:bg-accent-600 dark:hover:bg-accent-500;
   }
 
   .btn-secondary {
-    @apply btn bg-white text-ink-900 ring-1 ring-inset ring-ink-200 hover:bg-ink-50 hover:ring-ink-300 active:scale-[0.98];
+    @apply btn bg-white text-ink-900 ring-1 ring-inset ring-ink-200 hover:bg-ink-50 hover:ring-ink-300 active:scale-[0.98] dark:bg-ink-800 dark:text-ink-100 dark:ring-ink-700 dark:hover:bg-ink-700;
   }
 
   .btn-ghost {
-    @apply btn text-ink-700 hover:bg-ink-100 hover:text-ink-900;
+    @apply btn text-ink-700 hover:bg-ink-100 hover:text-ink-900 dark:text-ink-300 dark:hover:bg-ink-800 dark:hover:text-ink-100;
   }
 
   .card {
-    @apply rounded-2xl bg-white ring-1 ring-ink-200/70 transition-all duration-300;
+    @apply rounded-2xl bg-white ring-1 ring-ink-200/70 transition-all duration-300 dark:bg-ink-900 dark:ring-ink-700/70;
   }
 
   .card-hover {
@@ -57,11 +57,11 @@
   }
 
   .eyebrow {
-    @apply text-xs font-semibold uppercase tracking-widest text-accent-600;
+    @apply text-xs font-semibold uppercase tracking-widest text-accent-600 dark:text-accent-400;
   }
 
   .section-title {
-    @apply font-serif text-3xl font-medium tracking-tight text-ink-900 sm:text-4xl;
+    @apply font-serif text-3xl font-medium tracking-tight text-ink-900 sm:text-4xl dark:text-ink-100;
   }
 
   .link-underline {
@@ -78,11 +78,25 @@
   }
 
   .prose-toolisme {
-    @apply prose max-w-none prose-headings:font-serif prose-headings:font-medium prose-headings:tracking-tight prose-a:text-accent-700 prose-a:no-underline hover:prose-a:underline prose-strong:text-ink-900 prose-headings:text-ink-900 prose-p:text-ink-700 prose-li:text-ink-700 prose-strong:text-ink-900;
+    @apply prose max-w-none prose-headings:font-serif prose-headings:font-medium prose-headings:tracking-tight prose-a:text-accent-700 prose-a:no-underline hover:prose-a:underline prose-strong:text-ink-900 prose-headings:text-ink-900 prose-p:text-ink-700 prose-li:text-ink-700 prose-strong:text-ink-900 dark:prose-headings:text-ink-100 dark:prose-p:text-ink-300 dark:prose-li:text-ink-300 dark:prose-strong:text-ink-100 dark:prose-a:text-accent-400;
   }
 }
 
 @layer utilities {
+  /* Global dark-mode text remap: keeps inline text-ink-* readable on dark surfaces */
+  .dark .text-ink-900 {
+    @apply text-ink-100;
+  }
+  .dark .text-ink-700 {
+    @apply text-ink-300;
+  }
+  .dark .text-ink-600 {
+    @apply text-ink-300;
+  }
+  .dark .text-ink-500 {
+    @apply text-ink-400;
+  }
+
   .text-balance {
     text-wrap: balance;
   }

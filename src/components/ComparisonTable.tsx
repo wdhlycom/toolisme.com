@@ -7,23 +7,23 @@ export default function ComparisonTable() {
     <div className="overflow-x-auto">
       <table className="w-full min-w-[760px] border-collapse">
         <thead>
-          <tr className="border-b-2 border-ink-200 text-left">
-            <th className="px-4 py-4 text-xs font-semibold uppercase tracking-widest text-ink-500">
+          <tr className="border-b-2 border-ink-200 text-left dark:border-ink-700">
+            <th className="px-4 py-4 text-xs font-semibold uppercase tracking-widest text-ink-500 dark:text-ink-400">
               Tool
             </th>
-            <th className="px-4 py-4 text-xs font-semibold uppercase tracking-widest text-ink-500">
+            <th className="px-4 py-4 text-xs font-semibold uppercase tracking-widest text-ink-500 dark:text-ink-400">
               Category
             </th>
-            <th className="px-4 py-4 text-xs font-semibold uppercase tracking-widest text-ink-500">
+            <th className="px-4 py-4 text-xs font-semibold uppercase tracking-widest text-ink-500 dark:text-ink-400">
               Our Rating
             </th>
-            <th className="px-4 py-4 text-xs font-semibold uppercase tracking-widest text-ink-500">
+            <th className="px-4 py-4 text-xs font-semibold uppercase tracking-widest text-ink-500 dark:text-ink-400">
               Starting Price
             </th>
-            <th className="px-4 py-4 text-xs font-semibold uppercase tracking-widest text-ink-500">
+            <th className="px-4 py-4 text-xs font-semibold uppercase tracking-widest text-ink-500 dark:text-ink-400">
               Key Advantage
             </th>
-            <th className="px-4 py-4 text-right text-xs font-semibold uppercase tracking-widest text-ink-500">
+            <th className="px-4 py-4 text-right text-xs font-semibold uppercase tracking-widest text-ink-500 dark:text-ink-400">
               Action
             </th>
           </tr>
@@ -34,7 +34,7 @@ export default function ComparisonTable() {
             return (
               <tr
                 key={review.slug}
-                className="border-b border-ink-100 transition-colors hover:bg-ink-50/60"
+                className="border-b border-ink-100 transition-colors hover:bg-ink-50/60 dark:border-ink-800 dark:hover:bg-ink-800/50"
               >
                 {/* Tool name */}
                 <td className="px-4 py-5">
@@ -42,10 +42,10 @@ export default function ComparisonTable() {
                     to={`/reviews/${review.slug}`}
                     className="flex items-center gap-3"
                   >
-                    <span className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-ink-900 font-serif text-sm font-medium text-white">
+                    <span className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-ink-900 font-serif text-sm font-medium text-white dark:bg-accent-600">
                       {review.name.slice(0, 2)}
                     </span>
-                    <span className="font-serif text-base font-medium text-ink-900 hover:text-accent-700">
+                    <span className="font-serif text-base font-medium text-ink-900 hover:text-accent-700 dark:text-ink-100 dark:hover:text-accent-400">
                       {review.name}
                     </span>
                   </Link>
@@ -62,21 +62,21 @@ export default function ComparisonTable() {
                 <td className="px-4 py-5">
                   <div className="flex items-center gap-1.5">
                     <Star className="h-4 w-4 fill-sand-400 text-sand-400" />
-                    <span className="text-sm font-semibold text-ink-900">
+                    <span className="text-sm font-semibold text-ink-900 dark:text-ink-100">
                       {review.rating.toFixed(1)}
                     </span>
-                    <span className="text-xs text-ink-400">/5</span>
+                    <span className="text-xs text-ink-400 dark:text-ink-500">/5</span>
                   </div>
                 </td>
 
                 {/* Starting price */}
                 <td className="px-4 py-5">
-                  <span className="text-sm font-medium text-ink-700">{review.pricing}</span>
+                  <span className="text-sm font-medium text-ink-700 dark:text-ink-300">{review.pricing}</span>
                 </td>
 
                 {/* Key advantage */}
                 <td className="px-4 py-5">
-                  <span className="text-sm text-ink-600">{review.keyAdvantage}</span>
+                  <span className="text-sm text-ink-600 dark:text-ink-300">{review.keyAdvantage}</span>
                 </td>
 
                 {/* Action */}
@@ -84,7 +84,7 @@ export default function ComparisonTable() {
                   <div className="flex items-center justify-end gap-2">
                     <Link
                       to={`/reviews/${review.slug}`}
-                      className="inline-flex items-center gap-1 rounded-full bg-ink-100 px-3 py-1.5 text-xs font-semibold text-ink-700 transition-colors hover:bg-ink-200"
+                      className="inline-flex items-center gap-1 rounded-full bg-ink-100 px-3 py-1.5 text-xs font-semibold text-ink-700 transition-colors hover:bg-ink-200 dark:bg-ink-800 dark:text-ink-300 dark:hover:bg-ink-700"
                     >
                       Review
                       <ArrowRight className="h-3 w-3" />

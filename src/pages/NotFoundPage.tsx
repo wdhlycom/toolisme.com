@@ -5,7 +5,7 @@ export default function NotFoundPage() {
   return (
     <div className="flex min-h-[60vh] items-center justify-center px-5">
       <div className="text-center">
-        <p className="font-serif text-8xl font-medium text-ink-200">404</p>
+        <p className="font-serif text-8xl font-medium text-ink-200 dark:text-ink-700">404</p>
         <h1 className="mt-4 font-serif text-3xl font-medium tracking-tight text-ink-900">
           Page not found
         </h1>

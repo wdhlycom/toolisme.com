@@ -14,7 +14,7 @@ export default function PrivacyPage() {
 
       <section className="container-prose py-16">
         <div className="prose-toolisme">
-          <div className="not-prose mb-10 flex items-start gap-4 rounded-2xl border border-sage-200 bg-sage-50 p-6">
+          <div className="not-prose mb-10 flex items-start gap-4 rounded-2xl border border-sage-200 bg-sage-50 p-6 dark:border-sage-800 dark:bg-sage-950">
             <ShieldCheck className="h-6 w-6 flex-shrink-0 text-sage-600" />
             <p className="text-sm leading-relaxed text-ink-700">
               <strong>TL;DR:</strong> We collect minimal data, we do not sell it, and we

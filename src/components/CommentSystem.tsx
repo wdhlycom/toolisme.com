@@ -52,7 +52,7 @@ export default function CommentSystem({
 
   if (!configured) {
     return (
-      <div className="rounded-2xl border-2 border-dashed border-ink-200 bg-ink-50 p-8 text-center">
+      <div className="rounded-2xl border-2 border-dashed border-ink-200 bg-ink-50 p-8 text-center dark:border-ink-700 dark:bg-ink-900">
         <p className="text-sm font-semibold text-ink-700">
           Comments powered by Giscus
         </p>

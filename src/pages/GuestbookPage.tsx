@@ -15,7 +15,7 @@ export default function GuestbookPage() {
 
       {/* Welcome message */}
       <section className="container-prose py-12">
-        <div className="rounded-2xl border border-accent-200 bg-accent-50 p-6">
+        <div className="rounded-2xl border border-accent-200 bg-accent-50 p-6 dark:border-accent-800 dark:bg-accent-950">
           <div className="flex items-start gap-4">
             <span className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-accent-600 text-white">
               <MessageCircle className="h-5 w-5" />
@@ -73,7 +73,7 @@ export default function GuestbookPage() {
 
       {/* Comment system */}
       <section className="container-prose pb-20">
-        <div className="flex items-center gap-3 border-b border-ink-200 pb-6">
+        <div className="flex items-center gap-3 border-b border-ink-200 pb-6 dark:border-ink-700">
           <ThumbsUp className="h-5 w-5 text-accent-600" />
           <h2 className="font-serif text-2xl font-medium tracking-tight text-ink-900">
             Leave a message

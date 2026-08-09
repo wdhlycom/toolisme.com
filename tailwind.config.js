@@ -2,6 +2,7 @@ import typography from '@tailwindcss/typography'
 
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: 'class',
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
@@ -71,6 +72,7 @@ export default {
         'fade-in': 'fadeIn 0.6s ease-out',
         'fade-up': 'fadeUp 0.7s cubic-bezier(0.25, 0.8, 0.25, 1)',
         'pulse-soft': 'pulseSoft 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'gradient-x': 'gradientX 8s ease infinite',
       },
       keyframes: {
         fadeIn: {
@@ -84,6 +86,10 @@ export default {
         pulseSoft: {
           '0%, 100%': { opacity: '1' },
           '50%': { opacity: '0.7' },
+        },
+        gradientX: {
+          '0%, 100%': { backgroundPosition: '0% 50%' },
+          '50%': { backgroundPosition: '100% 50%' },
         },
       },
     },

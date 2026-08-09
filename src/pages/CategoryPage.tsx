@@ -35,7 +35,7 @@ export default function CategoryPage() {
             ))}
           </div>
         ) : (
-          <div className="mt-8 rounded-2xl border-2 border-dashed border-ink-200 bg-ink-50 p-12 text-center">
+          <div className="mt-8 rounded-2xl border-2 border-dashed border-ink-200 bg-ink-50 p-12 text-center dark:border-ink-700 dark:bg-ink-900">
             <p className="font-serif text-xl font-medium text-ink-700">
               Reviews coming soon
             </p>
@@ -50,7 +50,7 @@ export default function CategoryPage() {
       </section>
 
       {/* Other categories */}
-      <section className="border-t border-ink-200/70 bg-white py-16">
+      <section className="border-t border-ink-200/70 bg-white py-16 dark:border-ink-700/70 dark:bg-ink-950">
         <div className="container-page">
           <h2 className="section-title">Browse other categories</h2>
           <div className="mt-8 grid gap-4 sm:grid-cols-3">

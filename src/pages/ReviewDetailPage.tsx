@@ -81,7 +81,7 @@ export default function ReviewDetailPage() {
   return (
     <div>
       {/* Breadcrumb header */}
-      <header className="border-b border-ink-200/70 bg-white">
+      <header className="border-b border-ink-200/70 bg-white dark:border-ink-700/70 dark:bg-ink-950">
         <div className="container-page py-6">
           <nav className="flex items-center gap-1.5 text-xs font-medium text-ink-400">
             <Link to="/" className="hover:text-ink-700">Home</Link>
@@ -96,7 +96,7 @@ export default function ReviewDetailPage() {
       </header>
 
       {/* Article header */}
-      <section className="border-b border-ink-200/70 bg-white">
+      <section className="border-b border-ink-200/70 bg-white dark:border-ink-700/70 dark:bg-ink-950">
         <div className="container-page py-12">
           <div className="mx-auto max-w-3xl">
             <div className="flex items-center gap-2">
@@ -149,9 +149,9 @@ export default function ReviewDetailPage() {
       </section>
 
       {/* TL;DR / Quick Verdict Box */}
-      <section className="bg-ink-50">
+      <section className="bg-ink-50 dark:bg-ink-950">
         <div className="container-page py-8">
-          <div className="mx-auto max-w-3xl overflow-hidden rounded-2xl border border-ink-200 bg-white shadow-sm">
+          <div className="mx-auto max-w-3xl overflow-hidden rounded-2xl border border-ink-200 bg-white shadow-sm dark:border-ink-700 dark:bg-ink-900 dark:shadow-none">
             <div className="flex items-center gap-2 border-b border-ink-100 bg-ink-50 px-6 py-3">
               <ShieldCheck className="h-4 w-4 text-accent-600" />
               <span className="text-xs font-semibold uppercase tracking-widest text-ink-500">
@@ -210,7 +210,7 @@ export default function ReviewDetailPage() {
                   Contents
                 </h3>
               </div>
-              <nav className="mt-4 space-y-1 border-l border-ink-200">
+              <nav className="mt-4 space-y-1 border-l border-ink-200 dark:border-ink-700">
                 {tocSections.map((s) => (
                   <button
                     key={s.id}
@@ -274,12 +274,12 @@ export default function ReviewDetailPage() {
                 <h2>Pros &amp; Cons</h2>
                 <div className="not-prose mt-6 grid gap-4 sm:grid-cols-2">
                   {/* Pros card */}
-                  <div className="overflow-hidden rounded-2xl border-2 border-sage-200 bg-sage-50">
-                    <div className="flex items-center gap-2 border-b border-sage-200 bg-sage-100 px-5 py-3">
+                  <div className="overflow-hidden rounded-2xl border-2 border-sage-200 bg-sage-50 dark:border-sage-800 dark:bg-sage-950">
+                    <div className="flex items-center gap-2 border-b border-sage-200 bg-sage-100 px-5 py-3 dark:border-sage-800 dark:bg-sage-900">
                       <span className="flex h-7 w-7 items-center justify-center rounded-full bg-sage-600 text-white">
                         <Check className="h-4 w-4" />
                       </span>
-                      <h3 className="font-serif text-lg font-medium text-sage-900">Pros</h3>
+                      <h3 className="font-serif text-lg font-medium text-sage-900 dark:text-sage-100">Pros</h3>
                     </div>
                     <ul className="space-y-3 p-5">
                       {review.pros.map((pro) => (
@@ -291,12 +291,12 @@ export default function ReviewDetailPage() {
                     </ul>
                   </div>
                   {/* Cons card */}
-                  <div className="overflow-hidden rounded-2xl border-2 border-red-200 bg-red-50">
+                  <div className="overflow-hidden rounded-2xl border-2 border-red-200 bg-red-50 dark:border-red-900 dark:bg-red-950">
                     <div className=" flex items-center gap-2 border-b border-red-200 bg-red-100 px-5 py-3">
                       <span className="flex h-7 w-7 items-center justify-center rounded-full bg-red-600 text-white">
                         <X className="h-4 w-4" />
                       </span>
-                      <h3 className="font-serif text-lg font-medium text-red-900">Cons</h3>
+                      <h3 className="font-serif text-lg font-medium text-red-900 dark:text-red-100">Cons</h3>
                     </div>
                     <ul className="space-y-3 p-5">
                       {review.cons.map((con) => (
@@ -325,12 +325,12 @@ export default function ReviewDetailPage() {
               <div className="not-prose mt-12">
                 <h2 className="font-serif text-2xl font-medium tracking-tight text-ink-900">Pros &amp; Cons</h2>
                 <div className="mt-6 grid gap-4 sm:grid-cols-2">
-                  <div className="overflow-hidden rounded-2xl border-2 border-sage-200 bg-sage-50">
-                    <div className="flex items-center gap-2 border-b border-sage-200 bg-sage-100 px-5 py-3">
+                  <div className="overflow-hidden rounded-2xl border-2 border-sage-200 bg-sage-50 dark:border-sage-800 dark:bg-sage-950">
+                    <div className="flex items-center gap-2 border-b border-sage-200 bg-sage-100 px-5 py-3 dark:border-sage-800 dark:bg-sage-900">
                       <span className="flex h-7 w-7 items-center justify-center rounded-full bg-sage-600 text-white">
                         <Check className="h-4 w-4" />
                       </span>
-                      <h3 className="font-serif text-lg font-medium text-sage-900">Pros</h3>
+                      <h3 className="font-serif text-lg font-medium text-sage-900 dark:text-sage-100">Pros</h3>
                     </div>
                     <ul className="space-y-3 p-5">
                       {review.pros.map((pro) => (
@@ -341,12 +341,12 @@ export default function ReviewDetailPage() {
                       ))}
                     </ul>
                   </div>
-                  <div className="overflow-hidden rounded-2xl border-2 border-red-200 bg-red-50">
+                  <div className="overflow-hidden rounded-2xl border-2 border-red-200 bg-red-50 dark:border-red-900 dark:bg-red-950">
                     <div className="flex items-center gap-2 border-b border-red-200 bg-red-100 px-5 py-3">
                       <span className="flex h-7 w-7 items-center justify-center rounded-full bg-red-600 text-white">
                         <X className="h-4 w-4" />
                       </span>
-                      <h3 className="font-serif text-lg font-medium text-red-900">Cons</h3>
+                      <h3 className="font-serif text-lg font-medium text-red-900 dark:text-red-100">Cons</h3>
                     </div>
                     <ul className="space-y-3 p-5">
                       {review.cons.map((con) => (

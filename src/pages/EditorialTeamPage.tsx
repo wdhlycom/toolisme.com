@@ -21,11 +21,11 @@ export default function EditorialTeamPage() {
           {teamMembers.map((member) => (
             <div key={member.name} className="card-hover group p-6">
               <div className="flex items-center gap-4">
-                <span
-                  className={`flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-2xl font-serif text-xl font-medium ${member.accentClass}`}
-                >
-                  {member.initials}
-                </span>
+                <img
+                  src={member.avatar}
+                  alt={member.initials}
+                  className="h-16 w-16 flex-shrink-0 rounded-2xl object-cover"
+                />
                 <div>
                   <h3 className="font-serif text-lg font-medium tracking-tight text-ink-900">
                     {member.name}
@@ -38,12 +38,12 @@ export default function EditorialTeamPage() {
                 {member.bio}
               </p>
 
-              <div className="mt-5 flex flex-wrap gap-2 border-t border-ink-100 pt-4">
+              <div className="mt-5 flex flex-wrap gap-2 border-t border-ink-100 pt-4 dark:border-ink-800">
                 {member.socials.map((social) => (
                   <a
                     key={social.label}
                     href={social.url}
-                    className="rounded-full bg-ink-100 px-3 py-1 text-xs font-semibold text-ink-600 transition-colors hover:bg-ink-900 hover:text-white"
+                    className="rounded-full bg-ink-100 px-3 py-1 text-xs font-semibold text-ink-600 transition-colors hover:bg-ink-900 hover:text-white dark:bg-ink-800 dark:text-ink-300 dark:hover:bg-ink-100 dark:hover:text-ink-900"
                   >
                     {social.label}
                   </a>
@@ -55,7 +55,7 @@ export default function EditorialTeamPage() {
       </section>
 
       {/* Editorial standards */}
-      <section className="border-y border-ink-200/70 bg-white py-20">
+      <section className="border-y border-ink-200/70 bg-white py-20 dark:border-ink-700/70 dark:bg-ink-950">
         <div className="container-page">
           <div className="mx-auto max-w-2xl text-center">
             <p className="eyebrow mb-3">Our standards</p>
@@ -71,7 +71,7 @@ export default function EditorialTeamPage() {
               const Icon = (Icons as unknown as Record<string, LucideIcon>)[value.icon] ?? Icons.ShieldCheck
               return (
                 <div key={value.title}>
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-ink-100 text-ink-700">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-ink-100 text-ink-700 dark:bg-ink-800 dark:text-ink-300">
                     <Icon className="h-6 w-6" />
                   </div>
                   <h3 className="mt-4 font-serif text-lg font-medium text-ink-900">

@@ -35,7 +35,7 @@ export interface ToolReview {
   markdownBody?: string
 }
 
-export const categories: Category[] = [
+const baseCategories: Category[] = [
   {
     slug: 'software',
     name: 'Software',
@@ -43,7 +43,7 @@ export const categories: Category[] = [
     description:
       'Project management, AI writing, and productivity platforms that help teams and individuals get more done.',
     icon: 'MonitorSmartphone',
-    toolCount: 32,
+    toolCount: 0,
     accentClass: 'text-accent-600 bg-accent-50',
   },
   {
@@ -53,7 +53,7 @@ export const categories: Category[] = [
     description:
       'Video editors, audio AI, and creative suites built for YouTubers, podcasters, and digital storytellers.',
     icon: 'Clapperboard',
-    toolCount: 24,
+    toolCount: 0,
     accentClass: 'text-sage-600 bg-sage-50',
   },
   {
@@ -63,7 +63,7 @@ export const categories: Category[] = [
     description:
       'VPNs, password managers, and privacy tools that keep your data safe and your browsing anonymous.',
     icon: 'ShieldCheck',
-    toolCount: 18,
+    toolCount: 0,
     accentClass: 'text-sand-600 bg-sand-50',
   },
   {
@@ -73,7 +73,7 @@ export const categories: Category[] = [
     description:
       'Workstations, monitors, keyboards, and peripherals reviewed for developers, designers, and power users.',
     icon: 'Cpu',
-    toolCount: 15,
+    toolCount: 0,
     accentClass: 'text-ink-600 bg-ink-100',
   },
 ]
@@ -359,25 +359,34 @@ export const reviews: ToolReview[] = [
   })),
 ]
 
+// toolCount is derived from the actual reviews array so the site never shows
+// stale hardcoded numbers.
+export const categories: Category[] = baseCategories.map((c) => ({
+  ...c,
+  toolCount: reviews.filter((r) => r.category === c.slug).length,
+}))
+
 export interface TeamMember {
   name: string
   role: string
   bio: string
   initials: string
   accentClass: string
+  avatar: string
   socials: { label: string; url: string }[]
 }
 
 export const teamMembers: TeamMember[] = [
   {
-    name: 'Marcus Chen',
+    name: 'Tyce Shirley',
     role: 'Founder & Editor-in-Chief',
-    bio: 'Former product manager at two SaaS startups. Marcus started Toolisme after spending too many hours comparing tools for his own team. He oversees editorial standards and reviews methodology.',
-    initials: 'MC',
+    bio: 'Former product manager at two SaaS startups. Tyce started Toolisme after spending too many hours comparing tools for his own team. He oversees editorial standards and reviews methodology.',
+    initials: 'TS',
     accentClass: 'bg-accent-100 text-accent-800',
+    avatar: '/avatars/tyce-shirley.jpg',
     socials: [
+      { label: 'X', url: 'https://x.com/toolisme' },
       { label: 'LinkedIn', url: '#' },
-      { label: 'X', url: '#' },
     ],
   },
   {
@@ -386,9 +395,10 @@ export const teamMembers: TeamMember[] = [
     bio: 'Priya has a background in content marketing and journalism. She leads our Software category and developed the scoring rubric we use across all reviews. She has tested over 40 SaaS tools.',
     initials: 'PS',
     accentClass: 'bg-sage-100 text-sage-800',
+    avatar: '/avatars/priya-sharma.jpg',
     socials: [
+      { label: 'X', url: 'https://x.com/soywhale' },
       { label: 'LinkedIn', url: '#' },
-      { label: 'X', url: '#' },
     ],
   },
   {
@@ -397,6 +407,7 @@ export const teamMembers: TeamMember[] = [
     bio: 'A visual artist turned tech reviewer, David brings a creator perspective to our video, audio, and hardware reviews. His work has been featured in three digital art exhibitions.',
     initials: 'DO',
     accentClass: 'bg-sand-100 text-sand-800',
+    avatar: '/avatars/david-okonkwo.jpg',
     socials: [
       { label: 'LinkedIn', url: '#' },
       { label: 'Instagram', url: '#' },
@@ -408,6 +419,7 @@ export const teamMembers: TeamMember[] = [
     bio: 'Sofia researches privacy tools and online security. She runs our annual security survey and writes the deep-dive VPN comparisons that keep our recommendations honest.',
     initials: 'SR',
     accentClass: 'bg-ink-100 text-ink-800',
+    avatar: '/avatars/sofia-reyes.jpg',
     socials: [
       { label: 'LinkedIn', url: '#' },
       { label: 'X', url: '#' },
@@ -419,8 +431,9 @@ export const teamMembers: TeamMember[] = [
     bio: 'James keeps the Toolisme database running. He built our tool comparison engine and the search infrastructure that powers the site.',
     initials: 'JP',
     accentClass: 'bg-accent-100 text-accent-800',
+    avatar: '/avatars/james-park.jpg',
     socials: [
-      { label: 'GitHub', url: '#' },
+      { label: 'GitHub', url: 'https://www.github.com/wdhlycom' },
       { label: 'LinkedIn', url: '#' },
     ],
   },
@@ -430,9 +443,10 @@ export const teamMembers: TeamMember[] = [
     bio: 'Aisha manages reader feedback, the guestbook, and our relationships with tool makers. If you want to suggest a tool for review, she is the person to reach.',
     initials: 'AB',
     accentClass: 'bg-sage-100 text-sage-800',
+    avatar: '/avatars/aisha-bello.jpg',
     socials: [
+      { label: 'Email', url: 'mailto:master@toolisme.com' },
       { label: 'LinkedIn', url: '#' },
-      { label: 'Email', url: '#' },
     ],
   },
 ]

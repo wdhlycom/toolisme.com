@@ -29,88 +29,90 @@ export default function HomePage() {
   return (
     <div>
       {/* Hero */}
-      <section className="relative overflow-hidden border-b border-ink-200/70 bg-white">
+      <section className="relative overflow-hidden bg-white dark:bg-ink-950">
         <div className="absolute inset-0 bg-grid mask-fade-b opacity-50" />
-        <div className="container-page relative py-20 sm:py-24 lg:py-28">
-          <div className="mx-auto max-w-3xl text-center">
-            <h1 className="font-serif text-5xl font-medium tracking-tight text-ink-900 sm:text-6xl lg:text-7xl text-balance">
-              Smart minds leverage great tools.
-            </h1>
-            <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-ink-600 text-pretty">
-              We test, review, and filter the best SaaS &amp; AI tools to multiply your
-              productivity. Skip the trial and error.
-            </p>
+        <div className="container-page relative py-10 sm:py-12 lg:py-16">
+          {/* Unified hero trust card */}
+          <div className="mx-auto max-w-5xl rounded-3xl border border-ink-200/70 bg-ink-50/70 p-7 shadow-sm dark:border-ink-700/70 dark:bg-ink-900/50 sm:p-9 lg:max-w-6xl lg:p-12">
+            <div className="mx-auto max-w-5xl text-center lg:max-w-7xl">
+              <h1 className="pb-1 leading-[1.2] font-serif text-4xl font-medium tracking-tight sm:text-5xl lg:text-6xl xl:text-7xl bg-gradient-to-r from-ink-900 via-accent-700 to-accent-500 bg-clip-text text-transparent animate-gradient-x bg-[length:200%_200%] dark:from-ink-100 dark:via-accent-400 dark:to-accent-300">
+                Smart minds leverage great tools.
+              </h1>
+              <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-ink-600 text-pretty dark:text-ink-300">
+                We test, review, and filter the best SaaS &amp; AI tools to multiply your
+                productivity. Skip the trial and error.
+              </p>
 
-            {/* Local search */}
-            <div className="mx-auto mt-8 max-w-xl">
-              <div className="flex items-center gap-2 rounded-full bg-white p-2 shadow-lg shadow-ink-900/5 ring-1 ring-ink-200">
-                <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-ink-100 text-ink-500">
-                  <Search className="h-5 w-5" />
+              {/* Local search */}
+              <div className="mx-auto mt-7 max-w-xl">
+                <div className="flex items-center gap-2 rounded-full bg-white p-2 shadow-lg shadow-ink-900/5 ring-1 ring-ink-200 dark:bg-ink-800 dark:ring-ink-700">
+                  <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-ink-100 text-ink-500 dark:bg-ink-700 dark:text-ink-400">
+                    <Search className="h-5 w-5" />
+                  </div>
+                  <input
+                    type="text"
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                    placeholder="Search reviews..."
+                    className="flex-1 bg-transparent px-2 text-sm text-ink-900 placeholder:text-ink-400 focus:outline-none dark:text-ink-100 dark:placeholder:text-ink-500"
+                  />
                 </div>
-                <input
-                  type="text"
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                  placeholder="Search reviews..."
-                  className="flex-1 bg-transparent px-2 text-sm text-ink-900 placeholder:text-ink-400 focus:outline-none"
-                />
-              </div>
 
-              {/* Popular tags */}
-              <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
-                <span className="text-xs font-medium text-ink-400">Popular:</span>
-                {heroTags.map((tag) => (
-                  <button
-                    key={tag}
-                    onClick={() => setSearch(tag)}
-                    className="rounded-full bg-ink-100 px-3 py-1 text-xs font-semibold text-ink-600 transition-colors hover:bg-ink-900 hover:text-white"
-                  >
-                    {tag}
-                  </button>
-                ))}
+                {/* Popular tags */}
+                <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
+                  <span className="text-xs font-medium text-ink-400 dark:text-ink-500">Popular:</span>
+                  {heroTags.map((tag) => (
+                    <button
+                      key={tag}
+                      onClick={() => setSearch(tag)}
+                      className="rounded-full bg-ink-100 px-3 py-1 text-xs font-semibold text-ink-600 transition-colors hover:bg-ink-900 hover:text-white dark:bg-ink-800 dark:text-ink-300 dark:hover:bg-accent-600 dark:hover:text-white"
+                    >
+                      {tag}
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
 
-          <div className="mx-auto mt-14 grid max-w-4xl grid-cols-2 gap-6 sm:grid-cols-4">
-            {[
-              { value: '89', label: 'Tools tested' },
-              { value: '4', label: 'Categories' },
-              { value: '100%', label: 'Hands-on' },
-              { value: '0', label: 'Paid reviews' },
-            ].map((stat) => (
-              <div key={stat.label} className="text-center">
-                <p className="font-serif text-4xl font-medium text-ink-900">{stat.value}</p>
-                <p className="mt-1 text-sm font-medium text-ink-500">{stat.label}</p>
-              </div>
-            ))}
+            {/* Trust stats */}
+            <div className="mx-auto mt-9 grid max-w-4xl grid-cols-2 gap-6 border-t border-ink-200/60 pt-7 sm:grid-cols-4 dark:border-ink-700/60">
+              {[
+                { value: String(reviews.length), label: 'Tools tested' },
+                { value: '4', label: 'Categories' },
+                { value: '100%', label: 'Hands-on' },
+                { value: '0', label: 'Paid reviews' },
+              ].map((stat) => (
+                <div key={stat.label} className="text-center">
+                  <p className="font-serif text-3xl font-medium text-ink-900 dark:text-ink-100 sm:text-4xl">{stat.value}</p>
+                  <p className="mt-1 text-sm font-medium text-ink-500 dark:text-ink-400">{stat.label}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* Trust signals */}
+            <div className="mx-auto mt-7 grid max-w-4xl grid-cols-2 gap-4 border-t border-ink-200/60 pt-7 sm:grid-cols-4 dark:border-ink-700/60">
+              {[
+                { icon: ShieldCheck, title: '100% Independent', subtitle: 'No vendor influence' },
+                { icon: Hand, title: 'Hands-On Testing', subtitle: 'Real workflows' },
+                { icon: CalendarClock, title: 'Updated 2026', subtitle: 'Current pricing' },
+                { icon: BadgeCheck, title: 'No Paid Rankings', subtitle: 'Never for sale' },
+              ].map((item) => (
+                <div key={item.title} className="flex items-center gap-2.5">
+                  <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-xl bg-accent-50 text-accent-700 dark:bg-accent-950 dark:text-accent-400">
+                    <item.icon className="h-5 w-5" />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-xs font-semibold leading-tight text-ink-900 dark:text-ink-100">{item.title}</p>
+                    <p className="mt-0.5 text-[11px] text-ink-500 dark:text-ink-400">{item.subtitle}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Trust Signals Bar */}
-      <section className="border-b border-ink-200/70 bg-white">
-        <div className="container-page py-6">
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-4 sm:gap-6">
-            {[
-              { icon: ShieldCheck, title: '100% Independent Reviews', subtitle: 'No vendor influence' },
-              { icon: Hand, title: 'Hands-On Testing', subtitle: 'Real workflows, not specsheets' },
-              { icon: CalendarClock, title: 'Updated for 2026', subtitle: 'Current pricing & features' },
-              { icon: BadgeCheck, title: 'No Paid Rankings', subtitle: 'Rankings never for sale' },
-            ].map((item) => (
-              <div key={item.title} className="flex items-center gap-3">
-                <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-accent-50 text-accent-700">
-                  <item.icon className="h-5 w-5" />
-                </div>
-                <div className="min-w-0">
-                  <p className="text-sm font-semibold leading-tight text-ink-900">{item.title}</p>
-                  <p className="mt-0.5 text-xs text-ink-500">{item.subtitle}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Trust signals now integrated into the Hero card above */}
 
       {/* Search results */}
       {filteredReviews && (
@@ -127,11 +129,11 @@ export default function HomePage() {
               ))}
             </div>
           ) : (
-            <p className="mt-6 text-ink-500">
+            <p className="mt-6 text-ink-500 dark:text-ink-400">
               Try a different keyword, or{' '}
               <button
                 onClick={() => setSearch('')}
-                className="font-semibold text-accent-700 hover:text-accent-900"
+                className="font-semibold text-accent-700 hover:text-accent-900 dark:text-accent-400 dark:hover:text-accent-300"
               >
                 clear the search
               </button>
@@ -164,7 +166,7 @@ export default function HomePage() {
 
       {/* Top Tools Comparison Table */}
       {!filteredReviews && (
-        <section className="border-y border-ink-200/70 bg-white py-20">
+        <section className="border-y border-ink-200/70 bg-white py-20 dark:border-ink-700/70 dark:bg-ink-950">
           <div className="container-page">
             <div className="flex items-end justify-between gap-4">
               <div>
@@ -173,17 +175,76 @@ export default function HomePage() {
                   At a Glance
                 </p>
                 <h2 className="section-title">Top tools comparison</h2>
-                <p className="mt-2 text-sm text-ink-500">
+                <p className="mt-2 text-sm text-ink-500 dark:text-ink-400">
                   Compare our top 5 reviewed tools side by side — ratings, pricing, and key advantages.
                 </p>
               </div>
             </div>
-            <div className="mt-8 overflow-hidden rounded-2xl border border-ink-200 bg-white shadow-sm">
+            <div className="mt-8 overflow-hidden rounded-2xl border border-ink-200 bg-white shadow-sm dark:border-ink-700 dark:bg-ink-900 dark:shadow-none">
               <ComparisonTable />
             </div>
-            <p className="mt-3 text-right text-xs text-ink-400">
+            <p className="mt-3 text-right text-xs text-ink-400 dark:text-ink-500">
               Swipe horizontally on mobile to see all columns &rarr;
             </p>
+          </div>
+        </section>
+      )}
+
+      {/* How to Choose */}
+      {!filteredReviews && (
+        <section className="container-page py-16">
+          <div className="grid items-center gap-8 lg:grid-cols-2">
+            {/* Left: buying dimensions */}
+            <div>
+              <p className="eyebrow mb-3 flex items-center gap-1.5">
+                <BarChart3 className="h-3.5 w-3.5" />
+                Buying guide
+              </p>
+              <h2 className="section-title">How to choose the right tool</h2>
+              <p className="mt-3 max-w-md text-sm text-ink-500 dark:text-ink-400">
+                Four dimensions we weigh before any tool earns a spot on Toolisme.
+              </p>
+              <div className="mt-8 space-y-4">
+                {[
+                  { icon: BadgeCheck, title: 'Pricing & Value', desc: 'Real cost versus the work it actually replaces — not the sticker price.' },
+                  { icon: Hand, title: 'Workflow Fit', desc: 'Does it slot into your stack, or force you to rebuild around it?' },
+                  { icon: TrendingUp, title: 'Long-term Scalability', desc: 'Stays useful as your team and needs grow, not just on day one.' },
+                  { icon: ShieldCheck, title: 'Trust & Support', desc: 'Transparent data handling and help that shows up when needed.' },
+                ].map((dim) => (
+                  <div key={dim.title} className="flex items-start gap-3.5">
+                    <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-accent-50 text-accent-700 dark:bg-accent-950 dark:text-accent-400">
+                      <dim.icon className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <h3 className="font-serif text-base font-semibold text-ink-900 dark:text-ink-100">{dim.title}</h3>
+                      <p className="mt-0.5 text-sm leading-relaxed text-ink-500 dark:text-ink-400">{dim.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Right: guide CTA */}
+            <div className="flex h-full items-center">
+              <div className="w-full rounded-2xl border border-ink-200 bg-white p-8 shadow-sm dark:border-ink-700 dark:bg-ink-900 dark:shadow-none">
+                <p className="text-xs font-semibold uppercase tracking-widest text-accent-600 dark:text-accent-400">
+                  The full playbook
+                </p>
+                <h3 className="mt-3 font-serif text-2xl font-medium tracking-tight text-ink-900 dark:text-ink-100">
+                  Read our complete buyer's guide
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-ink-500 dark:text-ink-400">
+                  A step-by-step framework for picking tools that pay for themselves — with the exact scorecard we use on every review.
+                </p>
+                <Link
+                  to="/methodology"
+                  className="btn-primary mt-6 inline-flex items-center gap-2"
+                >
+                  Read the full guide
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
+            </div>
           </div>
         </section>
       )}
@@ -197,7 +258,7 @@ export default function HomePage() {
           return (
             <section
               key={category.slug}
-              className="border-t border-ink-200/70 bg-white py-16"
+              className="bg-white py-16 dark:bg-ink-950"
             >
               <div className="container-page">
                 <div className="flex items-end justify-between gap-4">
@@ -207,7 +268,7 @@ export default function HomePage() {
                   </div>
                   <Link
                     to={`/category/${category.slug}`}
-                    className="inline-flex items-center gap-1.5 text-sm font-semibold text-accent-700 hover:text-accent-900"
+                    className="inline-flex items-center gap-1.5 text-sm font-semibold text-accent-700 hover:text-accent-900 dark:text-accent-400 dark:hover:text-accent-300"
                   >
                     View all
                     <ArrowRight className="h-4 w-4" />
@@ -226,13 +287,13 @@ export default function HomePage() {
 
       {/* Editorial values strip */}
       {!filteredReviews && (
-        <section className="border-y border-ink-200/70 bg-ink-900 py-16 text-white">
+        <section className="border-y border-ink-200/70 bg-ink-900 py-16 text-white dark:border-ink-700/70">
           <div className="container-page">
             <div className="mx-auto max-w-2xl text-center">
               <p className="text-xs font-semibold uppercase tracking-widest text-accent-400">
                 Why trust us
               </p>
-              <h2 className="mt-3 font-serif text-3xl font-medium tracking-tight sm:text-4xl">
+              <h2 className="mt-3 font-serif text-3xl font-medium tracking-tight text-white sm:text-4xl">
                 Reviews you can actually trust
               </h2>
             </div>
@@ -242,7 +303,7 @@ export default function HomePage() {
                   <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-white/10">
                     <ShieldCheck className="h-6 w-6 text-accent-400" />
                   </div>
-                  <h3 className="mt-4 font-serif text-lg font-medium">{value.title}</h3>
+                  <h3 className="mt-4 font-serif text-lg font-medium text-white">{value.title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-ink-300">{value.description}</p>
                 </div>
               ))}
@@ -269,9 +330,9 @@ export default function HomePage() {
               <Link
                 key={review.slug}
                 to={`/reviews/${review.slug}`}
-                className="group flex items-center gap-4 border-b border-ink-100 py-5 transition-colors hover:bg-ink-50/50"
+                className="group flex items-center gap-4 border-b border-ink-100 py-5 transition-colors hover:bg-ink-50/50 dark:border-ink-800 dark:hover:bg-ink-900/50"
               >
-                <span className="hidden font-serif text-2xl font-medium text-ink-300 sm:block w-8">
+                <span className="hidden w-8 font-serif text-2xl font-medium text-ink-300 sm:block dark:text-ink-600">
                   {String(i + 1).padStart(2, '0')}
                 </span>
                 <div className="flex-1 min-w-0">
@@ -282,28 +343,28 @@ export default function HomePage() {
                       {review.subcategory}
                     </span>
                     {review.editorsPick && (
-                      <span className="inline-flex items-center gap-1 rounded-full bg-ink-900 px-2 py-0.5 text-xs font-semibold text-white">
+                      <span className="inline-flex items-center gap-1 rounded-full bg-ink-900 px-2 py-0.5 text-xs font-semibold text-white dark:bg-accent-600">
                         <Star className="h-2.5 w-2.5 fill-current" />
                         Pick
                       </span>
                     )}
                   </div>
-                  <h3 className="mt-1.5 font-serif text-lg font-medium tracking-tight text-ink-900 group-hover:text-accent-700">
+                  <h3 className="mt-1.5 font-serif text-lg font-medium tracking-tight text-ink-900 group-hover:text-accent-700 dark:text-ink-100 dark:group-hover:text-accent-400">
                     {review.name} Review 2026
                   </h3>
-                  <p className="mt-0.5 text-sm text-ink-500 truncate">{review.tagline}</p>
+                  <p className="mt-0.5 truncate text-sm text-ink-500 dark:text-ink-400">{review.tagline}</p>
                 </div>
                 <div className="hidden flex-shrink-0 items-center gap-4 sm:flex">
-                  <span className="flex items-center gap-1 text-xs font-medium text-ink-400">
+                  <span className="flex items-center gap-1 text-xs font-medium text-ink-400 dark:text-ink-500">
                     <Clock className="h-3.5 w-3.5" />
                     {review.readTime} min
                   </span>
-                  <span className="flex items-center gap-1 text-sm font-semibold text-ink-700">
+                  <span className="flex items-center gap-1 text-sm font-semibold text-ink-700 dark:text-ink-300">
                     <Star className="h-4 w-4 fill-sand-400 text-sand-400" />
                     {review.rating.toFixed(1)}
                   </span>
                 </div>
-                <ArrowRight className="h-5 w-5 flex-shrink-0 text-ink-300 transition-transform group-hover:translate-x-1 group-hover:text-accent-600" />
+                <ArrowRight className="h-5 w-5 flex-shrink-0 text-ink-300 transition-transform group-hover:translate-x-1 group-hover:text-accent-600 dark:text-ink-600" />
               </Link>
             ))}
           </div>
@@ -312,7 +373,7 @@ export default function HomePage() {
 
       {/* Browse categories */}
       {!filteredReviews && (
-        <section className="border-t border-ink-200/70 bg-white py-20">
+        <section className="border-t border-ink-200/70 bg-white py-20 dark:border-ink-700/70 dark:bg-ink-950">
           <div className="container-page">
             <p className="eyebrow mb-3 text-center">Browse by category</p>
             <h2 className="section-title text-center">Explore all categories</h2>
