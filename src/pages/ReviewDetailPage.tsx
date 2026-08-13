@@ -1,12 +1,16 @@
 import { useParams, Link, Navigate } from 'react-router-dom'
 import { useEffect, useState, useMemo } from 'react'
+import { createRoot } from 'react-dom/client'
 import {
   Star, Clock, Check, X, ArrowRight, ExternalLink, Users, Tag,
   ChevronRight, ShieldCheck, UserCheck, UserX, ListOrdered,
 } from 'lucide-react'
-import { reviews, categories } from '@/data/content'
+import { reviews, comparisons, categories, reviewPath, comparisonPath, type ToolReview } from '@/data/content'
 import { renderMarkdown } from '@/content/markdownReviews'
 import ReviewCard from '@/components/ReviewCard'
+import AiHeadshotQuiz from '@/components/AiHeadshotQuiz'
+import AhaSlidesDecisionMatrix from '@/components/AhaSlidesDecisionMatrix'
+import TubeMagicQuiz from '@/components/TubeMagicQuiz'
 
 const TOC_SECTIONS = [
   { id: 'overview', label: 'Overview' },
@@ -20,9 +24,97 @@ function slugifyHeading(text: string): string {
   return text.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '')
 }
 
-export default function ReviewDetailPage() {
+const SITE_BASE = 'https://toolisme.com'
+
+// Affiliate choices surfaced on the AI-headshot comparison decision card.
+// `colors` drives the per-tool tinted card + CTA button in the bottom panel.
+const HEADSHOT_CARDS = [
+  {
+    name: 'HeadshotPro',
+    url: 'https://www.headshotpro.com/?via=toolisme',
+    tagline: 'Best for Teams & Consistency',
+    colors: { border: 'border-blue-400', bg: 'bg-blue-50 dark:bg-blue-950/30', btn: 'bg-blue-600 hover:bg-blue-500', text: 'text-blue-700 dark:text-blue-400' },
+  },
+  {
+    name: 'Aragon.ai',
+    url: 'https://www.aragon.ai/?via=toolisme',
+    tagline: 'Fastest & Fewest Selfies',
+    colors: { border: 'border-emerald-400', bg: 'bg-emerald-50 dark:bg-emerald-950/30', btn: 'bg-emerald-600 hover:bg-emerald-500', text: 'text-emerald-700 dark:text-emerald-400' },
+  },
+  {
+    name: 'BetterPic',
+    url: 'https://betterpic.link/hu-liangyu',
+    tagline: '4K & Anti-Wax Face',
+    colors: { border: 'border-violet-400', bg: 'bg-violet-50 dark:bg-violet-950/30', btn: 'bg-violet-600 hover:bg-violet-500', text: 'text-violet-700 dark:text-violet-400' },
+  },
+  {
+    name: 'Proshoot',
+    url: 'https://www.proshoot.co?ref=toolisme',
+    tagline: 'Best Likeness Match',
+    colors: { border: 'border-orange-400', bg: 'bg-orange-50 dark:bg-orange-950/30', btn: 'bg-orange-600 hover:bg-orange-500', text: 'text-orange-700 dark:text-orange-400' },
+  },
+]
+
+// SoftwareApplication + Review structured data so Google SERP can show stars,
+// price and pros/cons for software review pages.
+function buildArticleSchema(review: ToolReview, articleUrl: string): object {
+  const priceMatch = (review.pricing || '').match(/\d+(\.\d+)?/)
+  const freeTier = /^free/i.test(review.pricing || '')
+  const price = freeTier ? 0 : priceMatch ? parseFloat(priceMatch[0]) : undefined
+  const firstImage = review.markdownBody?.match(/(?:src="([^"]+)"|!\[[^\]]*\]\(([^)]+)\))/)
+  const image = firstImage ? SITE_BASE + (firstImage[1] || firstImage[2]) : undefined
+
+  const app: Record<string, unknown> = {
+    '@type': 'SoftwareApplication',
+    name: review.name,
+    description: review.summary,
+    applicationCategory: review.appCategory || review.subcategory || 'Productivity',
+    operatingSystem: review.operatingSystem || 'Web',
+    url: articleUrl,
+    offers: {
+      '@type': 'Offer',
+      priceCurrency: 'USD',
+      price,
+      description: review.pricing,
+      availability: 'https://schema.org/InStock',
+    },
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: review.rating,
+      bestRating: 5,
+      ratingCount: 1,
+    },
+  }
+  if (image) app.image = image
+
+  const reviewNode: Record<string, unknown> = {
+    '@type': 'Review',
+    name: `${review.name} Review 2026`,
+    reviewRating: { '@type': 'Rating', ratingValue: review.rating, bestRating: 5 },
+    author: { '@type': 'Organization', name: 'Toolisme' },
+    reviewBody: review.summary,
+    datePublished: review.date,
+    itemReviewed: { '@type': 'SoftwareApplication', name: review.name },
+    positiveNotes: {
+      '@type': 'ItemList',
+      itemListElement: review.pros.map((p, i) => ({ '@type': 'ListItem', position: i + 1, name: p })),
+    },
+    negativeNotes: {
+      '@type': 'ItemList',
+      itemListElement: review.cons.map((c, i) => ({ '@type': 'ListItem', position: i + 1, name: c })),
+    },
+  }
+
+  return { '@context': 'https://schema.org', '@graph': [app, reviewNode] }
+}
+
+export default function ReviewDetailPage({ comparison = false }: { comparison?: boolean }) {
   const { slug } = useParams<{ slug: string }>()
-  const review = reviews.find((r) => r.slug === slug)
+  const sourceList = comparison ? comparisons : reviews
+  const review = sourceList.find((r) => r.slug === slug)
+  const isAiHeadshot = comparison && slug === 'ai-headshot-tools-comparison-2026'
+  const isAhaSlides = !comparison && slug === 'ahaslides-review-2026'
+  const isTubeMagic = comparison && slug === 'tubemagic-vs-subscribr-2026'
   const [activeSection, setActiveSection] = useState('overview')
 
   // For markdown articles, build TOC from h2 headings
@@ -65,10 +157,45 @@ export default function ReviewDetailPage() {
     })
   }, [review])
 
+  // Mount the interactive picker into the markdown's quiz placeholder
+  useEffect(() => {
+    if (!isAiHeadshot || !review?.markdownBody) return
+    const mount = document.getElementById('ai-headshot-quiz')
+    if (!mount || mount.dataset.quizMounted) return
+    mount.dataset.quizMounted = '1'
+    createRoot(mount).render(<AiHeadshotQuiz />)
+  }, [isAiHeadshot, review])
+
+  // Mount the AhaSlides decision matrix into its markdown placeholder
+  useEffect(() => {
+    if (!isAhaSlides || !review?.markdownBody) return
+    const mount = document.getElementById('ahaslides-decision-matrix')
+    if (!mount || mount.dataset.matrixMounted) return
+    mount.dataset.matrixMounted = '1'
+    createRoot(mount).render(<AhaSlidesDecisionMatrix />)
+  }, [isAhaSlides, review])
+
+  // Mount the TubeMagic vs Subscribr quiz into its markdown placeholder
+  useEffect(() => {
+    if (!isTubeMagic || !review?.markdownBody) return
+    const mount = document.getElementById('tubemagic-quiz')
+    if (!mount || mount.dataset.quizMounted) return
+    mount.dataset.quizMounted = '1'
+    createRoot(mount).render(<TubeMagicQuiz />)
+  }, [isTubeMagic, review])
+
+  // If accessed via /reviews/ path but article is comparison-only, redirect
+  if (!review && !comparison) {
+    const compArticle = comparisons.find((r) => r.slug === slug)
+    if (compArticle) {
+      return <Navigate to={`/comparisons/${compArticle.category}/${compArticle.slug}`} replace />
+    }
+  }
+
   if (!review) return <Navigate to="/" replace />
 
   const category = categories.find((c) => c.slug === review.category)
-  const relatedReviews = reviews
+  const relatedReviews = sourceList
     .filter((r) => r.category === review.category && r.slug !== review.slug)
     .slice(0, 3)
 
@@ -77,32 +204,38 @@ export default function ReviewDetailPage() {
   }
 
   const renderedMarkdown = review.markdownBody ? renderMarkdown(review.markdownBody) : ''
+  const articleSchema = buildArticleSchema(review, `${SITE_BASE}${comparison ? comparisonPath(review) : reviewPath(review)}`)
 
   return (
     <div>
+      {/* Product + Review structured data for Google SERP rich results */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+
       {/* Breadcrumb header */}
-      <header className="border-b border-ink-200/70 bg-white dark:border-ink-700/70 dark:bg-ink-950">
-        <div className="container-page py-6">
+      <header className="bg-white dark:bg-ink-950">
+        <div className="container-page pt-6 pb-2">
           <nav className="flex items-center gap-1.5 text-xs font-medium text-ink-400">
             <Link to="/" className="hover:text-ink-700">Home</Link>
             <ChevronRight className="h-3.5 w-3.5" />
-            <Link to={`/category/${review.category}`} className="hover:text-ink-700">
+            <Link to={comparison ? `/comparisons/${review.category}` : `/reviews/${review.category}`} className="hover:text-ink-700">
               {category?.name}
             </Link>
             <ChevronRight className="h-3.5 w-3.5" />
-            <span className="text-ink-600">{review.name} Review 2026</span>
+            <Link to={comparison ? comparisonPath(review) : reviewPath(review)} className="font-semibold text-ink-600 hover:text-ink-900 dark:hover:text-ink-200">
+              {comparison ? review.name : `${review.name} Review 2026`}
+            </Link>
           </nav>
         </div>
       </header>
 
       {/* Article header */}
-      <section className="border-b border-ink-200/70 bg-white dark:border-ink-700/70 dark:bg-ink-950">
-        <div className="container-page py-12">
+      <section className="bg-white dark:bg-ink-950">
+        <div className="container-page pt-3 pb-2">
           <div className="mx-auto max-w-3xl">
             <div className="flex items-center gap-2">
-              <span className={`rounded-full px-3 py-1 text-xs font-semibold ${category?.accentClass}`}>
-                {review.subcategory}
-              </span>
               {review.editorsPick && (
                 <span className="inline-flex items-center gap-1 rounded-full bg-ink-900 px-2.5 py-1 text-xs font-semibold text-white">
                   <Star className="h-3 w-3 fill-current" />
@@ -111,10 +244,10 @@ export default function ReviewDetailPage() {
               )}
             </div>
 
-            <h1 className="mt-5 font-serif text-4xl font-medium tracking-tight text-ink-900 sm:text-5xl text-balance">
+            <h1 className="mt-3 font-serif text-4xl font-medium leading-tight tracking-tight text-ink-900 sm:text-5xl text-balance">
               {review.name} Review 2026: {review.tagline}
             </h1>
-            <p className="mt-4 text-lg leading-relaxed text-ink-600 text-pretty">
+            <p className="mt-3 text-lg leading-relaxed text-ink-600 text-pretty">
               {review.summary}
             </p>
 
@@ -150,13 +283,18 @@ export default function ReviewDetailPage() {
 
       {/* TL;DR / Quick Verdict Box */}
       <section className="bg-ink-50 dark:bg-ink-950">
-        <div className="container-page py-8">
+        <div className="container-page pt-6 pb-8">
           <div className="mx-auto max-w-3xl overflow-hidden rounded-2xl border border-ink-200 bg-white shadow-sm dark:border-ink-700 dark:bg-ink-900 dark:shadow-none">
-            <div className="flex items-center gap-2 border-b border-ink-100 bg-ink-50 px-6 py-3">
+            <div className="flex flex-wrap items-center gap-2 border-b border-ink-100 bg-ink-50 px-6 py-3">
               <ShieldCheck className="h-4 w-4 text-accent-600" />
               <span className="text-xs font-semibold uppercase tracking-widest text-ink-500">
                 Quick Verdict &middot; TL;DR
               </span>
+              {review.verdictBadge && (
+                <span className="ml-auto inline-flex items-center rounded-full bg-amber-400 px-3 py-1 text-xs font-bold text-ink-900 shadow-sm dark:bg-amber-300 dark:text-ink-950">
+                  {review.verdictBadge}
+                </span>
+              )}
             </div>
             <div className="grid gap-6 p-6 sm:grid-cols-3">
               {/* Our Verdict */}
@@ -186,13 +324,33 @@ export default function ReviewDetailPage() {
             </div>
             {/* CTA */}
             <div className="border-t border-ink-100 bg-sage-50 px-6 py-4">
-              <a
-                href={review.url}
-                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-sage-600 px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-sage-500 hover:shadow-lg active:scale-[0.98] sm:w-auto"
-              >
-                Check Latest Price
-                <ArrowRight className="h-4 w-4" />
-              </a>
+              {isAiHeadshot ? (
+                <div className="flex flex-wrap items-center justify-end gap-x-5 gap-y-2">
+                  <span className="mr-auto text-xs font-medium uppercase tracking-widest text-ink-400 dark:text-ink-500">
+                    Top picks
+                  </span>
+                  {HEADSHOT_CARDS.map((t) => (
+                    <a
+                      key={t.name}
+                      href={t.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 text-sm font-semibold text-accent-700 hover:text-accent-900 dark:text-accent-400 dark:hover:text-accent-300"
+                    >
+                      {t.name}
+                      <ArrowRight className="h-4 w-4" />
+                    </a>
+                  ))}
+                </div>
+              ) : (
+                <a
+                  href={review.url}
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-amber-400 px-6 py-3 text-sm font-bold text-ink-950 shadow-md shadow-amber-400/30 transition-all hover:bg-accent-600 hover:text-white hover:shadow-lg hover:shadow-accent-600/30 active:scale-[0.98] sm:w-auto"
+                >
+                  {review.ctaLabel ? `🚀 ${review.ctaLabel}` : 'Check Latest Price'}
+                  <ArrowRight className="h-4 w-4" />
+                </a>
+              )}
             </div>
           </div>
         </div>
@@ -361,31 +519,69 @@ export default function ReviewDetailPage() {
               </div>
             )}
 
-            {/* Affiliate CTA */}
-            <div className="not-prose mt-12 flex flex-col items-center justify-between gap-4 rounded-2xl bg-ink-900 p-8 text-white sm:flex-row">
-              <div>
-                <h3 className="font-serif text-xl font-medium">Ready to try {review.name}?</h3>
-                <p className="mt-1 text-sm text-ink-300">
-                  {review.pricing} &middot; {review.bestFor}
-                </p>
+            {/* Affiliate CTA / decision card */}
+            {isAiHeadshot ? (
+              <div className="not-prose mt-12 overflow-hidden rounded-3xl bg-[conic-gradient(at_25%_25%,#60a5fa,#34d399,#a78bfa,#fb923c,#f472b6,#60a5fa)] p-[2px] shadow-xl shadow-accent-500/10">
+                <div className="rounded-[calc(1.5rem-2px)] bg-white/95 p-6 backdrop-blur-sm dark:bg-ink-950/95 sm:p-8">
+                  <div className="flex flex-wrap items-baseline gap-3">
+                    <h3 className="font-serif text-xl font-medium text-ink-900 dark:text-ink-100">
+                      Ready to try AI Headshot Tools?
+                    </h3>
+                    <span className="text-xs font-semibold uppercase tracking-widest text-accent-600 dark:text-accent-400">
+                      Make the call
+                    </span>
+                  </div>
+                  <p className="mt-1 text-sm text-ink-600 dark:text-ink-400">
+                    Four picks, one fits your brief — every button goes to the official site.
+                  </p>
+                  <div className="mt-5 grid gap-3 sm:grid-cols-2">
+                    {HEADSHOT_CARDS.map((t) => (
+                      <div
+                        key={t.name}
+                        className={`flex flex-col gap-2.5 rounded-xl border-2 ${t.colors.border} ${t.colors.bg} p-4 transition-all hover:-translate-y-0.5 hover:shadow-md`}
+                      >
+                        <a
+                          href={t.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          style={{ color: '#fff' }}
+                          className={`inline-flex items-center justify-between gap-2 rounded-lg ${t.colors.btn} px-4 py-2.5 text-sm font-bold shadow-sm transition-all active:scale-[0.98]`}
+                        >
+                          Buy {t.name}
+                          <ArrowRight className="h-4 w-4" />
+                        </a>
+                        <p className={`text-xs font-medium ${t.colors.text}`}>{t.tagline}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
-              <div className="flex flex-col gap-3 sm:flex-row">
-                <a
-                  href={review.url}
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-sage-600 px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-sage-500 hover:shadow-lg active:scale-[0.98]"
-                >
-                  Check Latest Price
-                  <ArrowRight className="h-4 w-4" />
-                </a>
-                <a
-                  href={review.url}
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-ink-900 transition-all hover:shadow-lg active:scale-[0.98]"
-                >
-                  Visit Official Site
-                  <ExternalLink className="h-4 w-4" />
-                </a>
+            ) : (
+              <div className="not-prose mt-12 flex flex-col items-center justify-between gap-4 rounded-2xl bg-ink-900 p-8 text-white sm:flex-row">
+                <div>
+                  <h3 className="font-serif text-xl font-medium">Ready to try {review.name}?</h3>
+                  <p className="mt-1 text-sm text-ink-300">
+                    {review.pricing} &middot; {review.bestFor}
+                  </p>
+                </div>
+                <div className="flex flex-col gap-3 sm:flex-row">
+                  <a
+                    href={review.url}
+                    className="inline-flex items-center justify-center gap-2 rounded-full bg-amber-400 px-6 py-3 text-sm font-bold text-ink-950 shadow-md shadow-amber-400/30 transition-all hover:bg-accent-600 hover:text-white hover:shadow-lg hover:shadow-accent-600/30 active:scale-[0.98]"
+                  >
+                    {review.ctaLabel ? `🚀 ${review.ctaLabel}` : 'Check Latest Price'}
+                    <ArrowRight className="h-4 w-4" />
+                  </a>
+                  <a
+                    href={review.url}
+                    className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-ink-900 transition-all hover:shadow-lg active:scale-[0.98]"
+                  >
+                    Visit Official Site
+                    <ExternalLink className="h-4 w-4" />
+                  </a>
+                </div>
               </div>
-            </div>
+            )}
             <p className="not-prose mt-3 text-center text-xs text-ink-400">
               Some links on this page are affiliate links.{' '}
               <Link to="/disclosure" className="font-medium text-ink-600 hover:text-ink-900">

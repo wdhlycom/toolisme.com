@@ -9,7 +9,7 @@ export default function CategoryCard({ category }: { category: Category }) {
 
   return (
     <Link
-      to={`/category/${category.slug}`}
+      to={`/reviews/${category.slug}`}
       className="card-hover group relative flex flex-col overflow-hidden p-6"
     >
       <div

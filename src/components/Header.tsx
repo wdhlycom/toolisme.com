@@ -4,6 +4,9 @@ import { Menu, X, Info, Sun, Moon } from 'lucide-react'
 
 const navLinks = [
   { to: '/', label: 'Home' },
+  { to: '/guides', label: 'Guides' },
+  { to: '/reviews', label: 'Reviews' },
+  { to: '/comparisons', label: 'Comparisons' },
   { to: '/about', label: 'About' },
   { to: '/editorial-team', label: 'Editorial Team' },
   { to: '/methodology', label: 'Methodology' },
@@ -50,8 +53,8 @@ export default function Header() {
   }, [location.pathname])
 
   return (
-    <header className="sticky top-0 z-50">
-      {/* Affiliate disclosure strip */}
+    <header className="sticky top-0 z-50 group">
+      {/* Affiliate disclosure strip — always visible */}
       <div className="bg-ink-900 text-ink-300">
         <div className="container-page flex items-center justify-center gap-2 py-1.5 text-center">
           <Info className="hidden h-3 w-3 flex-shrink-0 text-ink-400 sm:block" />
@@ -64,73 +67,73 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Main nav */}
+      {/* Main nav — collapses on desktop, reveals on hover; always visible on mobile */}
       <div
-        className={`transition-all duration-300 ${
-          scrolled
-            ? 'border-b border-ink-200/70 bg-ink-50/85 backdrop-blur-lg dark:border-ink-700/70 dark:bg-ink-950/85'
-            : 'border-b border-transparent bg-transparent'
+        className={`overflow-hidden bg-transparent transition-all duration-300 max-h-16 opacity-100 md:max-h-0 md:opacity-0 md:group-hover:max-h-16 md:group-hover:bg-ink-50/85 md:group-hover:opacity-100 md:group-hover:backdrop-blur-lg dark:md:group-hover:bg-ink-950/85 ${
+          scrolled ? 'shadow-sm md:group-hover:shadow-md' : ''
         }`}
       >
-      <nav className="container-page flex h-16 items-center justify-between">
-        <Link to="/" className="flex items-center gap-2.5 group">
-          <img
-            src="/logo.png"
-            alt="Toolisme"
-            className="h-9 w-9 rounded-full object-cover transition-transform group-hover:scale-105"
-          />
-          <span className="font-serif text-xl font-medium tracking-tight text-ink-900 dark:text-ink-100">
-            Toolisme
-          </span>
-        </Link>
+        <nav className="container-page flex h-16 items-center justify-between">
+          <Link to="/" className="flex items-center gap-2.5 group">
+            <img
+              src="/logo.png"
+              alt="Toolisme"
+              className="h-9 w-9 rounded-full object-cover transition-transform group-hover:scale-105"
+            />
+            <span className="font-serif text-xl font-medium tracking-tight text-ink-900 dark:text-ink-100">
+              Toolisme
+            </span>
+          </Link>
 
-        <div className="hidden items-center gap-1 md:flex">
-          {navLinks.map((link) => (
-            <NavLink
-              key={link.to}
-              to={link.to}
-              end={link.to === '/'}
-              className={({ isActive }) =>
-                `rounded-full px-4 py-2 text-sm font-medium transition-colors ${
-                  isActive
-                    ? 'bg-ink-900 text-white dark:bg-accent-600 dark:text-white'
-                    : 'text-ink-600 hover:bg-ink-100 hover:text-ink-900 dark:text-ink-400 dark:hover:bg-ink-800 dark:hover:text-ink-100'
-                }`
-              }
+          <div className="hidden items-center gap-1 md:flex">
+            {navLinks.map((link) => (
+              <NavLink
+                key={link.to}
+                to={link.to}
+                end={link.to === '/'}
+                className={({ isActive }) =>
+                  `rounded-full px-4 py-2 text-sm font-medium transition-colors ${
+                    isActive
+                      ? 'bg-ink-900 text-white dark:bg-accent-600 dark:text-white'
+                      : 'text-ink-600 hover:bg-ink-100 hover:text-ink-900 dark:text-ink-400 dark:hover:bg-ink-800 dark:hover:text-ink-100'
+                  }`
+                }
+              >
+                {link.label}
+              </NavLink>
+            ))}
+
+            {/* Dark mode toggle */}
+            <button
+              onClick={() => setDark(!dark)}
+              className="ml-2 flex h-9 w-9 items-center justify-center rounded-full border border-ink-200 bg-white text-ink-600 transition-all hover:bg-ink-100 hover:text-ink-900 dark:border-ink-700 dark:bg-ink-800 dark:text-ink-300 dark:hover:bg-ink-700 dark:hover:text-ink-100"
+              aria-label={dark ? 'Switch to light mode' : 'Switch to dark mode'}
             >
-              {link.label}
-            </NavLink>
-          ))}
+              {dark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+            </button>
+          </div>
 
-          {/* Dark mode toggle */}
-          <button
-            onClick={() => setDark(!dark)}
-            className="ml-2 flex h-9 w-9 items-center justify-center rounded-full border border-ink-200 bg-white text-ink-600 transition-all hover:bg-ink-100 hover:text-ink-900 dark:border-ink-700 dark:bg-ink-800 dark:text-ink-300 dark:hover:bg-ink-700 dark:hover:text-ink-100"
-            aria-label={dark ? 'Switch to light mode' : 'Switch to dark mode'}
-          >
-            {dark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
-          </button>
-        </div>
+          <div className="flex items-center gap-2 md:hidden">
+            {/* Dark mode toggle - mobile */}
+            <button
+              onClick={() => setDark(!dark)}
+              className="rounded-lg p-2 text-ink-700 hover:bg-ink-100 dark:text-ink-300 dark:hover:bg-ink-800"
+              aria-label={dark ? 'Switch to light mode' : 'Switch to dark mode'}
+            >
+              {dark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+            </button>
+            <button
+              onClick={() => setMobileOpen((v) => !v)}
+              className="rounded-lg p-2 text-ink-700 hover:bg-ink-100 dark:text-ink-300 dark:hover:bg-ink-800"
+              aria-label="Toggle menu"
+            >
+              {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
+          </div>
+        </nav>
+      </div>
 
-        <div className="flex items-center gap-2 md:hidden">
-          {/* Dark mode toggle - mobile */}
-          <button
-            onClick={() => setDark(!dark)}
-            className="rounded-lg p-2 text-ink-700 hover:bg-ink-100 dark:text-ink-300 dark:hover:bg-ink-800"
-            aria-label={dark ? 'Switch to light mode' : 'Switch to dark mode'}
-          >
-            {dark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-          </button>
-          <button
-            onClick={() => setMobileOpen((v) => !v)}
-            className="rounded-lg p-2 text-ink-700 hover:bg-ink-100 dark:text-ink-300 dark:hover:bg-ink-800"
-            aria-label="Toggle menu"
-          >
-            {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
-        </div>
-      </nav>
-
+      {/* Mobile menu dropdown — separate so it never gets clipped by the collapsing wrapper */}
       {mobileOpen && (
         <div className="border-t border-ink-200/70 bg-ink-50 md:hidden dark:border-ink-700/70 dark:bg-ink-950">
           <div className="container-page flex flex-col gap-1 py-4">
@@ -151,7 +154,6 @@ export default function Header() {
           </div>
         </div>
       )}
-      </div>
     </header>
   )
 }

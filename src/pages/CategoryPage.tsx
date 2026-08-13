@@ -18,7 +18,7 @@ export default function CategoryPage() {
         eyebrow={category.tagline}
         title={category.name}
         description={category.description}
-        breadcrumbs={[{ label: category.name }]}
+        breadcrumbs={[{ label: category.name, to: `/reviews/${category.slug}` }]}
       />
 
       <section className="container-page py-16">
@@ -59,7 +59,7 @@ export default function CategoryPage() {
               .map((c) => (
                 <Link
                   key={c.slug}
-                  to={`/category/${c.slug}`}
+                  to={`/reviews/${c.slug}`}
                   className="card-hover group flex items-center justify-between p-5"
                 >
                   <div>

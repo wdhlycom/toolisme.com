@@ -1,10 +1,14 @@
 import { useState, useMemo } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowRight, Search, Star, Clock, TrendingUp, ShieldCheck, Hand, CalendarClock, BadgeCheck, BarChart3 } from 'lucide-react'
+import { ArrowRight, Search, Star, Clock, TrendingUp, ShieldCheck, Hand, CalendarClock, BadgeCheck, BarChart3, MonitorSmartphone, Clapperboard, Cpu, type LucideIcon } from 'lucide-react'
 import CategoryCard from '@/components/CategoryCard'
 import ReviewCard from '@/components/ReviewCard'
 import ComparisonTable from '@/components/ComparisonTable'
-import { categories, reviews, editorialValues, heroTags } from '@/data/content'
+import { categories, reviews, editorialValues, heroTags, reviewPath, type CategorySlug } from '@/data/content'
+import { guides } from '@/content/guides'
+
+const sectionJumpCls =
+  'inline-flex items-center gap-1 rounded-full bg-amber-400 px-4 py-1.5 text-sm font-semibold text-ink-900 transition-colors hover:bg-accent-600 hover:text-white dark:bg-amber-400/90 dark:text-ink-950 dark:hover:bg-accent-500 dark:hover:text-white'
 
 export default function HomePage() {
   const [search, setSearch] = useState('')
@@ -26,19 +30,51 @@ export default function HomePage() {
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
   )
 
+  const categoryIcons: Record<CategorySlug, LucideIcon> = {
+    software: MonitorSmartphone,
+    creators: Clapperboard,
+    security: ShieldCheck,
+    hardware: Cpu,
+  }
+
+  const categorySubtitles: Record<CategorySlug, string> = {
+    software: 'Battle-tested apps that eliminate manual tasks so you can focus on building.',
+    creators: 'Turn raw ideas into polished videos and podcasts faster with top-rated creative tools.',
+    security: 'Keep your connection encrypted, protect your data, and safeguard your online identity.',
+    hardware: 'High-performance gear and workstations built for professionals spending long hours at the desk.',
+  }
+
+  // Each how-to-choose card surfaces up to 3 guides tagged with its category slug.
+  const categoryGuides = categories
+    .filter((c) => c.slug in categoryIcons)
+    .map((c) => ({
+      slug: c.slug,
+      name: c.name,
+      tagline: c.tagline,
+      accentClass: c.accentClass,
+      icon: categoryIcons[c.slug],
+      guides: guides.filter((g) => g.tags.includes(c.slug)).slice(0, 3),
+    }))
+
   return (
     <div>
       {/* Hero */}
       <section className="relative overflow-hidden bg-white dark:bg-ink-950">
         <div className="absolute inset-0 bg-grid mask-fade-b opacity-50" />
         <div className="container-page relative py-10 sm:py-12 lg:py-16">
-          {/* Unified hero trust card */}
-          <div className="mx-auto max-w-5xl rounded-3xl border border-ink-200/70 bg-ink-50/70 p-7 shadow-sm dark:border-ink-700/70 dark:bg-ink-900/50 sm:p-9 lg:max-w-6xl lg:p-12">
+          {/* Soft glow behind the card — deepens the raised feel */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute left-1/2 top-6 h-48 w-[85%] -translate-x-1/2 rounded-full bg-accent-400/10 blur-3xl dark:bg-accent-500/10"
+          />
+
+          {/* Unified hero trust card — embossed */}
+          <div className="mx-auto max-w-5xl rounded-3xl border border-ink-200/80 bg-gradient-to-b from-white via-white to-ink-50/80 p-7 shadow-[0_1px_0_rgba(255,255,255,0.95)_inset,0_-1px_0_rgba(15,23,42,0.05)_inset,0_24px_60px_-15px_rgba(15,23,42,0.35),0_8px_20px_-8px_rgba(15,23,42,0.18)] ring-1 ring-white/60 dark:border-ink-700/80 dark:from-ink-900 dark:via-ink-900 dark:to-ink-950/90 dark:shadow-[0_1px_0_rgba(255,255,255,0.10)_inset,0_-1px_0_rgba(0,0,0,0.5)_inset,0_24px_60px_-15px_rgba(0,0,0,0.75),0_8px_20px_-8px_rgba(0,0,0,0.5)] dark:ring-white/5 sm:p-9 lg:max-w-6xl lg:p-12">
             <div className="mx-auto max-w-5xl text-center lg:max-w-7xl">
-              <h1 className="pb-1 leading-[1.2] font-serif text-4xl font-medium tracking-tight sm:text-5xl lg:text-6xl xl:text-7xl bg-gradient-to-r from-ink-900 via-accent-700 to-accent-500 bg-clip-text text-transparent animate-gradient-x bg-[length:200%_200%] dark:from-ink-100 dark:via-accent-400 dark:to-accent-300">
+              <h1 className="-mt-2 pb-3 leading-[1.3] font-serif text-4xl font-medium tracking-tight sm:text-5xl lg:text-6xl xl:text-7xl bg-gradient-to-r from-ink-900 via-accent-700 to-accent-500 bg-clip-text text-transparent animate-gradient-x bg-[length:200%_200%] dark:from-ink-100 dark:via-accent-400 dark:to-accent-300">
                 Smart minds leverage great tools.
               </h1>
-              <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-ink-600 text-pretty dark:text-ink-300">
+              <p className="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-ink-600 text-pretty dark:text-ink-300">
                 We test, review, and filter the best SaaS &amp; AI tools to multiply your
                 productivity. Skip the trial and error.
               </p>
@@ -89,21 +125,24 @@ export default function HomePage() {
               ))}
             </div>
 
-            {/* Trust signals */}
-            <div className="mx-auto mt-7 grid max-w-4xl grid-cols-2 gap-4 border-t border-ink-200/60 pt-7 sm:grid-cols-4 dark:border-ink-700/60">
+            {/* Trust signals — elevated mini-cards with golden highlights */}
+            <div className="mx-auto mt-7 grid max-w-4xl grid-cols-2 gap-3 border-t border-ink-200/60 pt-7 sm:grid-cols-4 dark:border-ink-700/60">
               {[
                 { icon: ShieldCheck, title: '100% Independent', subtitle: 'No vendor influence' },
                 { icon: Hand, title: 'Hands-On Testing', subtitle: 'Real workflows' },
                 { icon: CalendarClock, title: 'Updated 2026', subtitle: 'Current pricing' },
                 { icon: BadgeCheck, title: 'No Paid Rankings', subtitle: 'Never for sale' },
               ].map((item) => (
-                <div key={item.title} className="flex items-center gap-2.5">
-                  <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-xl bg-accent-50 text-accent-700 dark:bg-accent-950 dark:text-accent-400">
+                <div
+                  key={item.title}
+                  className="flex items-center gap-3 rounded-xl border border-ink-200/70 bg-white p-3 shadow-sm ring-1 ring-ink-100/60 dark:border-ink-700/70 dark:bg-ink-900/80 dark:ring-ink-800/60"
+                >
+                  <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-accent-400 to-accent-600 text-white shadow-md shadow-accent-500/25 dark:from-accent-500 dark:to-accent-700">
                     <item.icon className="h-5 w-5" />
                   </div>
                   <div className="min-w-0">
-                    <p className="text-xs font-semibold leading-tight text-ink-900 dark:text-ink-100">{item.title}</p>
-                    <p className="mt-0.5 text-[11px] text-ink-500 dark:text-ink-400">{item.subtitle}</p>
+                    <p className="text-[13px] font-bold leading-tight text-amber-600 dark:text-amber-400">{item.title}</p>
+                    <p className="mt-0.5 text-xs font-medium text-sand-700 dark:text-sand-300">{item.subtitle}</p>
                   </div>
                 </div>
               ))}
@@ -111,8 +150,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      {/* Trust signals now integrated into the Hero card above */}
 
       {/* Search results */}
       {filteredReviews && (
@@ -152,8 +189,15 @@ export default function HomePage() {
                 <Star className="h-3.5 w-3.5 fill-current" />
                 Top Picks
               </p>
-              <h2 className="section-title">Editor's picks</h2>
+              <h2 className="section-title text-red-600 dark:text-red-400">Editor's picks</h2>
             </div>
+            <Link
+              to="/reviews"
+              className={sectionJumpCls}
+            >
+              All reviews
+              <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
           </div>
 
           <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -174,11 +218,18 @@ export default function HomePage() {
                   <BarChart3 className="h-3.5 w-3.5" />
                   At a Glance
                 </p>
-                <h2 className="section-title">Top tools comparison</h2>
+                <h2 className="section-title text-red-600 dark:text-red-400">Top tools comparison</h2>
                 <p className="mt-2 text-sm text-ink-500 dark:text-ink-400">
                   Compare our top 5 reviewed tools side by side — ratings, pricing, and key advantages.
                 </p>
               </div>
+              <Link
+                to="/comparisons"
+                className={sectionJumpCls}
+              >
+                All comparisons
+                <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
             </div>
             <div className="mt-8 overflow-hidden rounded-2xl border border-ink-200 bg-white shadow-sm dark:border-ink-700 dark:bg-ink-900 dark:shadow-none">
               <ComparisonTable />
@@ -186,65 +237,92 @@ export default function HomePage() {
             <p className="mt-3 text-right text-xs text-ink-400 dark:text-ink-500">
               Swipe horizontally on mobile to see all columns &rarr;
             </p>
+
+            {/* Per-category comparison pages */}
+            <div className="mt-6 flex flex-wrap items-center gap-2">
+              <span className="text-sm font-medium text-ink-500 dark:text-ink-400">Per-category comparisons:</span>
+              {categories.map((c) => (
+                <Link
+                  key={c.slug}
+                  to={`/comparisons/${c.slug}`}
+                  className="inline-flex items-center gap-1 rounded-full bg-ink-100 px-4 py-1.5 text-sm font-semibold text-ink-600 transition-colors hover:bg-ink-900 hover:text-white dark:bg-ink-800 dark:text-ink-300 dark:hover:bg-accent-600 dark:hover:text-white"
+                >
+                  {c.name}
+                  <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
+              ))}
+            </div>
           </div>
         </section>
       )}
 
-      {/* How to Choose */}
+      {/* How to Choose — per-category guides */}
       {!filteredReviews && (
         <section className="container-page py-16">
-          <div className="grid items-center gap-8 lg:grid-cols-2">
-            {/* Left: buying dimensions */}
+          <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
               <p className="eyebrow mb-3 flex items-center gap-1.5">
                 <BarChart3 className="h-3.5 w-3.5" />
                 Buying guide
               </p>
-              <h2 className="section-title">How to choose the right tool</h2>
-              <p className="mt-3 max-w-md text-sm text-ink-500 dark:text-ink-400">
-                Four dimensions we weigh before any tool earns a spot on Toolisme.
+              <h2 className="section-title text-red-600 dark:text-red-400">How to choose the right tool</h2>
+              <p className="mt-3 max-w-xl text-sm text-ink-500 dark:text-ink-400">
+                One framework doesn't fit every category. Pick your lane — the guides below are
+                tagged by category and updated as we publish.
               </p>
-              <div className="mt-8 space-y-4">
-                {[
-                  { icon: BadgeCheck, title: 'Pricing & Value', desc: 'Real cost versus the work it actually replaces — not the sticker price.' },
-                  { icon: Hand, title: 'Workflow Fit', desc: 'Does it slot into your stack, or force you to rebuild around it?' },
-                  { icon: TrendingUp, title: 'Long-term Scalability', desc: 'Stays useful as your team and needs grow, not just on day one.' },
-                  { icon: ShieldCheck, title: 'Trust & Support', desc: 'Transparent data handling and help that shows up when needed.' },
-                ].map((dim) => (
-                  <div key={dim.title} className="flex items-start gap-3.5">
-                    <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-accent-50 text-accent-700 dark:bg-accent-950 dark:text-accent-400">
-                      <dim.icon className="h-5 w-5" />
-                    </div>
-                    <div>
-                      <h3 className="font-serif text-base font-semibold text-ink-900 dark:text-ink-100">{dim.title}</h3>
-                      <p className="mt-0.5 text-sm leading-relaxed text-ink-500 dark:text-ink-400">{dim.desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
             </div>
+            <Link
+              to="/guides"
+              className={sectionJumpCls}
+            >
+              All buyer's guides
+              <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+          </div>
 
-            {/* Right: guide CTA */}
-            <div className="flex h-full items-center">
-              <div className="w-full rounded-2xl border border-ink-200 bg-white p-8 shadow-sm dark:border-ink-700 dark:bg-ink-900 dark:shadow-none">
-                <p className="text-xs font-semibold uppercase tracking-widest text-accent-600 dark:text-accent-400">
-                  The full playbook
-                </p>
-                <h3 className="mt-3 font-serif text-2xl font-medium tracking-tight text-ink-900 dark:text-ink-100">
-                  Read our complete buyer's guide
-                </h3>
-                <p className="mt-3 text-sm leading-relaxed text-ink-500 dark:text-ink-400">
-                  A step-by-step framework for picking tools that pay for themselves — with the exact scorecard we use on every review.
-                </p>
-                <Link
-                  to="/methodology"
-                  className="btn-primary mt-6 inline-flex items-center gap-2"
-                >
-                  Read the full guide
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              </div>
-            </div>
+          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {categoryGuides.map((card) => (
+              <Link
+                key={card.slug}
+                to={`/guides?tag=${card.slug}`}
+                className="group flex flex-col rounded-2xl border border-ink-200 bg-white p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:border-accent-300 hover:shadow-lg dark:border-ink-700 dark:bg-ink-900 dark:shadow-none dark:hover:border-accent-700"
+              >
+                <div className="flex items-center gap-3">
+                  <div className={`flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl ${card.accentClass}`}>
+                    <card.icon className="h-5 w-5" />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-[11px] font-semibold uppercase tracking-widest text-ink-400">{card.tagline}</p>
+                    <h3 className="font-serif text-lg font-semibold text-ink-900 dark:text-ink-100">{card.name}</h3>
+                  </div>
+                </div>
+
+                <div className="mt-5 flex-1 space-y-2">
+                  {card.guides.length > 0 ? (
+                    card.guides.map((g) => (
+                      <div
+                        key={g.slug}
+                        className="flex items-start gap-2 rounded-lg border border-ink-100 bg-ink-50/70 px-3 py-2 dark:border-ink-800 dark:bg-ink-800/50"
+                      >
+                        <ArrowRight className="mt-0.5 h-3.5 w-3.5 flex-shrink-0 text-accent-600" />
+                        <span className="text-sm font-medium leading-snug text-ink-800 group-hover:text-accent-700 dark:text-ink-100 dark:group-hover:text-accent-400">
+                          {g.title}
+                        </span>
+                      </div>
+                    ))
+                  ) : (
+                    <p className="rounded-lg border border-dashed border-ink-200 px-3 py-3 text-center text-sm text-ink-400 dark:border-ink-700">
+                      Guides coming soon
+                    </p>
+                  )}
+                </div>
+
+                <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-accent-700 group-hover:text-accent-900 dark:text-accent-400 dark:group-hover:text-accent-300">
+                  Browse {card.name}
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                </span>
+              </Link>
+            ))}
           </div>
         </section>
       )}
@@ -264,14 +342,15 @@ export default function HomePage() {
                 <div className="flex items-end justify-between gap-4">
                   <div>
                     <p className="eyebrow mb-2">{category.tagline}</p>
-                    <h2 className="section-title">{category.name}</h2>
+                    <h2 className="section-title text-red-600 dark:text-red-400">{category.name}</h2>
+                    <p className="mt-2 text-sm text-ink-500 dark:text-ink-400">{categorySubtitles[category.slug]}</p>
                   </div>
                   <Link
-                    to={`/category/${category.slug}`}
-                    className="inline-flex items-center gap-1.5 text-sm font-semibold text-accent-700 hover:text-accent-900 dark:text-accent-400 dark:hover:text-accent-300"
+                    to={`/reviews/${category.slug}`}
+                    className={sectionJumpCls}
                   >
                     View all
-                    <ArrowRight className="h-4 w-4" />
+                    <ArrowRight className="h-3.5 w-3.5" />
                   </Link>
                 </div>
 
@@ -329,7 +408,7 @@ export default function HomePage() {
             {recentReviews.map((review, i) => (
               <Link
                 key={review.slug}
-                to={`/reviews/${review.slug}`}
+                to={reviewPath(review)}
                 className="group flex items-center gap-4 border-b border-ink-100 py-5 transition-colors hover:bg-ink-50/50 dark:border-ink-800 dark:hover:bg-ink-900/50"
               >
                 <span className="hidden w-8 font-serif text-2xl font-medium text-ink-300 sm:block dark:text-ink-600">

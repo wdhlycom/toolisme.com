@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom'
 import { Star, ArrowRight, ExternalLink } from 'lucide-react'
-import { reviews, categories } from '@/data/content'
+import { reviews, categories, articlePath, type CategorySlug } from '@/data/content'
 
-export default function ComparisonTable() {
+export default function ComparisonTable({ category }: { category?: CategorySlug }) {
+  const rows = category ? reviews.filter((r) => r.category === category) : reviews
+
   return (
     <div className="overflow-x-auto">
       <table className="w-full min-w-[760px] border-collapse">
@@ -29,7 +31,7 @@ export default function ComparisonTable() {
           </tr>
         </thead>
         <tbody>
-          {reviews.map((review) => {
+          {rows.map((review) => {
             const category = categories.find((c) => c.slug === review.category)
             return (
               <tr
@@ -39,7 +41,7 @@ export default function ComparisonTable() {
                 {/* Tool name */}
                 <td className="px-4 py-5">
                   <Link
-                    to={`/reviews/${review.slug}`}
+                    to={articlePath(review)}
                     className="flex items-center gap-3"
                   >
                     <span className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-ink-900 font-serif text-sm font-medium text-white dark:bg-accent-600">
@@ -83,7 +85,7 @@ export default function ComparisonTable() {
                 <td className="px-4 py-5">
                   <div className="flex items-center justify-end gap-2">
                     <Link
-                      to={`/reviews/${review.slug}`}
+                      to={articlePath(review)}
                       className="inline-flex items-center gap-1 rounded-full bg-ink-100 px-3 py-1.5 text-xs font-semibold text-ink-700 transition-colors hover:bg-ink-200 dark:bg-ink-800 dark:text-ink-300 dark:hover:bg-ink-700"
                     >
                       Review

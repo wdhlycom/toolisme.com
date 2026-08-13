@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Decision Tree</title>
+<style>
+  html,body{margin:0;padding:0;background:#ffffff;font-family:"Segoe UI","Microsoft YaHei",Arial,sans-serif;}
+</style>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720">
+  <defs>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <!-- connectors -->
+  <line x1="600" y1="100" x2="600" y2="150" stroke="#9ca3af" stroke-width="3"/>
+  <line x1="180" y1="150" x2="1020" y2="150" stroke="#9ca3af" stroke-width="3"/>
+  <line x1="180" y1="150" x2="180" y2="200" stroke="#9ca3af" stroke-width="3"/>
+  <line x1="460" y1="150" x2="460" y2="200" stroke="#9ca3af" stroke-width="3"/>
+  <line x1="740" y1="150" x2="740" y2="200" stroke="#9ca3af" stroke-width="3"/>
+  <line x1="1020" y1="150" x2="1020" y2="200" stroke="#9ca3af" stroke-width="3"/>
+
+  <!-- root -->
+  <rect x="430" y="36" width="340" height="64" rx="14" fill="#1f2937" filter="url(#shadow)"/>
+  <text x="600" y="74" text-anchor="middle" fill="#ffffff" font-size="23" font-weight="700">Which AI headshot tool?</text>
+  <text x="600" y="124" text-anchor="middle" fill="#6b7280" font-size="15">Decision guide — pick by your situation</text>
+
+  <!-- Card 1: HeadshotPro -->
+  <g>
+    <rect x="60" y="200" width="240" height="380" rx="14" fill="#ffffff" stroke="#2f6df6" stroke-width="2.5" filter="url(#shadow)"/>
+    <text x="180" y="244" text-anchor="middle" fill="#2f6df6" font-size="22" font-weight="700">HeadshotPro</text>
+    <line x1="84" y1="262" x2="276" y2="262" stroke="#e5e7eb" stroke-width="1.5"/>
+    <text x="180" y="296" text-anchor="middle" fill="#374151" font-size="15" font-weight="600">HR team / exec</text>
+    <text x="180" y="318" text-anchor="middle" fill="#374151" font-size="15" font-weight="600">with budget</text>
+    <rect x="76" y="400" width="208" height="150" rx="10" fill="#2f6df6" fill-opacity="0.08"/>
+    <text x="180" y="438" text-anchor="middle" fill="#1f2937" font-size="14">B2B consistency</text>
+    <text x="180" y="462" text-anchor="middle" fill="#1f2937" font-size="14">+ 14-day refund</text>
+    <text x="180" y="496" text-anchor="middle" fill="#6b7280" font-size="13">Team Edition unifies</text>
+    <text x="180" y="518" text-anchor="middle" fill="#6b7280" font-size="13">the whole company</text>
+  </g>
+
+  <!-- Card 2: Aragon.ai -->
+  <g>
+    <rect x="340" y="200" width="240" height="380" rx="14" fill="#ffffff" stroke="#16a34a" stroke-width="2.5" filter="url(#shadow)"/>
+    <text x="460" y="244" text-anchor="middle" fill="#16a34a" font-size="22" font-weight="700">Aragon.ai</text>
+    <line x1="364" y1="262" x2="556" y2="262" stroke="#e5e7eb" stroke-width="1.5"/>
+    <text x="460" y="296" text-anchor="middle" fill="#374151" font-size="15" font-weight="600">Few selfies /</text>
+    <text x="460" y="318" text-anchor="middle" fill="#374151" font-size="15" font-weight="600">need it in 30 min</text>
+    <rect x="356" y="400" width="208" height="150" rx="10" fill="#16a34a" fill-opacity="0.08"/>
+    <text x="460" y="438" text-anchor="middle" fill="#1f2937" font-size="14">Only 6 photos</text>
+    <text x="460" y="462" text-anchor="middle" fill="#1f2937" font-size="14">multi-scene</text>
+    <text x="460" y="496" text-anchor="middle" fill="#6b7280" font-size="13">Fastest in class,</text>
+    <text x="460" y="518" text-anchor="middle" fill="#6b7280" font-size="13">Remix editor free</text>
+  </g>
+
+  <!-- Card 3: BetterPic -->
+  <g>
+    <rect x="620" y="200" width="240" height="380" rx="14" fill="#ffffff" stroke="#9333ea" stroke-width="2.5" filter="url(#shadow)"/>
+    <text x="740" y="244" text-anchor="middle" fill="#9333ea" font-size="22" font-weight="700">BetterPic</text>
+    <line x1="644" y1="262" x2="836" y2="262" stroke="#e5e7eb" stroke-width="1.5"/>
+    <text x="740" y="296" text-anchor="middle" fill="#374151" font-size="15" font-weight="600">Hate "wax face" /</text>
+    <text x="740" y="318" text-anchor="middle" fill="#374151" font-size="15" font-weight="600">want true 4K</text>
+    <rect x="636" y="400" width="208" height="150" rx="10" fill="#9333ea" fill-opacity="0.08"/>
+    <text x="740" y="438" text-anchor="middle" fill="#1f2937" font-size="14">True 4K +</text>
+    <text x="740" y="462" text-anchor="middle" fill="#1f2937" font-size="14">human retouch</text>
+    <text x="740" y="496" text-anchor="middle" fill="#6b7280" font-size="13">No wax-skin,</text>
+    <text x="740" y="518" text-anchor="middle" fill="#6b7280" font-size="13">real texture</text>
+  </g>
+
+  <!-- Card 4: Proshoot -->
+  <g>
+    <rect x="900" y="200" width="240" height="380" rx="14" fill="#ffffff" stroke="#ea580c" stroke-width="2.5" filter="url(#shadow)"/>
+    <text x="1020" y="244" text-anchor="middle" fill="#ea580c" font-size="22" font-weight="700">Proshoot</text>
+    <line x1="924" y1="262" x2="1116" y2="262" stroke="#e5e7eb" stroke-width="1.5"/>
+    <text x="1020" y="296" text-anchor="middle" fill="#374151" font-size="15" font-weight="600">Must look</text>
+    <text x="1020" y="318" text-anchor="middle" fill="#374151" font-size="15" font-weight="600">like YOU</text>
+    <rect x="916" y="400" width="208" height="150" rx="10" fill="#ea580c" fill-opacity="0.08"/>
+    <text x="1020" y="438" text-anchor="middle" fill="#1f2937" font-size="14">Keeps your</text>
+    <text x="1020" y="462" text-anchor="middle" fill="#1f2937" font-size="14">real features</text>
+    <text x="1020" y="496" text-anchor="middle" fill="#6b7280" font-size="13">Hairline, dimples,</text>
+    <text x="1020" y="518" text-anchor="middle" fill="#6b7280" font-size="13">moles preserved</text>
+  </g>
+
+  <text x="600" y="636" text-anchor="middle" fill="#9ca3af" font-size="13">Sources: official pricing pages &amp; reviews, verified Aug 2026</text>
+</svg>
+</body>
+</html>

@@ -6,10 +6,10 @@ const footerNav = [
     title: 'Explore',
     links: [
       { to: '/', label: 'Home' },
-      { to: '/category/software', label: 'Software' },
-      { to: '/category/creators', label: 'Creators' },
-      { to: '/category/security', label: 'Security' },
-      { to: '/category/hardware', label: 'Hardware' },
+      { to: '/reviews/software', label: 'Software' },
+      { to: '/reviews/creators', label: 'Creators' },
+      { to: '/reviews/security', label: 'Security' },
+      { to: '/reviews/hardware', label: 'Hardware' },
     ],
   },
   {

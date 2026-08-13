@@ -32,6 +32,11 @@ export interface ToolReview {
   bodySections: { heading: string; paragraphs: string[] }[]
   featured?: boolean
   editorsPick?: boolean
+  comparisonOnly?: boolean
+  verdictBadge?: string
+  ctaLabel?: string
+  appCategory?: string
+  operatingSystem?: string
   markdownBody?: string
 }
 
@@ -87,7 +92,7 @@ export const heroTags: string[] = [
   'Paraphraser',
 ]
 
-export const reviews: ToolReview[] = [
+const _allArticles: ToolReview[] = [
   {
     slug: 'clickup-review-2026',
     name: 'ClickUp',
@@ -356,8 +361,22 @@ export const reviews: ToolReview[] = [
     markdownBody: r.markdownBody,
     featured: r.featured,
     editorsPick: r.editorsPick,
+    comparisonOnly: r.comparisonOnly,
+    verdictBadge: r.verdictBadge,
+    ctaLabel: r.ctaLabel,
+    appCategory: r.appCategory,
+    operatingSystem: r.operatingSystem,
   })),
 ]
+
+/** All articles (reviews + comparisons) — use when you need everything. */
+export const allArticles: ToolReview[] = _allArticles
+
+/** Regular reviews only (excludes comparison-only articles). */
+export const reviews: ToolReview[] = _allArticles.filter((r) => !r.comparisonOnly)
+
+/** Comparison-only articles. */
+export const comparisons: ToolReview[] = _allArticles.filter((r) => r.comparisonOnly)
 
 // toolCount is derived from the actual reviews array so the site never shows
 // stale hardcoded numbers.
@@ -365,6 +384,18 @@ export const categories: Category[] = baseCategories.map((c) => ({
   ...c,
   toolCount: reviews.filter((r) => r.category === c.slug).length,
 }))
+
+/** Canonical review URL: /reviews/{category}/{slug} */
+export const reviewPath = (r: Pick<ToolReview, 'category' | 'slug'>): string =>
+  `/reviews/${r.category}/${r.slug}`
+
+/** Canonical comparison URL: /comparisons/{category}/{slug} */
+export const comparisonPath = (r: Pick<ToolReview, 'category' | 'slug'>): string =>
+  `/comparisons/${r.category}/${r.slug}`
+
+/** Returns the correct URL based on whether the article is comparison-only. */
+export const articlePath = (r: ToolReview): string =>
+  r.comparisonOnly ? comparisonPath(r) : reviewPath(r)
 
 export interface TeamMember {
   name: string

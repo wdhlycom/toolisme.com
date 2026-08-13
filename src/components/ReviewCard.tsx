@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { ArrowRight, Star, Clock, Award } from 'lucide-react'
 import type { ToolReview } from '@/data/content'
-import { categories } from '@/data/content'
+import { categories, articlePath } from '@/data/content'
 
 const categoryMap = Object.fromEntries(categories.map((c) => [c.slug, c]))
 
@@ -9,7 +9,11 @@ export default function ReviewCard({ review }: { review: ToolReview }) {
   const cat = categoryMap[review.category]
 
   return (
-    <article className="card-hover group flex flex-col overflow-hidden">
+    <Link
+      to={articlePath(review)}
+      className="card-hover group flex flex-col overflow-hidden"
+      aria-label={`Read ${review.name} review`}
+    >
       <div className="flex items-start justify-between gap-3 p-6 pb-0">
         <div className="flex flex-wrap items-center gap-2">
           <span
@@ -48,15 +52,12 @@ export default function ReviewCard({ review }: { review: ToolReview }) {
             </span>
             <span className="text-sm font-semibold text-ink-700 dark:text-ink-300">{review.pricing}</span>
           </div>
-          <Link
-            to={`/reviews/${review.slug}`}
-            className="inline-flex items-center gap-1.5 text-sm font-semibold text-accent-700 transition-colors hover:text-accent-900 dark:text-accent-400 dark:hover:text-accent-300"
-          >
+          <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-accent-700 transition-colors group-hover:text-accent-900 dark:text-accent-400 dark:group-hover:text-accent-300">
             Read review
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-          </Link>
+          </span>
         </div>
       </div>
-    </article>
+    </Link>
   )
 }
