@@ -4,6 +4,7 @@ import Header from './Header'
 import Footer from './Footer'
 import ScrollToTop from './ScrollToTop'
 import CookieBanner from './CookieBanner'
+import ImageLightbox from './ImageLightbox'
 
 export default function Layout() {
   // Global click-to-copy for [data-copy] buttons rendered from markdown (e.g. promo codes)
@@ -37,6 +38,7 @@ export default function Layout() {
       </main>
       <Footer />
       <CookieBanner />
+      <ImageLightbox />
     </div>
   )
 }

@@ -1,8 +1,11 @@
 import { useParams, Link, Navigate } from 'react-router-dom'
 import { useEffect, useMemo } from 'react'
+import { createRoot } from 'react-dom/client'
 import { ArrowLeft, Clock, Tag, ArrowRight } from 'lucide-react'
 import { guides, renderMarkdown } from '@/content/guides'
 import { categories } from '@/data/content'
+import HardwareKeyboardQuiz from '@/components/HardwareKeyboardQuiz'
+import SaasToolQuiz from '@/components/SaasToolQuiz'
 
 function slugifyHeading(text: string): string {
   return text.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '')
@@ -11,6 +14,8 @@ function slugifyHeading(text: string): string {
 export default function GuideDetailPage() {
   const { slug } = useParams<{ slug: string }>()
   const guide = guides.find((g) => g.slug === slug)
+  const isHardware = slug === 'remote-workstation-hardware-guide'
+  const isSaas = slug === 'how-to-choose-saas-ai-tools'
 
   const markdownHtml = useMemo(
     () => (guide ? renderMarkdown(guide.markdownBody) : ''),
@@ -36,12 +41,30 @@ export default function GuideDetailPage() {
     })
   }, [guide])
 
+  // Mount the hardware keyboard picker into its markdown placeholder
+  useEffect(() => {
+    if (!isHardware || !guide?.markdownBody) return
+    const mount = document.getElementById('hardware-keyboard-quiz')
+    if (!mount || mount.dataset.hwMounted) return
+    mount.dataset.hwMounted = '1'
+    createRoot(mount).render(<HardwareKeyboardQuiz />)
+  }, [isHardware, guide])
+
+  // Mount the SaaS tool matcher into its markdown placeholder
+  useEffect(() => {
+    if (!isSaas || !guide?.markdownBody) return
+    const mount = document.getElementById('saas-tool-quiz')
+    if (!mount || mount.dataset.saasMounted) return
+    mount.dataset.saasMounted = '1'
+    createRoot(mount).render(<SaasToolQuiz />)
+  }, [isSaas, guide])
+
   if (!guide) return <Navigate to="/guides" replace />
 
   return (
     <div>
       {/* Article header */}
-      <header className="relative overflow-hidden border-b border-ink-200/70 bg-white dark:border-ink-700/70 dark:bg-ink-950">
+      <header className="relative overflow-hidden bg-white dark:bg-ink-950">
         <div className="absolute inset-0 bg-grid mask-fade-b opacity-60" />
         <div className="container-page relative py-16 sm:py-20">
           <div className="max-w-3xl">

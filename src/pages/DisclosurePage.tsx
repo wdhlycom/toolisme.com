@@ -127,7 +127,7 @@ export default function DisclosurePage() {
           </p>
           <p>
             Questions about this disclosure?{' '}
-            <Link to="/contact">Contact us</Link> and we will answer them.
+            <Link to="/about#contact">Contact us</Link> and we will answer them.
           </p>
         </div>
       </section>
@@ -142,7 +142,7 @@ export default function DisclosurePage() {
             We are happy to explain anything on this page in more detail.
           </p>
           <Link
-            to="/contact"
+            to="/about#contact"
             className="mt-6 inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-ink-900 transition-all hover:shadow-lg active:scale-[0.98]"
           >
             Get in touch

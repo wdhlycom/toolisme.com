@@ -1,6 +1,8 @@
-import { Link } from 'react-router-dom'
+import { useEffect } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
 import PageHeader from '@/components/PageHeader'
+import ContactSection from '@/components/ContactSection'
 import * as Icons from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 
@@ -53,6 +55,16 @@ const testingPrinciples = [
 ]
 
 export default function AboutPage() {
+  const location = useLocation()
+
+  // Scroll to an in-page anchor (e.g. /about#contact) when arriving with a hash.
+  useEffect(() => {
+    if (location.hash) {
+      const el = document.getElementById(location.hash.slice(1))
+      if (el) el.scrollIntoView({ behavior: 'smooth' })
+    }
+  }, [location])
+
   return (
     <div>
       <PageHeader
@@ -151,6 +163,18 @@ export default function AboutPage() {
             <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
+      </section>
+
+      {/* Contact — merged here from the standalone Contact page */}
+      <section id="contact" className="border-t border-ink-200/70 bg-white py-16 dark:border-ink-700/70 dark:bg-ink-950">
+        <div className="container-page">
+          <p className="eyebrow mb-3">Get in touch</p>
+          <h2 className="section-title">Contact Toolisme</h2>
+          <p className="mt-3 max-w-xl text-sm text-ink-500 dark:text-ink-400">
+            Have a question, a tool to suggest, or a correction to flag? We read every message and respond within two business days.
+          </p>
+        </div>
+        <ContactSection />
       </section>
     </div>
   )

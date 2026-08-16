@@ -18,7 +18,7 @@ const footerNav = [
       { to: '/about', label: 'About Us' },
       { to: '/editorial-team', label: 'Editorial Team' },
       { to: '/methodology', label: 'Methodology' },
-      { to: '/contact', label: 'Contact' },
+      { to: '/about#contact', label: 'Contact' },
     ],
   },
   {
@@ -32,7 +32,7 @@ const footerNav = [
 
 export default function Footer() {
   return (
-    <footer className="border-t border-ink-200/70 bg-white dark:border-ink-700/70 dark:bg-ink-950">
+    <footer className="border-t border-white/10 bg-ink-950">
       <div className="container-page py-14">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-5">
           <div className="lg:col-span-2">
@@ -42,11 +42,11 @@ export default function Footer() {
                 alt="Toolisme"
                 className="h-9 w-9 rounded-full object-cover"
               />
-              <span className="font-serif text-xl font-medium tracking-tight text-ink-900 dark:text-ink-100">
+              <span className="font-serif text-xl font-medium tracking-tight text-white">
                 Toolisme
               </span>
             </Link>
-            <p className="mt-4 max-w-xs text-sm leading-relaxed text-ink-500 dark:text-ink-400">
+            <p className="mt-4 max-w-xs text-sm leading-relaxed text-ink-300">
               We test, review, and filter the best SaaS & AI tools to multiply your
               productivity. Skip the trial and error.
             </p>
@@ -54,14 +54,14 @@ export default function Footer() {
               <a
                 href="#"
                 aria-label="Newsletter"
-                className="flex h-9 w-9 items-center justify-center rounded-full bg-ink-100 text-ink-600 transition-colors hover:bg-ink-900 hover:text-white dark:bg-ink-800 dark:text-ink-400 dark:hover:bg-accent-600 dark:hover:text-white"
+                className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-ink-200 transition-colors hover:bg-white/20 hover:text-white"
               >
                 <Mail className="h-4 w-4" />
               </a>
               <a
                 href="#"
                 aria-label="RSS feed"
-                className="flex h-9 w-9 items-center justify-center rounded-full bg-ink-100 text-ink-600 transition-colors hover:bg-ink-900 hover:text-white dark:bg-ink-800 dark:text-ink-400 dark:hover:bg-accent-600 dark:hover:text-white"
+                className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-ink-200 transition-colors hover:bg-white/20 hover:text-white"
               >
                 <Rss className="h-4 w-4" />
               </a>
@@ -70,7 +70,7 @@ export default function Footer() {
 
           {footerNav.map((section) => (
             <div key={section.title}>
-              <h3 className="text-xs font-semibold uppercase tracking-widest text-ink-400 dark:text-ink-500">
+              <h3 className="text-xs font-semibold uppercase tracking-widest text-ink-400">
                 {section.title}
               </h3>
               <ul className="mt-4 space-y-3">
@@ -78,7 +78,7 @@ export default function Footer() {
                   <li key={link.to}>
                     <Link
                       to={link.to}
-                      className="text-sm text-ink-600 transition-colors hover:text-ink-900 dark:text-ink-400 dark:hover:text-ink-100"
+                      className="text-sm text-ink-300 transition-colors hover:text-white"
                     >
                       {link.label}
                     </Link>
@@ -89,13 +89,13 @@ export default function Footer() {
           ))}
         </div>
 
-        <div className="mt-12 flex flex-col items-start justify-between gap-4 border-t border-ink-200/70 pt-6 sm:flex-row sm:items-center">
-          <p className="text-xs text-ink-400 dark:text-ink-500">
+        <div className="mt-12 flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-6 sm:flex-row sm:items-center">
+          <p className="text-xs text-ink-400">
             &copy; {new Date().getFullYear()} Toolisme. All rights reserved.
           </p>
-          <p className="text-xs text-ink-400 dark:text-ink-500">
+          <p className="text-xs text-ink-400">
             Some links on this site are affiliate links.{' '}
-            <Link to="/disclosure" className="font-medium text-ink-600 hover:text-ink-900 dark:text-ink-400 dark:hover:text-ink-100">
+            <Link to="/disclosure" className="font-medium text-ink-300 hover:text-white">
               Read our disclosure
             </Link>
             .

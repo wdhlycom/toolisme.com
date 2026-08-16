@@ -125,7 +125,7 @@ export default function PrivacyPage() {
             <li>Non-discrimination for exercising your rights.</li>
           </ul>
           <p>
-            To exercise any right, <Link to="/contact">contact us</Link>.
+            To exercise any right, <Link to="/about#contact">contact us</Link>.
           </p>
 
           <h2>7. Security</h2>
@@ -150,7 +150,7 @@ export default function PrivacyPage() {
 
           <h2>10. Contact us</h2>
           <p>
-            Questions or requests about this policy or your data? <Link to="/contact">Reach out</Link>
+            Questions or requests about this policy or your data? <Link to="/about#contact">Reach out</Link>
             and we will be happy to help.
           </p>
         </div>

@@ -388,7 +388,7 @@ export default function MethodologyPage() {
                   something we missed, you're exactly who we want hearing from.
                 </p>
                 <div className="not-prose mt-8">
-                  <Link to="/contact" className="btn-primary">
+                  <Link to="/about#contact" className="btn-primary">
                     Get in touch
                     <ArrowRight className="h-4 w-4" />
                   </Link>

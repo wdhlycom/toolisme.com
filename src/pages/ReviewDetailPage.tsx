@@ -2,7 +2,7 @@ import { useParams, Link, Navigate } from 'react-router-dom'
 import { useEffect, useState, useMemo } from 'react'
 import { createRoot } from 'react-dom/client'
 import {
-  Star, Clock, Check, X, ArrowRight, ExternalLink, Users, Tag,
+  Star, Clock, Check, X, ArrowRight, Rocket, Users, Tag,
   ChevronRight, ShieldCheck, UserCheck, UserX, ListOrdered,
 } from 'lucide-react'
 import { reviews, comparisons, categories, reviewPath, comparisonPath, type ToolReview } from '@/data/content'
@@ -11,6 +11,9 @@ import ReviewCard from '@/components/ReviewCard'
 import AiHeadshotQuiz from '@/components/AiHeadshotQuiz'
 import AhaSlidesDecisionMatrix from '@/components/AhaSlidesDecisionMatrix'
 import TubeMagicQuiz from '@/components/TubeMagicQuiz'
+import SnovioDecisionTree from '@/components/SnovioDecisionTree'
+import WarmupInboxDecisionTree from '@/components/WarmupInboxDecisionTree'
+import BufferDecisionTree from '@/components/BufferDecisionTree'
 
 const TOC_SECTIONS = [
   { id: 'overview', label: 'Overview' },
@@ -115,6 +118,9 @@ export default function ReviewDetailPage({ comparison = false }: { comparison?: 
   const isAiHeadshot = comparison && slug === 'ai-headshot-tools-comparison-2026'
   const isAhaSlides = !comparison && slug === 'ahaslides-review-2026'
   const isTubeMagic = comparison && slug === 'tubemagic-vs-subscribr-2026'
+  const isSnovio = !comparison && slug === 'snovio-review-2026'
+  const isWarmupinbox = !comparison && slug === 'warmupinbox-review-2026'
+  const isBuffer = !comparison && slug === 'buffer-review-2026'
   const [activeSection, setActiveSection] = useState('overview')
 
   // For markdown articles, build TOC from h2 headings
@@ -183,6 +189,32 @@ export default function ReviewDetailPage({ comparison = false }: { comparison?: 
     mount.dataset.quizMounted = '1'
     createRoot(mount).render(<TubeMagicQuiz />)
   }, [isTubeMagic, review])
+
+  // Mount the Snov.io decision tree into its markdown placeholder
+  useEffect(() => {
+    if (!isSnovio || !review?.markdownBody) return
+    const mount = document.getElementById('snovio-decision-tree')
+    if (!mount || mount.dataset.decisionMounted) return
+    mount.dataset.decisionMounted = '1'
+    createRoot(mount).render(<SnovioDecisionTree />)
+  }, [isSnovio, review])
+
+  // Mount the WarmupInbox decision tree into its markdown placeholder
+  useEffect(() => {
+    if (!isWarmupinbox || !review?.markdownBody) return
+    const mount = document.getElementById('warmupinbox-decision-tree')
+    if (!mount || mount.dataset.warmupMounted) return
+    mount.dataset.warmupMounted = '1'
+    createRoot(mount).render(<WarmupInboxDecisionTree />)
+  }, [isWarmupinbox, review])
+
+  useEffect(() => {
+    if (!isBuffer || !review?.markdownBody) return
+    const mount = document.getElementById('buffer-decision-tree')
+    if (!mount || mount.dataset.bufferMounted) return
+    mount.dataset.bufferMounted = '1'
+    createRoot(mount).render(<BufferDecisionTree />)
+  }, [isBuffer, review])
 
   // If accessed via /reviews/ path but article is comparison-only, redirect
   if (!review && !comparison) {
@@ -345,6 +377,8 @@ export default function ReviewDetailPage({ comparison = false }: { comparison?: 
               ) : (
                 <a
                   href={review.url}
+                  target="_blank"
+                  rel="sponsored noopener noreferrer"
                   className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-amber-400 px-6 py-3 text-sm font-bold text-ink-950 shadow-md shadow-amber-400/30 transition-all hover:bg-accent-600 hover:text-white hover:shadow-lg hover:shadow-accent-600/30 active:scale-[0.98] sm:w-auto"
                 >
                   {review.ctaLabel ? `🚀 ${review.ctaLabel}` : 'Check Latest Price'}
@@ -557,29 +591,26 @@ export default function ReviewDetailPage({ comparison = false }: { comparison?: 
                 </div>
               </div>
             ) : (
-              <div className="not-prose mt-12 flex flex-col items-center justify-between gap-4 rounded-2xl bg-ink-900 p-8 text-white sm:flex-row">
-                <div>
-                  <h3 className="font-serif text-xl font-medium">Ready to try {review.name}?</h3>
-                  <p className="mt-1 text-sm text-ink-300">
-                    {review.pricing} &middot; {review.bestFor}
-                  </p>
-                </div>
-                <div className="flex flex-col gap-3 sm:flex-row">
-                  <a
-                    href={review.url}
-                    className="inline-flex items-center justify-center gap-2 rounded-full bg-amber-400 px-6 py-3 text-sm font-bold text-ink-950 shadow-md shadow-amber-400/30 transition-all hover:bg-accent-600 hover:text-white hover:shadow-lg hover:shadow-accent-600/30 active:scale-[0.98]"
-                  >
-                    {review.ctaLabel ? `🚀 ${review.ctaLabel}` : 'Check Latest Price'}
-                    <ArrowRight className="h-4 w-4" />
-                  </a>
-                  <a
-                    href={review.url}
-                    className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-ink-900 transition-all hover:shadow-lg active:scale-[0.98]"
-                  >
-                    Visit Official Site
-                    <ExternalLink className="h-4 w-4" />
-                  </a>
-                </div>
+              <div className="not-prose mt-12">
+                <a
+                  href={review.url}
+                  target="_blank"
+                  rel="sponsored noopener noreferrer"
+                  className="group mx-auto flex w-full max-w-2xl items-center gap-4 rounded-2xl bg-amber-400 px-6 py-5 text-ink-950 shadow-md shadow-amber-400/30 transition-all hover:bg-accent-600 hover:text-white hover:shadow-lg hover:shadow-accent-600/30 active:scale-[0.98]"
+                >
+                  <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl bg-white/30">
+                    <Rocket className="h-5 w-5" />
+                  </span>
+                  <span className="flex-1">
+                    <span className="block text-base font-bold leading-tight">
+                      {review.ctaLabel ? `🚀 ${review.ctaLabel}` : 'Check Latest Price'}
+                    </span>
+                    <span className="mt-0.5 block text-xs font-medium opacity-90">
+                      {review.pricing} &middot; {review.bestFor}
+                    </span>
+                  </span>
+                  <ArrowRight className="h-5 w-5 flex-shrink-0 transition-transform group-hover:translate-x-1" />
+                </a>
               </div>
             )}
             <p className="not-prose mt-3 text-center text-xs text-ink-400">

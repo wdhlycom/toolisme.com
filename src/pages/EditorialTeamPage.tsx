@@ -137,7 +137,7 @@ export default function EditorialTeamPage() {
             We are always looking for reviewers who love testing new tools and writing
             honest assessments.
           </p>
-          <Link to="/contact" className="mt-8 inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-ink-900 transition-all hover:shadow-lg active:scale-[0.98]">
+          <Link to="/about#contact" className="mt-8 inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-ink-900 transition-all hover:shadow-lg active:scale-[0.98]">
             Get in touch
             <ArrowRight className="h-4 w-4" />
           </Link>
