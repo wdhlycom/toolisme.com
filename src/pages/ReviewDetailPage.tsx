@@ -260,11 +260,11 @@ export default function ReviewDetailPage({ comparison = false }: { comparison?: 
   }
 
   const renderedMarkdown = review.markdownBody ? renderMarkdown(review.markdownBody) : ''
-  const articleSchema = buildArticleSchema(review, `${SITE_BASE}${comparison ? comparisonPath(review) : reviewPath(review)}`, authorDetail || undefined)
   const authorDetail = useMemo(() => {
     if (!review.author) return undefined
     return authorDetails.find((a) => a.name === review.author)
   }, [review.author])
+  const articleSchema = buildArticleSchema(review, `${SITE_BASE}${comparison ? comparisonPath(review) : reviewPath(review)}`, authorDetail || undefined)
 
   return (
     <div>
