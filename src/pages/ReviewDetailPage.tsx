@@ -96,8 +96,8 @@ function buildArticleSchema(review: ToolReview, articleUrl: string, author?: { n
     '@type': 'Review',
     name: `${review.name} Review 2026`,
     reviewRating: { '@type': 'Rating', ratingValue: review.rating, bestRating: 5 },
-    author: authorDetail
-      ? { '@type': 'Person', name: authorDetail.name, url: `${SITE_BASE}/author/${authorDetail.slug}` }
+    author: author
+      ? { '@type': 'Person', name: author.name, url: `${SITE_BASE}/author/${author.slug}` }
       : { '@type': 'Organization', name: 'Toolisme' },
     reviewBody: review.summary,
     datePublished: review.date,
