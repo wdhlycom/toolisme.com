@@ -28,6 +28,8 @@ interface MarkdownFrontmatter {
   // Schema.org SoftwareApplication fields
   appCategory?: string
   operatingSystem?: string
+  // Author display name (matches authorDetails.name in content.ts)
+  author?: string
 }
 
 export interface MarkdownReview extends MarkdownFrontmatter {

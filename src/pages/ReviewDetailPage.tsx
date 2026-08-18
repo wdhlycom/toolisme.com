@@ -5,7 +5,7 @@ import {
   Star, Clock, Check, X, ArrowRight, Rocket, Users, Tag,
   ChevronRight, ShieldCheck, UserCheck, UserX, ListOrdered,
 } from 'lucide-react'
-import { reviews, comparisons, categories, reviewPath, comparisonPath, type ToolReview } from '@/data/content'
+import { reviews, comparisons, categories, reviewPath, comparisonPath, type ToolReview, getAuthor, authorDetails } from '@/data/content'
 import { renderMarkdown } from '@/content/markdownReviews'
 import ReviewCard from '@/components/ReviewCard'
 import AiHeadshotQuiz from '@/components/AiHeadshotQuiz'
@@ -62,7 +62,7 @@ const HEADSHOT_CARDS = [
 
 // SoftwareApplication + Review structured data so Google SERP can show stars,
 // price and pros/cons for software review pages.
-function buildArticleSchema(review: ToolReview, articleUrl: string): object {
+function buildArticleSchema(review: ToolReview, articleUrl: string, author?: { name: string; slug: string }): object {
   const priceMatch = (review.pricing || '').match(/\d+(\.\d+)?/)
   const freeTier = /^free/i.test(review.pricing || '')
   const price = freeTier ? 0 : priceMatch ? parseFloat(priceMatch[0]) : undefined
@@ -96,7 +96,9 @@ function buildArticleSchema(review: ToolReview, articleUrl: string): object {
     '@type': 'Review',
     name: `${review.name} Review 2026`,
     reviewRating: { '@type': 'Rating', ratingValue: review.rating, bestRating: 5 },
-    author: { '@type': 'Organization', name: 'Toolisme' },
+    author: authorDetail
+      ? { '@type': 'Person', name: authorDetail.name, url: `${SITE_BASE}/author/${authorDetail.slug}` }
+      : { '@type': 'Organization', name: 'Toolisme' },
     reviewBody: review.summary,
     datePublished: review.date,
     itemReviewed: { '@type': 'SoftwareApplication', name: review.name },
@@ -258,7 +260,11 @@ export default function ReviewDetailPage({ comparison = false }: { comparison?: 
   }
 
   const renderedMarkdown = review.markdownBody ? renderMarkdown(review.markdownBody) : ''
-  const articleSchema = buildArticleSchema(review, `${SITE_BASE}${comparison ? comparisonPath(review) : reviewPath(review)}`)
+  const articleSchema = buildArticleSchema(review, `${SITE_BASE}${comparison ? comparisonPath(review) : reviewPath(review)}`, authorDetail || undefined)
+  const authorDetail = useMemo(() => {
+    if (!review.author) return undefined
+    return authorDetails.find((a) => a.name === review.author)
+  }, [review.author])
 
   return (
     <div>
@@ -301,6 +307,26 @@ export default function ReviewDetailPage({ comparison = false }: { comparison?: 
             <h1 className="mt-3 font-serif text-4xl font-medium leading-tight tracking-tight text-ink-900 sm:text-5xl text-balance">
               {review.name} Review 2026: {review.tagline}
             </h1>
+
+            {/* Author byline */}
+            {authorDetail && (
+              <div className="mt-3 flex items-center gap-2.5 text-sm">
+                <img
+                  src={authorDetail.avatar}
+                  alt={authorDetail.name}
+                  className="h-8 w-8 flex-shrink-0 rounded-full object-cover"
+                />
+                <span className="text-ink-500">
+                  By{' '}
+                  <Link
+                    to={`/author/${authorDetail.slug}`}
+                    className="font-semibold text-ink-700 hover:text-accent-700"
+                  >
+                    {authorDetail.name}
+                  </Link>
+                </span>
+              </div>
+            )}
             <p className="mt-3 text-lg leading-relaxed text-ink-600 text-pretty">
               {review.summary}
             </p>

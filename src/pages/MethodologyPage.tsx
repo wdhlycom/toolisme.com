@@ -339,10 +339,8 @@ export default function MethodologyPage() {
               <div id="authors" className="scroll-mt-24">
                 <h2>Who Writes</h2>
                 <p>
-                  Toolisme reviews are written by editors with hands-on domain experience — people
-                  who have run the software, managed the budgets, and dealt with the support queues
-                  they write about. Many come from engineering, security, or creative production
-                  backgrounds rather than marketing.
+                  Toolisme reviews are written by editors with domain experience — people who have used or deeply researched the tools they write about, and who aggregate real user feedback where direct testing isn't possible.
+                  Many come from engineering, security, or creative production backgrounds rather than marketing.
                 </p>
                 <p>
                   Every review carries the author's name and the date it was last verified. That

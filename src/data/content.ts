@@ -37,6 +37,7 @@ export interface ToolReview {
   ctaLabel?: string
   appCategory?: string
   operatingSystem?: string
+  author?: string
   markdownBody?: string
 }
 
@@ -119,6 +120,7 @@ const _allArticles: ToolReview[] = [
     ctaLabel: r.ctaLabel,
     appCategory: r.appCategory,
     operatingSystem: r.operatingSystem,
+    author: r.author,
   })),
 ]
 
@@ -209,7 +211,7 @@ export const authorDetails: AuthorDetail[] = [
     disclosure: 'Content on Toolisme is reviewed by the editorial team. See our Affiliate Disclosure.',
   },
   {
-    slug: 'trueer-quinn',
+    slug: 'trueer',
     name: 'Trueer',
     role: 'Creators & Hardware Editor',
     location: 'Melbourne, Victoria, Australia',
@@ -230,7 +232,7 @@ export const authorDetails: AuthorDetail[] = [
     location: 'Manchester, United Kingdom',
     avatar: '/avatars/bill-hartman.jpg',
     about:
-      "Bill Hartman researches privacy tools and online security. He runs Toolisme's annual security survey and writes the deep-dive VPN comparisons that keep our recommendations honest. Every claim links to primary sources — vendor docs and independent audits.",
+      "Bill Hartman tests and researches privacy tools and online security. He runs Toolisme's annual security survey and writes the deep-dive VPN comparisons that keep our recommendations honest. Every claim links to primary sources — vendor docs and independent audits.",
     expertise: ['VPNs', 'password managers', 'privacy browsers', 'security awareness'],
     howIWork:
       "For each tool I set it up and use it hands-on where I can — configuring the VPN, running speed and leak tests, reading the provider's audit report — then verify every claim against primary sources. Where I can't test directly, I aggregate and cite real user reports and label them as such. I never promise absolute protection; I report what the evidence shows.",
@@ -274,7 +276,7 @@ export const teamMembers: TeamMember[] = [
   },
   {
     name: 'Trueer',
-    slug: 'trueer-quinn',
+    slug: 'trueer',
     role: 'Creators & Hardware Editor',
     bio: "Trueer is our Creators & Hardware Editor. A visual artist turned tech reviewer, he brings a creator's perspective to video, audio, and hardware reviews. His creative work has appeared in three digital art exhibitions.",
     location: 'Melbourne, Victoria, Australia',
@@ -290,7 +292,7 @@ export const teamMembers: TeamMember[] = [
     name: 'Bill Hartman',
     slug: 'bill-hartman',
     role: 'Security Editor & Researcher',
-    bio: "Bill Hartman researches privacy tools and online security. He runs Toolisme's annual security survey and writes the deep-dive VPN comparisons that keep our recommendations honest. Every claim links to primary sources — vendor docs and independent audits.",
+    bio: "Bill Hartman tests and researches privacy tools and online security. He runs Toolisme's annual security survey and writes the deep-dive VPN comparisons that keep our recommendations honest. Every claim links to primary sources — vendor docs and independent audits.",
     location: 'Manchester, United Kingdom',
     initials: 'BH',
     accentClass: 'bg-ink-100 text-ink-800',
