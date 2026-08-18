@@ -183,14 +183,14 @@ export const authorDetails: AuthorDetail[] = [
     name: 'Holive',
     role: 'Founder & Editor-in-Chief',
     location: 'Austin, Texas, USA',
-    avatar: '/avatars/holive.png',
+    avatar: '/avatars/holive.jpg',
     about:
       "Holive is the founder and editor-in-chief of Toolisme. Before starting the site, he was a product manager at two SaaS startups, where he spent countless hours comparing tools for his own teams. He launched Toolisme to spare other teams that same trial and error. Today he sets the site's editorial standards and owns the review methodology every reviewer follows.",
     expertise: ['SaaS selection', 'productivity tools', 'review methodology', 'affiliate transparency'],
     howIWork:
       "I don't personally test every tool. Instead I define the hands-on testing standard, review each published piece for accuracy, and keep our scoring rubric honest. Every review on Toolisme runs through me before it goes live.",
-    sameAs: ['https://x.com/toolisme'],
-    socials: [{ label: 'X', url: 'https://x.com/toolisme' }],
+    sameAs: ['https://x.com/soyricher'],
+    socials: [{ label: 'X', url: 'https://x.com/soyricher' }],
     disclosure: 'Content on Toolisme is reviewed by the editorial team. See our Affiliate Disclosure.',
   },
   {
@@ -210,17 +210,17 @@ export const authorDetails: AuthorDetail[] = [
   },
   {
     slug: 'trueer-quinn',
-    name: 'trueer Quinn',
+    name: 'Trueer Quinn',
     role: 'Creators & Hardware Editor',
     location: 'Melbourne, Victoria, Australia',
     avatar: '/avatars/trueer-quinn.jpg',
     about:
-      "trueer Quinn is our Creators & Hardware Editor. A visual artist turned tech reviewer, he brings a creator's perspective to video, audio, and hardware reviews. His creative work has appeared in three digital art exhibitions.",
+      "Trueer Quinn is our Creators & Hardware Editor. A visual artist turned tech reviewer, he brings a creator's perspective to video, audio, and hardware reviews. His creative work has appeared in three digital art exhibitions.",
     expertise: ['video editing tools', 'podcast/audio tools', 'creator hardware', 'creator workflows'],
     howIWork:
       "Where possible I test every tool inside a real creator project — cutting an actual video, recording a podcast episode, or running a live stream — rather than ticking feature boxes. When I can't run a tool myself, I combine hands-on checks with sourced user feedback from creator communities and label which is which. If it doesn't survive a real deadline, it doesn't score well.",
-    sameAs: [],
-    socials: [],
+    sameAs: ['https://x.com/trueer9'],
+    socials: [{ label: 'X', url: 'https://x.com/trueer9' }],
     disclosure: 'Content on Toolisme is reviewed by the editorial team. See our Affiliate Disclosure.',
   },
   {
@@ -234,8 +234,8 @@ export const authorDetails: AuthorDetail[] = [
     expertise: ['VPNs', 'password managers', 'privacy browsers', 'security awareness'],
     howIWork:
       "For each tool I set it up and use it hands-on where I can — configuring the VPN, running speed and leak tests, reading the provider's audit report — then verify every claim against primary sources. Where I can't test directly, I aggregate and cite real user reports and label them as such. I never promise absolute protection; I report what the evidence shows.",
-    sameAs: [],
-    socials: [],
+    sameAs: ['https://x.com/0xtogoo'],
+    socials: [{ label: 'X', url: 'https://x.com/0xtogoo' }],
     disclosure: 'Content on Toolisme is reviewed by the editorial team. See our Affiliate Disclosure.',
   },
 ]
@@ -252,9 +252,9 @@ export const teamMembers: TeamMember[] = [
     location: 'Austin, Texas, USA',
     initials: 'HO',
     accentClass: 'bg-accent-100 text-accent-800',
-    avatar: '/avatars/holive.png',
+    avatar: '/avatars/holive.jpg',
     socials: [
-      { label: 'X', url: 'https://x.com/toolisme' },
+      { label: 'X', url: 'https://x.com/soyricher' },
     ],
     authorPage: true,
   },
@@ -273,15 +273,17 @@ export const teamMembers: TeamMember[] = [
     authorPage: true,
   },
   {
-    name: 'trueer Quinn',
+    name: 'Trueer Quinn',
     slug: 'trueer-quinn',
     role: 'Creators & Hardware Editor',
-    bio: "trueer Quinn is our Creators & Hardware Editor. A visual artist turned tech reviewer, he brings a creator's perspective to video, audio, and hardware reviews. His creative work has appeared in three digital art exhibitions.",
+    bio: "Trueer Quinn is our Creators & Hardware Editor. A visual artist turned tech reviewer, he brings a creator's perspective to video, audio, and hardware reviews. His creative work has appeared in three digital art exhibitions.",
     location: 'Melbourne, Victoria, Australia',
     initials: 'TQ',
     accentClass: 'bg-sand-100 text-sand-800',
     avatar: '/avatars/trueer-quinn.jpg',
-    socials: [],
+    socials: [
+      { label: 'X', url: 'https://x.com/trueer9' },
+    ],
     authorPage: true,
   },
   {
@@ -293,7 +295,9 @@ export const teamMembers: TeamMember[] = [
     initials: 'BH',
     accentClass: 'bg-ink-100 text-ink-800',
     avatar: '/avatars/bill-hartman.jpg',
-    socials: [],
+    socials: [
+      { label: 'X', url: 'https://x.com/0xtogoo' },
+    ],
     authorPage: true,
   },
   {
