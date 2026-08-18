@@ -24,7 +24,7 @@ whoShouldSkip: "Teams that want maximum volume at the lowest per-email cost, or 
 keyAdvantage: "Domain safety as the default — unlimited inboxes + free warm-up + deliverability monitor"
 editorsPick: true
 featured: false
-author: "Priya Sharma"
+author: "Annie Cole"
 ctaLabel: "Start Your 14-Day Free Trial (No Credit Card)"
 ---
 

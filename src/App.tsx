@@ -10,6 +10,7 @@ import GuidesPage from '@/pages/GuidesPage'
 import GuideDetailPage from '@/pages/GuideDetailPage'
 import ComparisonsPage from '@/pages/ComparisonsPage'
 import EditorialTeamPage from '@/pages/EditorialTeamPage'
+import AuthorPage from '@/pages/AuthorPage'
 import MethodologyPage from '@/pages/MethodologyPage'
 import PrivacyPage from '@/pages/PrivacyPage'
 import NotFoundPage from '@/pages/NotFoundPage'
@@ -37,6 +38,7 @@ export default function App() {
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/disclosure" element={<DisclosurePage />} />
           <Route path="/editorial-team" element={<EditorialTeamPage />} />
+          <Route path="/author/:slug" element={<AuthorPage />} />
           <Route path="/methodology" element={<MethodologyPage />} />
           <Route path="/privacy" element={<PrivacyPage />} />
           <Route path="*" element={<NotFoundPage />} />

@@ -13,6 +13,7 @@ export default function EditorialTeamPage() {
         title="Editorial Team"
         description="A small, independent team of writers, researchers, and developers who believe AI tools deserve honest, hands-on reviews."
         breadcrumbs={[{ label: 'Editorial Team' }]}
+        borderless
       />
 
       {/* Team grid */}
@@ -23,14 +24,24 @@ export default function EditorialTeamPage() {
               <div className="flex items-center gap-4">
                 <img
                   src={member.avatar}
-                  alt={member.initials}
+                  alt={member.name}
                   className="h-16 w-16 flex-shrink-0 rounded-2xl object-cover"
                 />
                 <div>
-                  <h3 className="font-serif text-lg font-medium tracking-tight text-ink-900">
-                    {member.name}
-                  </h3>
+                  {member.authorPage ? (
+                    <Link
+                      to={`/author/${member.slug}`}
+                      className="font-serif text-lg font-medium tracking-tight text-ink-900 hover:text-accent-700"
+                    >
+                      {member.name}
+                    </Link>
+                  ) : (
+                    <h3 className="font-serif text-lg font-medium tracking-tight text-ink-900">
+                      {member.name}
+                    </h3>
+                  )}
                   <p className="text-sm font-medium text-accent-700">{member.role}</p>
+                  <p className="mt-0.5 text-xs text-ink-400">{member.location}</p>
                 </div>
               </div>
 
@@ -38,17 +49,23 @@ export default function EditorialTeamPage() {
                 {member.bio}
               </p>
 
-              <div className="mt-5 flex flex-wrap gap-2 border-t border-ink-100 pt-4 dark:border-ink-800">
-                {member.socials.map((social) => (
-                  <a
-                    key={social.label}
-                    href={social.url}
-                    className="rounded-full bg-ink-100 px-3 py-1 text-xs font-semibold text-ink-600 transition-colors hover:bg-ink-900 hover:text-white dark:bg-ink-800 dark:text-ink-300 dark:hover:bg-ink-100 dark:hover:text-ink-900"
-                  >
-                    {social.label}
-                  </a>
-                ))}
-              </div>
+              {member.socials.filter((s) => s.url && s.url !== '#').length > 0 && (
+                <div className="mt-5 flex flex-wrap gap-2 border-t border-ink-100 pt-4 dark:border-ink-800">
+                  {member.socials
+                    .filter((s) => s.url && s.url !== '#')
+                    .map((social) => (
+                      <a
+                        key={social.label}
+                        href={social.url}
+                        target={social.url.startsWith('http') ? '_blank' : undefined}
+                        rel={social.url.startsWith('http') ? 'noopener noreferrer' : undefined}
+                        className="rounded-full bg-ink-100 px-3 py-1 text-xs font-semibold text-ink-600 transition-colors hover:bg-ink-900 hover:text-white dark:bg-ink-800 dark:text-ink-300 dark:hover:bg-ink-100 dark:hover:text-ink-900"
+                      >
+                        {social.label}
+                      </a>
+                    ))}
+                </div>
+              )}
             </div>
           ))}
         </div>
@@ -98,7 +115,7 @@ export default function EditorialTeamPage() {
               step: '01',
               title: 'We use the tool',
               description:
-                'A reviewer spends at least one week using the tool for real tasks — writing articles, generating images, editing video, or automating workflows.',
+                "A reviewer spends at least one week using the tool for real tasks where possible. For tools we couldn't test directly, we aggregate and cite real user reports and label them as such.",
             },
             {
               step: '02',

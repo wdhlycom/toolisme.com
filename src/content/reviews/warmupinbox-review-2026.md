@@ -24,7 +24,7 @@ whoShouldSkip: "Anyone warming a brand-new domain (<6 months) who will blindly a
 keyAdvantage: "Lowest real entry barrier + real inbox network + credit-card-free trial"
 editorsPick: true
 featured: false
-author: "Priya Sharma"
+author: "Annie Cole"
 ctaLabel: "Try WarmupInbox Free (7 Days, No Credit Card)"
 ---
 

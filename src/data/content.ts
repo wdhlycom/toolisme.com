@@ -152,86 +152,177 @@ export const articlePath = (r: ToolReview): string =>
 
 export interface TeamMember {
   name: string
+  slug: string
   role: string
   bio: string
+  location: string
   initials: string
   accentClass: string
   avatar: string
   socials: { label: string; url: string }[]
+  authorPage: boolean
 }
+
+export interface AuthorDetail {
+  slug: string
+  name: string
+  role: string
+  location: string
+  avatar: string
+  about: string
+  expertise: string[]
+  howIWork: string
+  sameAs: string[]
+  socials: { label: string; url: string }[]
+  disclosure: string
+}
+
+export const authorDetails: AuthorDetail[] = [
+  {
+    slug: 'holive',
+    name: 'Holive',
+    role: 'Founder & Editor-in-Chief',
+    location: 'Austin, Texas, USA',
+    avatar: '/avatars/holive.png',
+    about:
+      "Holive is the founder and editor-in-chief of Toolisme. Before starting the site, he was a product manager at two SaaS startups, where he spent countless hours comparing tools for his own teams. He launched Toolisme to spare other teams that same trial and error. Today he sets the site's editorial standards and owns the review methodology every reviewer follows.",
+    expertise: ['SaaS selection', 'productivity tools', 'review methodology', 'affiliate transparency'],
+    howIWork:
+      "I don't personally test every tool. Instead I define the hands-on testing standard, review each published piece for accuracy, and keep our scoring rubric honest. Every review on Toolisme runs through me before it goes live.",
+    sameAs: ['https://x.com/toolisme'],
+    socials: [{ label: 'X', url: 'https://x.com/toolisme' }],
+    disclosure: 'Content on Toolisme is reviewed by the editorial team. See our Affiliate Disclosure.',
+  },
+  {
+    slug: 'annie-cole',
+    name: 'Annie Cole',
+    role: 'Lead Reviewer & Software Editor',
+    location: 'Toronto, Ontario, Canada',
+    avatar: '/avatars/annie-cole.jpg',
+    about:
+      "Annie Cole leads Toolisme's Software category. With a background in content marketing and journalism, she built the scoring rubric used across all reviews and has hands-on tested 40+ SaaS tools. She focuses on project management, CRM, and AI writing assistants.",
+    expertise: ['SaaS reviews', 'scoring rubric', 'project management tools', 'AI writing tools'],
+    howIWork:
+      "Where I can, I spend at least one week using each tool inside a real workflow — not a demo account. For tools I couldn't test directly, I aggregate and cite real user reports from public reviews and communities, and I note exactly where it helps or falls short. Everything is scored against our published rubric.",
+    sameAs: ['https://x.com/soywhale'],
+    socials: [{ label: 'X', url: 'https://x.com/soywhale' }],
+    disclosure: 'Content on Toolisme is reviewed by the editorial team. See our Affiliate Disclosure.',
+  },
+  {
+    slug: 'trueer-quinn',
+    name: 'trueer Quinn',
+    role: 'Creators & Hardware Editor',
+    location: 'Melbourne, Victoria, Australia',
+    avatar: '/avatars/trueer-quinn.jpg',
+    about:
+      "trueer Quinn is our Creators & Hardware Editor. A visual artist turned tech reviewer, he brings a creator's perspective to video, audio, and hardware reviews. His creative work has appeared in three digital art exhibitions.",
+    expertise: ['video editing tools', 'podcast/audio tools', 'creator hardware', 'creator workflows'],
+    howIWork:
+      "Where possible I test every tool inside a real creator project — cutting an actual video, recording a podcast episode, or running a live stream — rather than ticking feature boxes. When I can't run a tool myself, I combine hands-on checks with sourced user feedback from creator communities and label which is which. If it doesn't survive a real deadline, it doesn't score well.",
+    sameAs: [],
+    socials: [],
+    disclosure: 'Content on Toolisme is reviewed by the editorial team. See our Affiliate Disclosure.',
+  },
+  {
+    slug: 'bill-hartman',
+    name: 'Bill Hartman',
+    role: 'Security Editor & Researcher',
+    location: 'Manchester, United Kingdom',
+    avatar: '/avatars/bill-hartman.jpg',
+    about:
+      "Bill Hartman researches privacy tools and online security. He runs Toolisme's annual security survey and writes the deep-dive VPN comparisons that keep our recommendations honest. Every claim links to primary sources — vendor docs and independent audits.",
+    expertise: ['VPNs', 'password managers', 'privacy browsers', 'security awareness'],
+    howIWork:
+      "For each tool I set it up and use it hands-on where I can — configuring the VPN, running speed and leak tests, reading the provider's audit report — then verify every claim against primary sources. Where I can't test directly, I aggregate and cite real user reports and label them as such. I never promise absolute protection; I report what the evidence shows.",
+    sameAs: [],
+    socials: [],
+    disclosure: 'Content on Toolisme is reviewed by the editorial team. See our Affiliate Disclosure.',
+  },
+]
+
+export const getAuthor = (slug: string): AuthorDetail | undefined =>
+  authorDetails.find((a) => a.slug === slug)
 
 export const teamMembers: TeamMember[] = [
   {
-    name: 'Tyce Shirley',
+    name: 'Holive',
+    slug: 'holive',
     role: 'Founder & Editor-in-Chief',
-    bio: 'Former product manager at two SaaS startups. Tyce started Toolisme after spending too many hours comparing tools for his own team. He oversees editorial standards and reviews methodology.',
-    initials: 'TS',
+    bio: "Holive is the founder and editor-in-chief of Toolisme. Before starting the site, he was a product manager at two SaaS startups, where he spent countless hours comparing tools for his own teams. He launched Toolisme to spare other teams that same trial and error. Today he sets the site's editorial standards and owns the review methodology every reviewer follows.",
+    location: 'Austin, Texas, USA',
+    initials: 'HO',
     accentClass: 'bg-accent-100 text-accent-800',
-    avatar: '/avatars/tyce-shirley.jpg',
+    avatar: '/avatars/holive.png',
     socials: [
       { label: 'X', url: 'https://x.com/toolisme' },
-      { label: 'LinkedIn', url: '#' },
     ],
+    authorPage: true,
   },
   {
-    name: 'Priya Sharma',
+    name: 'Annie Cole',
+    slug: 'annie-cole',
     role: 'Lead Reviewer & Software Editor',
-    bio: 'Priya has a background in content marketing and journalism. She leads our Software category and developed the scoring rubric we use across all reviews. She has tested over 40 SaaS tools.',
-    initials: 'PS',
+    bio: "Annie Cole leads Toolisme's Software category. With a background in content marketing and journalism, she built the scoring rubric used across all reviews and has hands-on tested 40+ SaaS tools. She focuses on project management, CRM, and AI writing assistants.",
+    location: 'Toronto, Ontario, Canada',
+    initials: 'AC',
     accentClass: 'bg-sage-100 text-sage-800',
-    avatar: '/avatars/priya-sharma.jpg',
+    avatar: '/avatars/annie-cole.jpg',
     socials: [
       { label: 'X', url: 'https://x.com/soywhale' },
-      { label: 'LinkedIn', url: '#' },
     ],
+    authorPage: true,
   },
   {
-    name: 'David Okonkwo',
+    name: 'trueer Quinn',
+    slug: 'trueer-quinn',
     role: 'Creators & Hardware Editor',
-    bio: 'A visual artist turned tech reviewer, David brings a creator perspective to our video, audio, and hardware reviews. His work has been featured in three digital art exhibitions.',
-    initials: 'DO',
+    bio: "trueer Quinn is our Creators & Hardware Editor. A visual artist turned tech reviewer, he brings a creator's perspective to video, audio, and hardware reviews. His creative work has appeared in three digital art exhibitions.",
+    location: 'Melbourne, Victoria, Australia',
+    initials: 'TQ',
     accentClass: 'bg-sand-100 text-sand-800',
-    avatar: '/avatars/david-okonkwo.jpg',
-    socials: [
-      { label: 'LinkedIn', url: '#' },
-      { label: 'Instagram', url: '#' },
-    ],
+    avatar: '/avatars/trueer-quinn.jpg',
+    socials: [],
+    authorPage: true,
   },
   {
-    name: 'Sofia Reyes',
+    name: 'Bill Hartman',
+    slug: 'bill-hartman',
     role: 'Security Editor & Researcher',
-    bio: 'Sofia researches privacy tools and online security. She runs our annual security survey and writes the deep-dive VPN comparisons that keep our recommendations honest.',
-    initials: 'SR',
+    bio: "Bill Hartman researches privacy tools and online security. He runs Toolisme's annual security survey and writes the deep-dive VPN comparisons that keep our recommendations honest. Every claim links to primary sources — vendor docs and independent audits.",
+    location: 'Manchester, United Kingdom',
+    initials: 'BH',
     accentClass: 'bg-ink-100 text-ink-800',
-    avatar: '/avatars/sofia-reyes.jpg',
-    socials: [
-      { label: 'LinkedIn', url: '#' },
-      { label: 'X', url: '#' },
-    ],
+    avatar: '/avatars/bill-hartman.jpg',
+    socials: [],
+    authorPage: true,
   },
   {
-    name: 'James Park',
+    name: 'James Calder',
+    slug: 'james-calder',
     role: 'Developer & Data Engineer',
-    bio: 'James keeps the Toolisme database running. He built our tool comparison engine and the search infrastructure that powers the site.',
-    initials: 'JP',
+    bio: 'James Calder keeps the Toolisme database running. He built our tool comparison engine and the search infrastructure that powers the site, so the numbers you see in comparisons stay current.',
+    location: 'Vancouver, British Columbia, Canada',
+    initials: 'JC',
     accentClass: 'bg-accent-100 text-accent-800',
-    avatar: '/avatars/james-park.jpg',
+    avatar: '/avatars/james-calder.jpg',
     socials: [
       { label: 'GitHub', url: 'https://www.github.com/wdhlycom' },
-      { label: 'LinkedIn', url: '#' },
     ],
+    authorPage: false,
   },
   {
-    name: 'Aisha Bello',
+    name: 'Sofia Bennett',
+    slug: 'sofia-bennett',
     role: 'Community & Partnerships',
-    bio: 'Aisha manages reader feedback, the guestbook, and our relationships with tool makers. If you want to suggest a tool for review, she is the person to reach.',
-    initials: 'AB',
+    bio: 'Sofia Bennett manages Community & Partnerships. She handles reader feedback, the guestbook, and our relationships with tool makers — and is the person to reach if you want to suggest a tool for review.',
+    location: 'Sydney, New South Wales, Australia',
+    initials: 'SB',
     accentClass: 'bg-sage-100 text-sage-800',
-    avatar: '/avatars/aisha-bello.jpg',
+    avatar: '/avatars/sofia-bennett.jpg',
     socials: [
       { label: 'Email', url: 'mailto:master@toolisme.com' },
-      { label: 'LinkedIn', url: '#' },
     ],
+    authorPage: false,
   },
 ]
 
@@ -245,7 +336,7 @@ export const editorialValues: EditorialValue[] = [
   {
     title: 'Hands-on testing',
     description:
-      'Every tool is used for real tasks before we review it. We do not rewrite press releases — we share what actually happened when we tried it.',
+      'Every tool is tested hands-on where we have access. Where we can\'t run a tool ourselves, we combine documented testing with sourced user feedback from public reviews and communities — and we say which is which.',
     icon: 'FlaskConical',
   },
   {

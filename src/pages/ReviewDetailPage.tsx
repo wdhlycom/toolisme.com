@@ -12,8 +12,10 @@ import AiHeadshotQuiz from '@/components/AiHeadshotQuiz'
 import AhaSlidesDecisionMatrix from '@/components/AhaSlidesDecisionMatrix'
 import TubeMagicQuiz from '@/components/TubeMagicQuiz'
 import SnovioDecisionTree from '@/components/SnovioDecisionTree'
-import WarmupInboxDecisionTree from '@/components/WarmupInboxDecisionTree'
 import BufferDecisionTree from '@/components/BufferDecisionTree'
+import WiziShopDecisionTree from '@/components/WiziShopDecisionTree'
+import GeoTargetlyDecisionTree from '@/components/GeoTargetlyDecisionTree'
+import WarmupInboxDecisionTree from '@/components/WarmupInboxDecisionTree'
 
 const TOC_SECTIONS = [
   { id: 'overview', label: 'Overview' },
@@ -100,11 +102,11 @@ function buildArticleSchema(review: ToolReview, articleUrl: string): object {
     itemReviewed: { '@type': 'SoftwareApplication', name: review.name },
     positiveNotes: {
       '@type': 'ItemList',
-      itemListElement: review.pros.map((p, i) => ({ '@type': 'ListItem', position: i + 1, name: p })),
+      itemListElement: (review.pros || []).map((p, i) => ({ '@type': 'ListItem', position: i + 1, name: p })),
     },
     negativeNotes: {
       '@type': 'ItemList',
-      itemListElement: review.cons.map((c, i) => ({ '@type': 'ListItem', position: i + 1, name: c })),
+      itemListElement: (review.cons || []).map((c, i) => ({ '@type': 'ListItem', position: i + 1, name: c })),
     },
   }
 
@@ -121,6 +123,8 @@ export default function ReviewDetailPage({ comparison = false }: { comparison?: 
   const isSnovio = !comparison && slug === 'snovio-review-2026'
   const isWarmupinbox = !comparison && slug === 'warmupinbox-review-2026'
   const isBuffer = !comparison && slug === 'buffer-review-2026'
+  const isWiziShop = !comparison && slug === 'wizishop-review-2026'
+  const isGeotargetly = !comparison && slug === 'geotargetly-review-2026'
   const [activeSection, setActiveSection] = useState('overview')
 
   // For markdown articles, build TOC from h2 headings
@@ -215,6 +219,24 @@ export default function ReviewDetailPage({ comparison = false }: { comparison?: 
     mount.dataset.bufferMounted = '1'
     createRoot(mount).render(<BufferDecisionTree />)
   }, [isBuffer, review])
+
+  // Mount the WiziShop decision tree into its markdown placeholder
+  useEffect(() => {
+    if (!isWiziShop || !review?.markdownBody) return
+    const mount = document.getElementById('wizishop-decision-tree')
+    if (!mount || mount.dataset.wizishopMounted) return
+    mount.dataset.wizishopMounted = '1'
+    createRoot(mount).render(<WiziShopDecisionTree />)
+  }, [isWiziShop, review])
+
+  // Mount the GeoTargetly decision tree into its markdown placeholder
+  useEffect(() => {
+    if (!isGeotargetly || !review?.markdownBody) return
+    const mount = document.getElementById('geotargetly-decision-tree')
+    if (!mount || mount.dataset.geotargetlyMounted) return
+    mount.dataset.geotargetlyMounted = '1'
+    createRoot(mount).render(<GeoTargetlyDecisionTree />)
+  }, [isGeotargetly, review])
 
   // If accessed via /reviews/ path but article is comparison-only, redirect
   if (!review && !comparison) {
@@ -513,7 +535,7 @@ export default function ReviewDetailPage({ comparison = false }: { comparison?: 
             )}
 
             {/* Pros & Cons cards (shown for both markdown and structured articles) */}
-            {review.markdownBody && (
+            {review.markdownBody && (review.pros?.length || review.cons?.length) && (
               <div className="not-prose mt-12">
                 <h2 className="font-serif text-2xl font-medium tracking-tight text-ink-900">Pros &amp; Cons</h2>
                 <div className="mt-6 grid gap-4 sm:grid-cols-2">

@@ -24,7 +24,7 @@ whoShouldSkip: "High-volume agencies burning 50,000+ credits a month (need Ultra
 keyAdvantage: "One subscription = prospecting + verification + warm-up + sequences + CRM, from $39/mo with warm-up included"
 editorsPick: false
 featured: false
-author: "Priya Sharma"
+author: "Annie Cole"
 ctaLabel: "Try Snov.io Free (50 Credits, No Credit Card)"
 ---
 

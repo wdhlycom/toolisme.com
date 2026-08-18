@@ -6,6 +6,7 @@ interface PageHeaderProps {
   title: string
   description?: string
   breadcrumbs?: { label: string; to?: string }[]
+  borderless?: boolean
 }
 
 export default function PageHeader({
@@ -13,9 +14,10 @@ export default function PageHeader({
   title,
   description,
   breadcrumbs,
+  borderless = false,
 }: PageHeaderProps) {
   return (
-    <header className="relative overflow-hidden border-b border-ink-200/70 bg-white dark:border-ink-700/70 dark:bg-ink-950">
+    <header className={`relative overflow-hidden bg-white dark:bg-ink-950${borderless ? '' : ' border-b border-ink-200/70 dark:border-ink-700/70'}`}>
       <div className="absolute inset-0 bg-grid mask-fade-b opacity-60" />
       <div className="container-page relative py-16 sm:py-20">
         {breadcrumbs && breadcrumbs.length > 0 && (
