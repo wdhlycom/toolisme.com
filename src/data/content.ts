@@ -210,12 +210,12 @@ export const authorDetails: AuthorDetail[] = [
   },
   {
     slug: 'trueer-quinn',
-    name: 'Trueer Quinn',
+    name: 'Trueer',
     role: 'Creators & Hardware Editor',
     location: 'Melbourne, Victoria, Australia',
     avatar: '/avatars/trueer-quinn.jpg',
     about:
-      "Trueer Quinn is our Creators & Hardware Editor. A visual artist turned tech reviewer, he brings a creator's perspective to video, audio, and hardware reviews. His creative work has appeared in three digital art exhibitions.",
+      "Trueer is our Creators & Hardware Editor. A visual artist turned tech reviewer, he brings a creator's perspective to video, audio, and hardware reviews. His creative work has appeared in three digital art exhibitions.",
     expertise: ['video editing tools', 'podcast/audio tools', 'creator hardware', 'creator workflows'],
     howIWork:
       "Where possible I test every tool inside a real creator project — cutting an actual video, recording a podcast episode, or running a live stream — rather than ticking feature boxes. When I can't run a tool myself, I combine hands-on checks with sourced user feedback from creator communities and label which is which. If it doesn't survive a real deadline, it doesn't score well.",
@@ -273,10 +273,10 @@ export const teamMembers: TeamMember[] = [
     authorPage: true,
   },
   {
-    name: 'Trueer Quinn',
+    name: 'Trueer',
     slug: 'trueer-quinn',
     role: 'Creators & Hardware Editor',
-    bio: "Trueer Quinn is our Creators & Hardware Editor. A visual artist turned tech reviewer, he brings a creator's perspective to video, audio, and hardware reviews. His creative work has appeared in three digital art exhibitions.",
+    bio: "Trueer is our Creators & Hardware Editor. A visual artist turned tech reviewer, he brings a creator's perspective to video, audio, and hardware reviews. His creative work has appeared in three digital art exhibitions.",
     location: 'Melbourne, Victoria, Australia',
     initials: 'TQ',
     accentClass: 'bg-sand-100 text-sand-800',

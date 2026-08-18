@@ -25,7 +25,7 @@ keyAdvantage: "AI handles the four grind jobs — copy, SEO, translation, produc
 ctaLabel: "Try WiziShop Free for 7 Days (No Card)"
 editorsPick: false
 featured: false
-author: "trueer Quinn"
+author: "Trueer"
 ---
 
 # WiziShop Review 2026: I Let AI Write 300 Product Descriptions So I Could Spend the Time Picking Winners
