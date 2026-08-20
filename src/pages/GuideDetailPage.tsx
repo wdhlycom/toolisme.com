@@ -1,11 +1,13 @@
 import { useParams, Link, Navigate } from 'react-router-dom'
-import { useEffect, useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { createRoot } from 'react-dom/client'
-import { ArrowLeft, Clock, Tag, ArrowRight } from 'lucide-react'
+import { ArrowLeft, Clock, Tag, ArrowRight, ListOrdered } from 'lucide-react'
 import { guides, renderMarkdown } from '@/content/guides'
-import { categories } from '@/data/content'
+import { categories, authorDetails } from '@/data/content'
 import HardwareKeyboardQuiz from '@/components/HardwareKeyboardQuiz'
 import SaasToolQuiz from '@/components/SaasToolQuiz'
+
+const SITE_BASE = 'https://toolisme.com'
 
 function slugifyHeading(text: string): string {
   return text.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '')
@@ -14,8 +16,11 @@ function slugifyHeading(text: string): string {
 export default function GuideDetailPage() {
   const { slug } = useParams<{ slug: string }>()
   const guide = guides.find((g) => g.slug === slug)
-  const isHardware = slug === 'remote-workstation-hardware-guide'
+  const isHardware = slug === 'remote-workstation-hardware-guide' || slug === 'how-to-choose-a-mechanical-keyboard'
   const isSaas = slug === 'how-to-choose-saas-ai-tools'
+  const authorDetail = authorDetails.find((a) => a.name === guide?.author)
+
+  const [activeSection, setActiveSection] = useState('')
 
   const markdownHtml = useMemo(
     () => (guide ? renderMarkdown(guide.markdownBody) : ''),
@@ -40,6 +45,33 @@ export default function GuideDetailPage() {
       h2.classList.add('scroll-mt-24')
     })
   }, [guide])
+
+  // Build TOC from h2 headings
+  const markdownToc = useMemo(() => {
+    if (!guide?.markdownBody) return []
+    return (guide.markdownBody.match(/^## (.+)$/gm) || []).map((h) => {
+      const label = h.replace(/^## /, '')
+      return { id: slugifyHeading(label), label }
+    })
+  }, [guide])
+
+  // Highlight the TOC entry for the section currently in view
+  useEffect(() => {
+    if (!guide) return
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActiveSection(entry.target.id)
+        })
+      },
+      { rootMargin: '-100px 0px -60% 0px', threshold: 0 },
+    )
+    markdownToc.forEach((s) => {
+      const el = document.getElementById(s.id)
+      if (el) observer.observe(el)
+    })
+    return () => observer.disconnect()
+  }, [guide, markdownToc])
 
   // Mount the hardware keyboard picker into its markdown placeholder
   useEffect(() => {
@@ -100,6 +132,31 @@ export default function GuideDetailPage() {
             <h1 className="mt-5 font-serif text-4xl font-medium tracking-tight text-ink-900 text-balance dark:text-ink-100 sm:text-5xl">
               {guide.title}
             </h1>
+
+            {/* Author byline */}
+            <div className="mt-3 flex items-center gap-2.5 text-sm">
+              {authorDetail ? (
+                <>
+                  <img
+                    src={authorDetail.avatar}
+                    alt={authorDetail.name}
+                    className="h-8 w-8 flex-shrink-0 rounded-full object-cover"
+                  />
+                  <span className="text-ink-500 dark:text-ink-400">
+                    By{' '}
+                    <Link
+                      to={`/author/${authorDetail.slug}`}
+                      className="font-semibold text-ink-700 hover:text-accent-700 dark:text-ink-300 dark:hover:text-accent-400"
+                    >
+                      {authorDetail.name}
+                    </Link>
+                  </span>
+                </>
+              ) : (
+                <span className="text-ink-500 dark:text-ink-400">By {guide.author}</span>
+              )}
+            </div>
+
             <p className="mt-4 text-lg leading-relaxed text-ink-600 text-pretty dark:text-ink-300">
               {guide.summary}
             </p>
@@ -121,23 +178,71 @@ export default function GuideDetailPage() {
         </div>
       </header>
 
-      {/* Article body */}
-      <section className="container-page py-14">
-        <div className="mx-auto max-w-3xl">
-          <div
-            className="prose-toolisme max-w-none"
-            data-guide-content
-            dangerouslySetInnerHTML={{ __html: markdownHtml }}
-          />
+      {/* Author Person JSON-LD (EEAT) */}
+      {authorDetail && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Person',
+              name: authorDetail.name,
+              url: `${SITE_BASE}/author/${authorDetail.slug}`,
+            }),
+          }}
+        />
+      )}
 
-          <div className="mt-12 border-t border-ink-200 pt-8 dark:border-ink-800">
-            <Link
-              to="/guides"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-accent-700 hover:text-accent-900 dark:text-accent-400 dark:hover:text-accent-300"
-            >
-              <ArrowLeft className="h-4 w-4" />
-              All buyer's guides
-            </Link>
+      {/* Article body with sticky TOC */}
+      <section className="container-page py-14">
+        <div className="mx-auto flex max-w-6xl gap-10">
+          {/* Sticky Table of Contents */}
+          <aside className="hidden w-56 flex-shrink-0 lg:block">
+            <div className="sticky top-24">
+              <div className="flex items-center gap-2">
+                <ListOrdered className="h-4 w-4 text-accent-600" />
+                <h3 className="text-xs font-semibold uppercase tracking-widest text-ink-500">
+                  Contents
+                </h3>
+              </div>
+              <nav className="mt-4 space-y-1 border-l border-ink-200 dark:border-ink-700">
+                {markdownToc.map((s) => (
+                  <button
+                    key={s.id}
+                    onClick={() => {
+                      const el = document.getElementById(s.id)
+                      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                    }}
+                    className={`block w-full border-l-2 py-2 pl-4 text-left text-sm transition-colors ${
+                      activeSection === s.id
+                        ? 'border-accent-500 font-semibold text-accent-700 dark:text-accent-400'
+                        : 'border-transparent text-ink-500 hover:text-ink-900 dark:text-ink-400 dark:hover:text-ink-300'
+                    }`}
+                  >
+                    {s.label}
+                  </button>
+                ))}
+              </nav>
+            </div>
+          </aside>
+
+          {/* Article body */}
+          <div className="min-w-0 flex-1">
+            <div
+              className="prose-toolisme max-w-none"
+              data-guide-content
+              dangerouslySetInnerHTML={{ __html: markdownHtml }}
+            />
+
+            <div className="mt-12 border-t border-ink-200 pt-8 dark:border-ink-800">
+              <Link
+                to="/guides"
+                className="inline-flex items-center gap-2 text-sm font-semibold text-accent-700 hover:text-accent-900 dark:text-accent-400 dark:hover:text-accent-300"
+              >
+                <ArrowLeft className="h-4 w-4" />
+                All buyer's guides
+              </Link>
+            </div>
           </div>
         </div>
       </section>

@@ -98,7 +98,7 @@ Two more patterns worth knowing before you buy:
 
 Keyboards fail in the first year more often than most peripherals — a dead switch row, a stabilizer that won't quiet down, a dongle that drops. A one-year warranty plus a no-questions return window protects you from a board that sounds ideal in reviews but ships wrong. Treat the return window as part of the price.
 
-## Decision logic — you are ___, so pick ___
+## Decision logic — you are …, so pick …
 
 - **You share a room or take calls** → silent linear or silent tactile. Skip clicky entirely.
 - **You code or write all day** → TKL or 75% with tactile switches; remapping (QMK/VIA) is the feature that pays off most.
@@ -106,7 +106,7 @@ Keyboards fail in the first year more often than most peripherals — a dead swi
 - **You travel or have a tiny desk** → 65% or 60%, but only if it is hot-swap and programmable; otherwise the layer learning curve bites.
 - **It is your first mechanical board** → hot-swap, gasket or tray per feel preference, and buy a switch tester before committing to a full set.
 
-![Decision flowchart mapping user type to recommended layout, switch, and must-have features.](/guides/kb-08.png)
+<div id="hardware-keyboard-quiz"></div>
 
 ## Transparency & sources
 

@@ -9,6 +9,8 @@ export interface GuideFrontmatter {
   summary: string
   date: string
   readTime: number
+  /** Author display name. Defaults to the editor-in-chief (Holive) when omitted. */
+  author?: string
 }
 
 export interface Guide extends GuideFrontmatter {
@@ -31,6 +33,7 @@ function parseFrontmatter(raw: string): Guide {
     summary: frontmatter.summary ?? '',
     date: frontmatter.date ?? '',
     readTime: frontmatter.readTime ?? 5,
+    author: frontmatter.author ?? 'Holive',
     markdownBody: match[2],
   }
 }
