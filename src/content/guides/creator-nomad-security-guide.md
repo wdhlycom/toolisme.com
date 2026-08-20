@@ -6,11 +6,12 @@ tags:
 summary: "The creator's nightmare isn't malware — it's a stolen account, a dead drive, or a cafe Wi-Fi sniffing your session. Layer your defenses: a password manager plus authenticator (and Passkey), a no-logs VPN with a kill switch, and a 3-2-1 backup you actually run."
 date: "2026-08-15"
 readTime: 10
+author: "Bill Hartman"
 ---
 
-We know a video creator who lost two years of work and a six-figure following in one night. Their account got taken over, and the platform did nothing. We also know someone whose laptop drive died mid-project — six months of edits, gone.
+Picture the failure modes creators actually hit: an account takeover that wipes years of work and a following built overnight, or a dead drive that loses months of edits mid-project. These aren't edge cases — account takeovers and drive failures are among the most commonly reported creator disasters, and they're exactly what the layers below are built to prevent.
 
-Here's the uncomfortable part: before it happened, both of them thought the same thing. "I'm nobody. Hackers don't care about me."
+Here's the uncomfortable part: before it happens, most creators think the same thing. "I'm nobody. Hackers don't care about me."
 
 Security isn't about how important you are. It's about habits. And it isn't about buying a stack of security software either — it's about **layered defense**: no single layer stops everything, but stacked together they stop the crashes that actually happen to creators — a stolen account, a sniffed session, a dead drive.
 
@@ -29,7 +30,7 @@ Neither is strictly better. **Want convenience, buy managed. Want ownership, sel
 
 **2FA: stay off SMS whenever you can.** SMS codes can be intercepted via SIM-swap attacks, and the cases keep piling up. Use an authenticator app (Google Authenticator, Authy, that family) or a hardware key (YubiKey and friends). Our rule: every critical account — email, password manager, payments, domains — gets an authenticator app. The password manager itself is the first one to protect, because it's the master key to everything else.
 
-**Passkey is worth its own paragraph.** Google, Apple, and password managers like 1Password have all pushed Passkey mainstream — you sign in with device biometrics (fingerprint or face) instead of a password. It kills the "memorize another password" problem, and it's structurally immune to most phishing, because there's no password to steal. On our own main accounts, we turn Passkey on wherever it's offered. Faster to log in, nothing new to remember.
+**Passkey is worth its own paragraph.** Google, Apple, and password managers like 1Password have all pushed Passkey mainstream — you sign in with device biometrics (fingerprint or face) instead of a password. It kills the "memorize another password" problem, and it's structurally immune to most phishing, because there's no password to steal. We recommend turning Passkey on wherever a service offers it — faster to log in, and nothing new to remember. It's one of the lowest-effort upgrades on this entire list.
 
 ## Layer 2: Public Networks & Privacy
 
