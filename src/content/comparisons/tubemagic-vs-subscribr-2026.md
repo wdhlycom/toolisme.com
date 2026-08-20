@@ -7,11 +7,11 @@ rating: 4.4
 tagline: Two ways to stop staring at a blank script — pick by how you make videos
 summary: TubeMagic and Subscribr both write YouTube scripts with AI, but they solve different halves of the problem. TubeMagic clones your channel voice and bundles YouTube SEO; Subscribr digs through outlier videos and rebuilds retention structures that keep people watching. We compared them head to head, with InVideo as the one-click-video reference point.
 pros:
-  - TubeMagic: one flat price, unlimited generation, channel voice cloning + full SEO suite in one place
-  - Subscribr: outlier-driven ideas and retention-focused scripts that read less like AI
+  - "TubeMagic: one flat price, unlimited generation, channel voice cloning + full SEO suite in one place"
+  - "Subscribr: outlier-driven ideas and retention-focused scripts that read less like AI"
 cons:
-  - TubeMagic: no free trial, monthly price stings for low-frequency uploaders, scripts still need a human pass
-  - Subscribr: annual billing only, credits consumed by script length, keyword tool lacks search-volume data
+  - "TubeMagic: no free trial, monthly price stings for low-frequency uploaders, scripts still need a human pass"
+  - "Subscribr: annual billing only, credits consumed by script length, keyword tool lacks search-volume data"
 pricing: "TubeMagic $47/mo ($497/yr); Subscribr $299–$747/yr (annual only)"
 url: "https://tubemagic.com/ds#aff=toolisme"
 date: "2026-08-13"
@@ -47,9 +47,9 @@ One line: **TubeMagic is fast, Subscribr is deep.** Both are script tools. Neith
 
 In a hurry? Skip straight to the tools:
 
-<a href="https://tubemagic.com/ds#aff=toolisme" style="display:inline-block;background:#0f172a;color:#fff;padding:10px 18px;border-radius:8px;font-weight:700;text-decoration:none;margin:10px 0;margin-right:12px;">🚀 Try TubeMagic →</a>
+<a href="https://tubemagic.com/ds#aff=toolisme" style="display:inline-block;background:#fbbf24;color:#0f172a;padding:10px 18px;border-radius:8px;font-weight:700;text-decoration:none;margin:10px 0;margin-right:12px;">🚀 Try TubeMagic →</a>
 
-<a href="https://subscribr.ai?via=hu-liangyu" style="display:inline-block;background:#0f172a;color:#fff;padding:10px 18px;border-radius:8px;font-weight:700;text-decoration:none;margin:10px 0;">🚀 Try Subscribr →</a>
+<a href="https://subscribr.ai?via=hu-liangyu" style="display:inline-block;background:#fbbf24;color:#0f172a;padding:10px 18px;border-radius:8px;font-weight:700;text-decoration:none;margin:10px 0;">🚀 Try Subscribr →</a>
 
 **TubeMagic — highlights (from user reviews & official docs)**
 - Paste your channel link and it learns your voice. No prompt engineering.
@@ -150,9 +150,9 @@ Two things to see clearly before you pay:
 
 Found your match? Here are the doors:
 
-<a href="https://tubemagic.com/ds#aff=toolisme" style="display:inline-block;background:#0f172a;color:#fff;padding:12px 22px;border-radius:8px;font-weight:700;text-decoration:none;margin:10px 0;margin-right:12px;">🚀 Try TubeMagic Risk-Free (30-Day Refund) →</a>
+<a href="https://tubemagic.com/ds#aff=toolisme" style="display:inline-block;background:#fbbf24;color:#0f172a;padding:12px 22px;border-radius:8px;font-weight:700;text-decoration:none;margin:10px 0;margin-right:12px;">🚀 Try TubeMagic Risk-Free (30-Day Refund) →</a>
 
-<a href="https://subscribr.ai?via=hu-liangyu" style="display:inline-block;background:#0f172a;color:#fff;padding:12px 22px;border-radius:8px;font-weight:700;text-decoration:none;margin:10px 0;">🚀 Try Subscribr ($7 for 7 Days) →</a>
+<a href="https://subscribr.ai?via=hu-liangyu" style="display:inline-block;background:#fbbf24;color:#0f172a;padding:12px 22px;border-radius:8px;font-weight:700;text-decoration:none;margin:10px 0;">🚀 Try Subscribr ($7 for 7 Days) →</a>
 
 ## 💡 The power combo (how people actually run both)
 
@@ -165,6 +165,8 @@ Found your match? Here are the doors:
 > Three tools, three jobs: ideas → writing → production. Budget tight? Buy one and match it to the decision tree above.
 
 ![Decision tree: four buyer profiles mapped to tools](/comparisons/tubemagic-verdict.png)
+
+<div id="tubemagic-quiz"></div>
 
 ## FAQ
 

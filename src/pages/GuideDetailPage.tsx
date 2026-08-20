@@ -5,7 +5,6 @@ import { ArrowLeft, Clock, Tag, ArrowRight, ListOrdered } from 'lucide-react'
 import { guides, renderMarkdown } from '@/content/guides'
 import { categories, authorDetails } from '@/data/content'
 import HardwareKeyboardQuiz from '@/components/HardwareKeyboardQuiz'
-import SaasToolQuiz from '@/components/SaasToolQuiz'
 
 const SITE_BASE = 'https://toolisme.com'
 
@@ -17,7 +16,6 @@ export default function GuideDetailPage() {
   const { slug } = useParams<{ slug: string }>()
   const guide = guides.find((g) => g.slug === slug)
   const isHardware = slug === 'remote-workstation-hardware-guide' || slug === 'how-to-choose-a-mechanical-keyboard'
-  const isSaas = slug === 'how-to-choose-saas-ai-tools'
   const authorDetail = authorDetails.find((a) => a.name === guide?.author)
 
   const [activeSection, setActiveSection] = useState('')
@@ -81,15 +79,6 @@ export default function GuideDetailPage() {
     mount.dataset.hwMounted = '1'
     createRoot(mount).render(<HardwareKeyboardQuiz />)
   }, [isHardware, guide])
-
-  // Mount the SaaS tool matcher into its markdown placeholder
-  useEffect(() => {
-    if (!isSaas || !guide?.markdownBody) return
-    const mount = document.getElementById('saas-tool-quiz')
-    if (!mount || mount.dataset.saasMounted) return
-    mount.dataset.saasMounted = '1'
-    createRoot(mount).render(<SaasToolQuiz />)
-  }, [isSaas, guide])
 
   if (!guide) return <Navigate to="/guides" replace />
 
