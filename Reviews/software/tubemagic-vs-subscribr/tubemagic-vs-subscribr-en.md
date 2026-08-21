@@ -164,8 +164,6 @@ Found your match? Here are the doors:
 >
 > Three tools, three jobs: ideas → writing → production. Budget tight? Buy one and match it to the decision tree above.
 
-![Decision tree: four buyer profiles mapped to tools](imgs/04-verdict.png)
-
 <div id="tubemagic-quiz"></div>
 
 ## FAQ

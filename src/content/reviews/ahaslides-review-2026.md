@@ -3,6 +3,7 @@ slug: ahaslides-review-2026
 name: AhaSlides
 category: software
 subcategory: Interactive Presentations
+author: "Annie Cole"
 rating: 4.6
 tagline: The cheapest way to make a slide deck talk back
 summary: AhaSlides turns one-way decks into live conversations with polls, quizzes, word clouds, and anonymous Q&A — audiences join from any phone by QR code, no app required. We ran it for two weeks across an all-hands, an onboarding quiz, and a client workshop, and it held up every time. Free plan covers 50 participants; paid plans start at $7.95/mo.

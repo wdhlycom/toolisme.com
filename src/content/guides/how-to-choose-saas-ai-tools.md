@@ -8,6 +8,7 @@ tags:
 summary: "The average team pays for six tools and uses two. Break your workflow into three pipelines, run a five-minute checklist on billing and AI limits, and users frequently report 30–40% savings on their SaaS bill."
 date: "2026-08-15"
 readTime: 10
+author: Holive
 ---
 
 Most teams we researched pay for far more tools than they actually use — the ones opened every day usually number two or three, against a bill that's $200+ a month.

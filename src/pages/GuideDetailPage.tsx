@@ -141,9 +141,9 @@ export default function GuideDetailPage() {
                     </Link>
                   </span>
                 </>
-              ) : (
+              ) : guide.author ? (
                 <span className="text-ink-500 dark:text-ink-400">By {guide.author}</span>
-              )}
+              ) : null}
             </div>
 
             <p className="mt-4 text-lg leading-relaxed text-ink-600 text-pretty dark:text-ink-300">
