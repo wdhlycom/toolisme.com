@@ -2,7 +2,7 @@
 slug: warmupinbox-review-2026
 name: WarmupInbox
 category: software
-subcategory: Email Deliverability & Warmup
+subcategory: "Email Deliverability & Warmup"
 rating: 4.6
 tagline: Get cold emails into the inbox — starting with a $15/month warmup engine
 summary: WarmupInbox is the cheapest real entry into email warmup: a 30,000+ network of real inboxes, a 7-day free trial with no credit card, and a reputation engine that does one thing well. It's the right call for budget-first individuals and small teams warming 1-2 established mailboxes — just watch the aggressive defaults on new domains.
@@ -24,14 +24,14 @@ whoShouldSkip: Anyone warming a brand-new domain (<6 months) who will blindly ac
 keyAdvantage: Lowest real entry barrier + real inbox network + credit-card-free trial
 editorsPick: false
 featured: false
-author: "Priya Sharma"
+author: "Annie Cole"
 ---
 
 # WarmupInbox Review: The $15/Month Warmup Engine That Gets Cold Emails Into the Inbox
 
 You just bought a shiny new domain. Day one, you fire off 200 cold emails. What happens? Not the spam folder — Gmail flags you as a suspicious sender outright. Your domain reputation starts at zero, and it stays there for months.
 
-That's not fear-mongering. We've helped a client rescue a domain like that; it took six weeks just waiting for Google to clear the flag.
+That's not fear-mongering. Users report that a new domain flagged by Google can take six weeks or more just waiting for the flag to clear.
 
 The iron law of cold email: **if it never reaches the inbox, the best copy in the world is worthless.** New domains and fresh mailboxes have no sending history, and mailbox providers simply don't trust them. WarmupInbox exists for exactly this job — it "warms up" your mailbox, makes it look like a real person, and slowly builds the reputation that gets you delivered.
 
