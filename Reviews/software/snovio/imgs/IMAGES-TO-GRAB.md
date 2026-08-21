@@ -1,88 +1,73 @@
 # Snov.io 配图指南（imgs/）
 
-本文 **5 个插图位**（01/02/03/04/05）。你是 AI 生图，下面把**生图的基本思路**讲透，再给每个槽位的具体做法。
+本文 **3 张图 + 1 个视频**（01/02/03 + 06-demo.mp4），04 决策树按 skill 规范**不配图**（写进正文为结构化逻辑）。**01/02/03 + 视频全部已落地**。
 
 ---
 
-## 一、AI 生图的核心认知（必读）
+## 0. AI 生图的核心认知（必读）
 
-AI 文生图有三大天然短板，直接决定"什么图能用 AI、什么不能"：
-
-1. **文字会乱码**——让它写 "1,000 credits" 大概率变成鬼画符。
-2. **结构不可控**——让它画"后台界面"十次九个崩。
-3. **数字会编**——让它放数据，数字不可信（如"Sender Health 98%"这种具体数字它纯属编造）。
-
-**正确姿势 = 分层**：AI 只出**无文字、氛围感、装饰性**的底图（渐变、路径、节点、抽象曲线），**文字 / 数字 / 箭头 / 标签** 全部用 Canva / PPT / HTML-to-screenshot 后期叠加上去。
-
-**本篇的特殊性**：Snov.io 是 SaaS，最有说服力的图是**真实界面特写**（不是全景大图——手机端/公众号里全景 UI 缩成蚂蚁，读者看不见细节）。**01/02/03 三张必须真截图**；04 用 Canva/PPT 直做；05 可用 AI 底图 + 后期叠字。
+AI 文生图三大天然短板：①文字乱码 ②结构不可控 ③数字会编。
+**正确姿势 = 分层**：AI 只出无文字氛围底图；文字/数字/标签全部用 Canva/PPT/HTML-to-screenshot 后期叠加。**本篇特殊性**：Snov.io 是 SaaS，最有说服力的是真实界面特写。
 
 ---
 
-## 二、5 个槽位的具体处置
+## 1. 已落地插图
 
-### 01-intro.png — LinkedIn 插件抓取特写（**真截图，非 AI**）
-- **内容**：一个 LinkedIn 人物页或公司页，右侧/悬浮层是 **Snov.io Chrome 插件**的抓取卡片——高亮显示"一键获取邮箱"的按钮，能看到联系人邮箱 + 已验证状态（绿色勾）。
-- **为什么用特写而非全景**：全景后台在手机端看不清；特写才能让读者一眼看懂"哦，它能直接在 LinkedIn 上抓邮箱"。
-- **怎么取**：装 Snov.io Chrome 扩展（snov.io/extension）→ 打开 LinkedIn / Sales Navigator 页面 → 截图插件浮层（**局部截图，放大到按钮清晰**）。
-- **AI 替代方案（若无法登录 LinkedIn）**：生成"邮箱探针"氛围底图——深底 #0f172a、放大镜/信封图标、蓝绿光晕，**无文字**；"Get email / Verified ✓"标签后期用 Canva 叠。提示词见下。
+### ✅ imgs/01-intro.png — LinkedIn 插件抓取特写（真截图，已落地）
+- **来源:** 用户提供的演示视频 `06-demo.mp4` 关键帧（LinkedIn 搜索"UI/UX Designer"+ Snov.io 插件浮窗）
+- **Content:** LinkedIn 搜索结果页 + Snov.io Chrome 插件浮窗，列出 6 个联系人姓名/职位/邮箱 + 验证绿点 + "Select/unselect all" 复选框 + "Save selected" 按钮
+- **Type:** `real plugin screenshot`（演示视频抽帧）
+- **Desensitization note:** 画面内姓名（Harold Fitch 等）和邮箱（@gmail.com/@yahoo.com/@snov.io）为演示用**示例数据**，非真实用户，无需脱敏；alt 文本已声明。
+- **Language:** 100% English（UI 本身是英文）
+- **Status:** ✅ 已落地（50092 bytes）
 
-### 02-feature.png — Drip Campaign 工作流画布局部（**真截图，非 AI**）
-- **内容**：Snov.io Drip Campaign 的可视化工作流画布**局部**——展示分支逻辑（如 `If Opened → Wait 2 days → Send Email B`），红框标出 **AI 写作辅助** 或 **Spintax** 按钮。
-- **怎么取**：app.snov.io → Drip Campaigns → 打开一个序列 → 截图画布局部（放大分支节点，红色标注框后期叠加）。
-- 这张图证明"自动化序列不是简单群发"，是 B2B 读者最想确认的能力。
+### ✅ imgs/02-feature.png — Drip Campaign 可视化画布（真截图，已落地）
+- **来源:** 用户补充（app.snov.io 登录后截图）
+- **Content:** Drip Campaign 画布——右侧面板拖拽 Email / Delay / Condition / LinkedIn action / Goal 到画布，虚线连接分支逻辑；AI 写作辅助可见
+- **Type:** `real official product screenshot`
+- **Language:** 100% English
+- **Status:** ✅ 已落地（136477 bytes）
 
-### 03-pricing.png — 定价页（**真截图，非 AI**）
-- **内容**：snov.io/pricing 各档并排（Trial / Starter / Pro S / Pro M / Pro L / Ultra + 25% 年付横幅）。
-- **怎么取**：访问 https://snov.io/pricing/ 整页截图（官方页自带 "🔥 25% off" 横幅）。
-- 若做社媒分享图，用 AI 深底边框 + 手动排价格数字。
+### ✅ imgs/03-pricing.png — 官方定价页（真截图，已落地）
+- **来源:** 用户补充（snov.io/pricing 截图）
+- **Content:** Trial / Starter / Pro S / Pro M / Pro L / Ultra 各档并排
+- **Type:** `real official pricing page screenshot`
+- **Language:** 100% English
+- **Status:** ✅ 已落地（213380 bytes）
 
-### 04-verdict.png — 卡片式决策流程图（**Canva/PPT 直做，或 AI 底图+叠字**）
-- **内容**：**卡片式**决策流程（方便读者截图保存），每张卡片 = 一类人群 → 推荐档位：
-  - 卡片 1：**外贸新手 / 个人** → Starter（$39）
-  - 卡片 2：**独立销售 / 小团队** → Starter 够用，点数别浪费
-  - 卡片 3：**成熟 Outbound 团队**（10+ 邮箱、多语言）→ Pro S（$99，无限预热）
-  - 卡片 4：**高量级 Agency**（月 5 万+ credits）→ Ultra / 定制
-- **推荐做法**：Canva / PPT 画四张卡片 + 箭头流，文字清晰可控，比 AI 生图准。
-- **AI 氛围版**：生成"分叉路径"深底插画，卡片文字后期叠。提示词见下。
-
-### 05-warmup.png — 预热效果趋势图（**AI 生底图 + 后期叠字，或图表工具直做**）
-- **内容**：一条**上升趋势曲线**，示意发件声誉/进箱率随周数爬坡（对应"技术原理"段的预热说明）。
-- **⚠️ 数字诚实红线**：曲线是**示意**——x 轴写 "Week 1 → Week 8"，y 轴写"Sender reputation / Inbox rate"，**具体百分比留空或用你自己后台的真实截图数字**。**禁止**写 "50%→98%" 这种编造数字（那是第三方建议稿拍的，我们没有数据源）。
-- **推荐做法**：用 Canva / 图表工具画一条平滑上升曲线最干净；或 AI 生成"上升趋势光带"底图 + 后期叠坐标轴文字。
-- **AI 氛围底图**：深色科技底 + 一条发光上升曲线，无文字、无数字。
+### ✅ imgs/06-demo.mp4 — LinkedIn 插件使用演示视频（真视频，已落地）
+- **来源:** 用户提供 `C:/Users/Holive Hu/Desktop/Snovio Service [nezoIcq6Z8E].mp4`（33s，1174×720，VP9/Opus），已重命名为 `06-demo.mp4`（去掉空格/方括号，编译期友好）
+- **Content:** LinkedIn 搜索结果 → Snov.io 插件浮窗 → 预览带验证状态的邮箱 → Save selected 整批保存
+- **嵌入方式:** `<video src="imgs/06-demo.mp4" controls poster="imgs/01-intro.png" ...>`（poster 用 01-intro 帧，首屏不黑）
+- **编译时:** mp4 搬 `public/reviews/snovio-demo.mp4`，md 路径改 `/reviews/snovio-demo.mp4`
+- **Status:** ✅ 已落地（2047936 bytes）
 
 ---
 
-## 三、AI 生图 Prompt 模板（仅用于氛围底图）
+## 2. 已删除的插图槽位
 
-统一风格：深色科技底 #0f172a，蓝绿渐变光晕，人形/信封/节点元素，无文字。
+### ❌ imgs/04-verdict.png — 决策树图（按 skill 规范不配图）
+- **Reason:** "Decision trees are NEVER images"——决策树写进正文为结构化分支，由 `SnovioDecisionTree` 组件挂载到 `<div id="snovio-decision-tree">`。
+- **旧图:** 文件仍在但 md 不再引用——建议删除（与组件保持一致）。
 
-**01 氛围底图（邮箱探针）：**
-> Dark navy background (#0f172a), a glowing magnifier over an envelope icon with a checkmark glow, teal-to-blue gradient, subtle particle trails, minimalist tech illustration, no text, no letters, clean futuristic style
-
-**04 氛围底图（决策/路径）：**
-> Dark navy background (#0f172a), a glowing forked roadmap with four lit doorway cards, abstract decision metaphor, teal and amber accent lights, no text, cinematic minimal
-
-**05 氛围底图（上升趋势）：**
-> Dark navy background (#0f172a), a single glowing upward trend line sweeping across the frame, teal gradient glow under the curve, subtle grid dots, minimalist data illustration, no text, no letters, no numbers, clean futuristic style
-
-**关键约束（每次都加）**：`no text, no letters, no numbers, no watermark`——杜绝乱码。
+### ❌ imgs/05-warmup.png — 预热示意曲线（不再使用）
+- **Reason:** 05-warmup 是 08-14 生成的示意曲线（"illustrative — trust your own dashboard numbers"），本次重写未引用。
+- **升级路径:** 若后续跑 Starter warm-up，用真实 sender reputation 数字重画（HTML 图表）。
 
 ---
 
-## 四、后期叠字（用 Canva / PPT / HTML-to-screenshot）
-- 字体：站点是英文全球受众，用干净无衬线（Inter / Helvetica）。
-- 数据必须手打：Trial 50 credits、Starter $39、Pro S $99、25% off、G2 4.6/5——不要信 AI 生成的任何数字。
-- 05 趋势图的百分比数字：留空或用自己的真实后台数据，别填编造值。
-- 导出：1200×630（社媒分享尺寸）或按正文宽度 1200×675。
+## 3. 后期叠字（用 Canva / PPT / HTML-to-screenshot）
+
+字体 Inter / Helvetica（英文全球受众）。数据必须手打：Trial 50 credits、Starter $39、Pro S $99、25% off、G2 4.6/5——别信 AI 生成的任何数字。导出 1200×630（社媒分享尺寸）。
 
 ---
 
-## 五、取图来源 URL（真截图用）
-- 后台（登录后）：https://app.snov.io/
-- Drip Campaigns：登录后 → 左侧 Drip Campaigns → 打开序列画布
-- 定价页：https://snov.io/pricing/
-- Chrome 扩展：https://snov.io/extension （安装后在 LinkedIn/Sales Nav 页抓取）
-- 官网首页（hero/定位说明）：https://snov.io/
+## 4. 取图来源 URL
 
-> 提醒：真截图里的 Snov.io logo / 品牌元素保留即可，无需去水印（那是官网自有品牌，不是第三方水印）。截图务必用**局部特写**（01/02），保证手机端文字可读。
+- 官方定价页：`https://snov.io/pricing/`
+- 后台（登录后）：`https://app.snov.io/`
+- Drip Campaigns 文档：`https://snov.io/drip-campaigns/`
+- Chrome 扩展：`https://snov.io/extension`
+- 演示视频（已入稿）：`imgs/06-demo.mp4`（原文件在桌面 `Snovio Service [nezoIcq6Z8E].mp4`）
+
+> 提醒：真截图里的 Snov.io logo / 品牌元素保留即可；截图务必用**局部特写**，保证手机端文字可读。

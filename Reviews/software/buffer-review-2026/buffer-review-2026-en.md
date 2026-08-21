@@ -1,7 +1,7 @@
 ---
 slug: buffer-review-2026
 name: Buffer
-category: software
+category: creators
 subcategory: "Social Media Management"
 rating: 4.3
 tagline: "Turns 'posting every day' into 'queueing once a week' — clean enough to need zero learning curve"
@@ -25,7 +25,7 @@ whoShouldSkip: "Teams that need social listening or competitor tracking, matrix 
 keyAdvantage: "Compresses multi-platform publishing into three steps: connect, queue, check the numbers — nothing else in the way"
 editorsPick: true
 featured: false
-author: "Priya Sharma"
+author: "Trueer"
 ---
 
 # Buffer Review: From "Posting Every Day" to "Queueing Once a Week"

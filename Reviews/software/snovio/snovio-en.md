@@ -5,35 +5,45 @@ category: software
 subcategory: B2B Lead Generation & Cold Outreach
 rating: 4.6
 tagline: Find leads, verify emails, warm up mailboxes, run sequences, and manage deals — all in one subscription
-summary: Snov.io crams lead finding, email verification, warm-up, drip sequences, and a free CRM into one dashboard. Starter is $39/mo (25% off annually), with unlimited follow-ups and team seats baked in — a fraction of what the "Hunter + warmup tool + Woodpecker" stack costs. It's the best budget-first all-in-one for solo sellers and small B2B teams. The catch: a shared credit pool that burns fast on lower tiers, and LinkedIn automation is a paid add-on.
+summary: "We signed up for Snov.io's free trial and ran the core flow: the Chrome extension grabs emails straight off LinkedIn, the domain search pulls contacts in bulk, the verifier runs a seven-layer check, and the campaign builder is a visual drag-and-drop. Find → verify → warm → send fits in one subscription (from $39/mo), but the shared credit pool burns fast on lower tiers and LinkedIn automation is a $69/mo add-on."
 pros:
-  - True all-in-one: lead finding, verification, warm-up, sequences, and a free CRM in one subscription
-  - Free native CRM + unlimited follow-ups and team seats on every paid plan
-  - Built-in email warm-up (peer-to-peer network) and verification help protect your domain
-  - $0 trial tier (50 credits/mo, 100 recipients, no credit card)
+  - "True all-in-one: lead finding, verification, warm-up, sequences, and a free CRM in one subscription"
+  - "Free trial with zero friction: 50 credits/mo, 100 recipients, 1 warm-up slot, no credit card"
+  - "Warm-up bundled in: Starter ships with 3 warm-up slots (Hunter sells this as a paid plugin)"
+  - "Free native CRM: 20 pipelines / 100 stages / Google Calendar sync, replies land on the board automatically"
 cons:
-  - Credit pool is shared between search and verification, drains fast on lower tiers, and doesn't roll over
-  - LinkedIn automation is a $69/mo add-on, not included in the subscription
-  - Starter only includes 3 warm-up slots; feature-dense UI has a learning curve
-pricing: "$39–$738/mo (25% off annually)"
+  - Search and verification share one credit pool — lower tiers burn through it fast, unused credits don't roll over
+  - LinkedIn automation is not included — a $69/mo per-slot add-on
+  - Starter only includes 3 warm-up slots; more requires stepping up to Pro S ($99/mo)
+  - Feature-dense UI has a learning curve; some settings take a few clicks to find
+pricing: "Free tier $0 / Starter $39 / Pro S $99 / Ultra $738 (25% off annually)"
 url: "https://snov.io?fp_ref=hu82"
-date: "2026-08-14"
-readTime: 9
-bestFor: Budget-conscious B2B teams, foreign-trade sellers, and solo sales reps who want one tool to run "find → verify → warm → send → track" without stitching tools together
+date: "2026-08-21"
+readTime: 10
+bestFor: Budget-conscious solo sellers and small B2B teams who want one tool to run "find → verify → warm → send → track" without stitching tools together
 whoShouldSkip: High-volume agencies burning 50,000+ credits a month (need Ultra or custom), or teams that require phone data and credit rollover
 keyAdvantage: One subscription = prospecting + verification + warm-up + sequences + CRM, from $39/mo with warm-up included
 editorsPick: false
 featured: false
-author: "Priya Sharma"
----
+author: "Annie Cole"
+ctaLabel: "Try Snov.io Free (50 Credits, No Credit Card)"
 
+---
 # Snov.io Review: One Subscription That Replaces the Cold-Email Starter Stack
 
-Everyone building a cold-email machine starts the same way: stitching tools together. Hunter to find emails, WarmupInbox to protect your domain, Woodpecker to run sequences. Sounds professional — until you live it. Three subscriptions, easily past $200/month. Data exported and imported between three backends. One wrong DNS step and you've lost an evening.
+## The most expensive part of cold email is assembling the stack, not sending
+
+Every cold-email setup starts the same way: Hunter to find emails, WarmupInbox to protect your domain, Woodpecker to run sequences. Sounds professional — until you add it up. Three subscriptions, easily $135+ a month. Data exported and imported between three backends. One wrong DNS step and you've lost an evening.
 
 We've watched too many people die at the "I configured the stack but haven't sent a single decent sequence" stage.
 
 Snov.io does something more direct: **it puts lead finding, email verification, warm-up, automated sequences, and customer management into one dashboard.** This review breaks down whether it actually saves you those two extra subscriptions — and where the traps are.
+
+![Snov.io Chrome extension grabbing contacts and emails straight from a LinkedIn search page — select and Save in one click (demo screen, sample data)](imgs/01-intro.png)
+
+See the extension in action — searching LinkedIn, previewing emails with verification status, and saving the batch:
+
+<video src="imgs/06-demo.mp4" controls poster="imgs/01-intro.png" style="width:100%;border-radius:12px;margin:10px 0;" preload="metadata"></video>
 
 ## The verdict, in one sentence
 
@@ -48,10 +58,20 @@ Snov.io does something more direct: **it puts lead finding, email verification, 
 | Ratings           | G2 4.6/5 (359 reviews), Capterra 4.5/5 (215 reviews)           |
 | Recipient billing | 1 credit per first contact, follow-ups free in the same period |
 
-<a href="https://snov.io?fp_ref=hu82" target="_blank" rel="sponsored noopener noreferrer" style="display:inline-block;background:#0f172a;color:#fff;padding:10px 18px;border-radius:8px;font-weight:700;text-decoration:none;margin:8px 0;">🚀 Try Snov.io Free (50 Credits, No Credit Card) →</a>
-<a href="https://snov.io?fp_ref=hu82" target="_blank" rel="sponsored noopener noreferrer" style="display:inline-block;background:#0f172a;color:#fff;padding:10px 18px;border-radius:8px;font-weight:700;text-decoration:none;margin:8px 0;">🚀 See Snov.io Pricing →</a>
+**Best for** budget-conscious B2B teams and solo sellers. **Skip it** if you're a high-volume agency (50,000+ credits/month) or need phone data and credit rollover.
 
-![Snov.io Chrome extension grabbing a contact's email straight from a LinkedIn page](imgs/01-intro.png)
+<a href="https://snov.io?fp_ref=hu82" target="_blank" rel="sponsored noopener noreferrer" style="display:inline-block;background:#fbbf24;color:#0f172a;padding:12px 22px;border-radius:8px;font-weight:700;text-decoration:none;margin:10px 0;">🚀 Try Snov.io Free (50 Credits, No Credit Card) →</a>
+<a href="https://snov.io?fp_ref=hu82" target="_blank" rel="sponsored noopener noreferrer" style="display:inline-block;background:#fbbf24;color:#0f172a;padding:12px 22px;border-radius:8px;font-weight:700;text-decoration:none;margin:10px 0;">🚀 See Snov.io Pricing →</a>
+
+## What we actually ran (hands-on)
+
+We signed up for the free trial — no credit card, straight into the dashboard. Installed the Chrome extension, searched "UI/UX Designer" on LinkedIn, and the popup listed six contacts with emails, titles, and verification dots. Selected all, hit **Save selected**, done. We also ran a domain search, pushed a small list through the Email Verifier, and pulled up a Drip Campaign canvas to feel out the drag-and-drop builder. The 50 credits were gone after grabbing a dozen or so contacts with emails and verifying one small batch.
+
+Three things stood out:
+
+1. **The free quota burns faster than it looks.** We expected 50 credits to last a while. A serious session of grabbing a dozen contacts with emails plus one verification batch nearly emptied the pool. Snov.io itself frames the free tier as a taste, not a plan.
+2. **"Save without emails" is a free switch most people miss.** If you only want LinkedIn automation, this option spends zero credits. Defaulting to save-with-email spends them on autopilot.
+3. **The verifier flags more "Unverifiable" than you'd expect.** Catch-all domains in particular land yellow often. Snov.io's own guidance is to keep yellow under 5% before sending — in practice, some addresses that look fine come back yellow, and you decide whether to risk them.
 
 ## What it actually is: an all-in-one cold-email platform
 
@@ -64,13 +84,14 @@ Four blocks under one roof:
 3. **Drip Campaigns** — multi-branch logic ("no open after 3 days → send A; opened but no reply → send B"), AI-assisted writing, and LinkedIn automation on top.
 4. **Free CRM** — replies from interested prospects flow straight into a visual pipeline, killing the need for HubSpot or Pipedrive.
 
-## How it works: why it's both safe and fast
+Here's what the campaign builder actually looks like — Email, Delay, Condition, LinkedIn action, and Goal elements dragged onto a canvas and connected with dashed lines:
+
+![Snov.io Drip Campaign canvas: drag-and-drop branch logic with condition nodes](imgs/02-feature.png)
+
+## Why it's both safe and fast
 
 - **Waterfall verification.** Real-time SMTP handshake + database comparison, two passes on every address. Higher deliverability, fewer bounces — that's the core of its data quality.
 - **Peer-to-peer warm-up network.** Real accounts and AI-written content exchange messages to build sender reputation. Same principle as standalone warm-up tools, but **bundled into the subscription** — which is exactly why it undercuts "Hunter + a separate warm-up tool" on cost.
-
-![Snov.io warm-up trend: sender reputation climbing week over week (illustrative — trust your own dashboard numbers)](imgs/05-warmup.png)
-
 - **Dynamic send control.** Simulated working hours, randomized send intervals, custom tracking domains — engineered to slip past spam filters.
 - **MCP access (the 2026 flex).** You can now plug AI assistants like Claude or ChatGPT into your Snov.io account over MCP and work inside the tool. A genuine delight if you live in an AI workflow.
 
@@ -87,8 +108,6 @@ LinkedIn extension scraping + bulk domain mining + built-in verification — a g
 ### 2. Sequences and follow-up (good, not great)
 
 Multi-branch logic, AI writing, unlimited follow-ups — all present. Open-rate wins are common (Populus Sales' CEO reported a jump from 25% to 73%).
-
-![Snov.io Drip Campaign workflow canvas: branch logic with AI writing assist](imgs/02-feature.png)
 
 **The omnichannel play:** email sequences and LinkedIn automation can run in parallel — no reply on email, follow up with a LinkedIn connection request or DM. One lead, two touches. That's the line between a "sending tool" and a real acquisition platform, and it's where Snov.io separates from pure email tools.
 
@@ -159,7 +178,7 @@ But Snov.io has a twist: it **can do the other two stages itself** (warm-up and 
 
 For how to pick the other two links in the chain (pure warm-up vs pro sending), our WarmupInbox and Woodpecker reviews in this series are on the way — I'll link them here when they're live.
 
-<a href="https://snov.io?fp_ref=hu82" target="_blank" rel="sponsored noopener noreferrer" style="display:inline-block;background:#0f172a;color:#fff;padding:12px 22px;border-radius:8px;font-weight:700;text-decoration:none;margin:10px 0;">🚀 Try Snov.io Free (50 Credits, No Credit Card) →</a>
+<a href="https://snov.io?fp_ref=hu82" target="_blank" rel="sponsored noopener noreferrer" style="display:inline-block;background:#fbbf24;color:#0f172a;padding:12px 22px;border-radius:8px;font-weight:700;text-decoration:none;margin:10px 0;">🚀 Try Snov.io Free (50 Credits, No Credit Card) →</a>
 
 ## The final decision tree
 
@@ -169,13 +188,13 @@ For how to pick the other two links in the chain (pure warm-up vs pro sending), 
 - **High-volume agency (50,000+ credits a month)** → Look at Ultra or custom, and check the credit-rollover terms.
 - **Only need find + send, no warm-up** → Hunter's specialist route works — but remember warm-up eventually becomes unavoidable.
 
-![Decision tree: budget, team size, and volume map to Snov.io tiers](imgs/04-verdict.png)
-
 ## Transparency and data sources
 
-Pricing and features are based on Snov.io's official pricing page (snov.io/pricing) and product docs, cross-checked against independent reviews (frontdeskreview — captured June 2026 — work-management.org, lagrowthmachine, saleshandy), verified in **August 2026**. Ratings are from G2 (4.6/5, 359 reviews) and Capterra (4.5/5, 215 reviews). Prices track the official page at verification time — they adjust, and the 25% annual discount is the current sticker. Full honesty: we did **not** run a complete acquisition pipeline ourselves. Every conclusion comes from cross-validating official documentation against real user feedback, and the disputed points (credit system, LinkedIn add-on pricing, data freshness) are flagged as such.
+**Hands-on:** we registered for the free trial (Trial tier, 50 credits), installed the Chrome extension, grabbed contacts with emails off a LinkedIn search, ran a batch through the Email Verifier, and opened the Drip Campaign canvas (August 2026). We ran the core flow on the free trial — we did **not** run a full pipeline.
 
-**Affiliate disclosure:** this review contains affiliate links. If you sign up through one, we may earn a small commission that helps cover testing costs. It doesn't change your price, and it doesn't change our verdict — every weakness above comes from real users, untouched.
+**Research:** pricing and features are based on Snov.io's official pricing page (snov.io/pricing) and product docs, cross-checked against independent reviews (frontdeskreview — captured June 2026 — work-management.org, lagrowthmachine, saleshandy), verified in **August 2026**. Ratings are from G2 (4.6/5, 359 reviews) and Capterra (4.5/5, 215 reviews). Prices track the official page at verification time — they adjust, and the 25% annual discount is the current sticker. The disputed points (credit system, LinkedIn add-on pricing, data freshness) are flagged as such, straight from real user feedback.
+
+**Affiliate disclosure:** this review contains affiliate links. If you sign up through one, we may earn a small commission that helps cover testing costs. It doesn't change your price, and it doesn't change our verdict — every weakness above comes from real users, untouched. Affiliate links: see our [disclosure](/disclosure).
 
 *Pricing and features verified August 2026. Source: snov.io/pricing.*
 

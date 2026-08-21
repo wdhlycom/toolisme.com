@@ -26,7 +26,7 @@ whoShouldSkip: "Teams that need social listening or competitor tracking, matrix 
 keyAdvantage: "Compresses multi-platform publishing into three steps: connect, queue, check the numbers — nothing else in the way"
 editorsPick: true
 featured: false
-author: "Annie Cole"
+author: "Trueer"
 ---
 
 # Buffer Review: From "Posting Every Day" to "Queueing Once a Week"
