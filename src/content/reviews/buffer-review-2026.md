@@ -226,4 +226,4 @@ Buffer's Trustpilot score is a rough **2.1/5 (93 reviews)** — a loud contrast 
 
 ---
 
-**P.S.** Buffer handles one link of the cold-email chain — actually, no, it doesn't. This one is for social scheduling. But it does sit in a series: if you're building out the whole creator stack, the Snov.io review (finding leads) and the Woodpecker review (sending sequences) are already live, and we'll link them here the moment they're published.
+**P.S.** Buffer is the social-scheduling piece of the creator stack. If you're building the whole outbound + content system, the [Snov.io review](/reviews/software/snovio-review-2026) (find leads) and [Woodpecker review](/reviews/software/woodpecker-review-2026) (send sequences) are both live now.

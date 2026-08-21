@@ -173,11 +173,3 @@ If you're weighing the Q1 Max against alternatives, these two are the most natur
 The Keychron Q1 Max is a clearly-positioned board: it puts what used to be niche, tinkery custom-keyboard experience into ordinary users' hands at production scale. For Mac/Windows dual users who want all-aluminum gasket feel and don't want to DIY, it's the fuss-free flagship choice.
 
 But its downsides are just as real: thick, heavy, Bluetooth that occasionally stumbles in busy environments, stock switches/caps that aren't peak, and a price that's no longer such a steal against newer rivals. It's not a "buy and never regret" hexagon warrior — it's a product where the pros and cons are both loud. If you don't mind the height and will pay a little premium for fuss-free, it belongs in your cart; if you care more about slim, gaming low-latency, or top-tier value, it's probably not your best answer.
-
----
-
-### IMAGES-TO-GRAB (delivered)
-- **01-product** (Tier 1 official): `keychron-q1-max-product.jpg` — Q1 Max product shot + feature icons, downloaded.
-- **02-colorways** (Tier 1 official): `keychron-q1-max-colorways.png` — official colorway showcase, transparent PNG, downloaded.
-- **03-launcher** (Tier 1 official): `keychron-q1-max-launcher.jpg` — Keychron Launcher web remap screenshot, no sensitive data, downloaded.
-- **04-spec-card** (Tier 3 HTML) — dropped: specs already enumerated in body, violates image-uniqueness rule.

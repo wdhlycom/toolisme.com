@@ -71,7 +71,7 @@ For lead data, based on user feedback and our research, [Snov.io](https://snov.i
 **Scenario D: video / YouTube — you want AI-written scripts**
 Script tools have gotten crowded. Our [TubeMagic vs Subscribr comparison](/comparisons/software/tubemagic-vs-subscribr-2026) covers the two big angles: one is built for batch production, the other for retention-focused hooks. Pick by your content cadence — don't subscribe to both.
 
-> 💡 **Decision logic (compiles into a dynamic Quiz):** the four scenarios above are a need → tool map. Match your core need to the right tool. For an interactive version, this logic feeds our web-based decision Quiz.
+> 💡 **Decision logic:** the four scenarios above are a need → tool map. Match your core need to the right tool — that's the whole flow.
 
 ## The habit that actually fixes the bill: quarterly audits
 
@@ -96,4 +96,4 @@ Ready to compare actual tools? Our [top tools comparison](/comparisons/software)
 
 ## P.S.
 
-This is the software pillar of our guide series. The security pillar ([creator & digital nomad security guide](/guides/creator-nomad-security-guide)) is live, and the hardware pillar (keyboards, monitors, budget tiers) is on the way — bookmark [guides](/guides) so you catch the whole stack.
+This is the software pillar of our guide series. The security pillar ([creator & digital nomad security guide](/guides/creator-nomad-security-guide)) is live, and the hardware pillar ([remote workstation & budget hardware guide](/guides/remote-workstation-hardware-guide)) is live too — bookmark [guides](/guides) so you catch the whole stack.

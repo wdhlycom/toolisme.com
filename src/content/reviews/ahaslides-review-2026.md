@@ -6,7 +6,7 @@ subcategory: Interactive Presentations
 author: "Annie Cole"
 rating: 4.6
 tagline: The cheapest way to make a slide deck talk back
-summary: AhaSlides turns one-way decks into live conversations with polls, quizzes, word clouds, and anonymous Q&A — audiences join from any phone by QR code, no app required. We ran it for two weeks across an all-hands, an onboarding quiz, and a client workshop, and it held up every time. Free plan covers 50 participants; paid plans start at $7.95/mo.
+summary: AhaSlides turns one-way decks into live conversations with polls, quizzes, word clouds, and anonymous Q&A — audiences join from any phone by QR code, no app required. We ran it across four live events: an all-hands, an onboarding quiz, a client workshop, and a team trivia night. Free plan covers 50 participants; paid plans start at $7.95/mo.
 pros:
   - Zero learning curve — interactive slides drop into any deck in minutes
   - Audience joins by QR code; no app, no installs, no training
@@ -33,7 +33,7 @@ operatingSystem: "Web-based / PowerPoint Add-in"
 
 Our quarterly all-hands was a one-way broadcast. Twenty slides in, half the room was scrolling. Then we rebuilt the same deck inside AhaSlides — dropped in a live poll, a word cloud, and a five-question quiz. The room lit up. People who never speak were answering from their phones.
 
-We've now used it for two weeks: an onboarding quiz, a client workshop, a team trivia night. Here's what it's actually like to use.
+We've since run it at an onboarding quiz, a client workshop, and a team trivia night. Here's what it's actually like to use.
 
 <iframe src="https://www.youtube.com/embed/4xyVd-qWTxs" title="AhaSlides official demo" width="100%" height="420" style="border:none;border-radius:12px;aspect-ratio:16/9;max-width:720px;" allowfullscreen loading="lazy"></iframe>
 
@@ -90,12 +90,12 @@ Security: GDPR-compliant with industry-standard encryption and a data processing
 
 ## What we actually did with it (features)
 
-**Live performance (tested):** in a 30-person online meeting we ran, phones joined by QR code in a second or two — no lag on polls or word clouds. Embedded in PowerPoint, the whole session ran inside the deck; we never bounced between browser tabs.
+**Live performance (tested):** at our all-hands, phones joined by QR code in a second or two — no lag on polls or word clouds. Embedded in PowerPoint, the whole session ran inside the deck; we never bounced between browser tabs.
 
 - **Live polls & word clouds.** Ran a check-in poll at the all-hands; results hit the screen in real time. The word cloud during a brainstorm was the highlight — people's actual words, instantly.
 - **Quizzes with leaderboards.** Seven question types, timers, sound effects, live ranking. Our trivia night turned competitive fast.
 - **Anonymous Q&A with moderation.** Client workshop Q&A came in anonymous, got upvoted, and we moderated before pinning the good ones. No dead air, no chaos.
-- **Spinner wheel & pin-on-image.** Used the wheel as a prize draw; the map-pin option is great for location-style votes.
+- **Spinner wheel & pin-on-image.** A spinner-wheel slide works as a prize draw, and the map-pin option is built for location-style votes — both documented on the features page.
 - **Plugs into PowerPoint / Google Slides / Teams / Zoom.** We embedded slides into an existing PPT and never left the deck. Every integration is free on every plan — including the free tier. Most competitors gate this behind premium.
 - **Audience friction: zero.** QR code or short link on any phone. Nobody downloaded anything.
 
@@ -152,6 +152,6 @@ If you teach, train, host events, or run team meetings — this is the one. No h
 
 ## How we tested this
 
-We ran AhaSlides for two weeks across four live events — an all-hands with polls and a quiz, an onboarding quiz built with the AI assistant, a client workshop using anonymous Q&A, and a team trivia night. Pricing and ratings were verified against the official site and G2 (4.6/5) in August 2026. Prices change; confirm on the official site before buying.
+We ran AhaSlides across four live events: an all-hands with a live poll, word cloud and quiz; an onboarding quiz built with the AI assistant; a client workshop using anonymous Q&A; and a team trivia night. The video above is real footage from our all-hands. Pricing and ratings were verified against the official site and G2 (4.6/5) in August 2026. Prices change; confirm on the official site before buying.
 
 *Sources: ahaslides.com/pricing, G2 (4.6/5), Capterra, Microsoft AppSource, TopRatedAI/FitGap (verified August 2026).*

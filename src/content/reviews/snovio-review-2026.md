@@ -173,7 +173,7 @@ But Snov.io has a twist: it **can do the other two stages itself** (warm-up and 
 - **Budget only stretches to one tool** → run the whole pipeline on Snov.io; skip the stack.
 - **Your sending setup is already locked in** (say, your team runs Woodpecker) → Snov.io works perfectly as the "find + verify + CRM" layer, decoupled and non-interfering.
 
-For how to pick the other two links in the chain (pure warm-up vs pro sending), our WarmupInbox and Woodpecker reviews in this series are on the way — I'll link them here when they're live.
+For how to pick the other two links in the chain (pure warm-up vs pro sending), see our [WarmupInbox review](/reviews/software/warmupinbox-review-2026) and [Woodpecker review](/reviews/software/woodpecker-review-2026) — both live now.
 
 <a href="https://snov.io?fp_ref=hu82" target="_blank" rel="sponsored noopener noreferrer" style="display:inline-block;background:#fbbf24;color:#0f172a;padding:12px 22px;border-radius:8px;font-weight:700;text-decoration:none;margin:10px 0;">🚀 Claim your 50 free credits →</a>
 
@@ -195,4 +195,4 @@ For how to pick the other two links in the chain (pure warm-up vs pro sending), 
 
 *Pricing and features verified August 2026. Source: snov.io/pricing.*
 
-**P.S.** Snov.io is the "who do I email?" link of the cold-email chain. The other two reviews in this series — **WarmupInbox** (warming the mailbox) and **Woodpecker** (sending the sequences) — are on the way; I'll link them right here the moment they're live.
+**P.S.** Snov.io is the "who do I email?" link of the cold-email chain. The other two reviews in this series — [WarmupInbox](/reviews/software/warmupinbox-review-2026) (warming the mailbox) and [Woodpecker](/reviews/software/woodpecker-review-2026) (sending the sequences) — are both live now.

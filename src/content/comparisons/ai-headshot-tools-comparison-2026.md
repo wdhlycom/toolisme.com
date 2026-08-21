@@ -201,3 +201,9 @@ We won't decide for you, but here's the decision tree:
 Sources: official pricing and feature pages, Trustpilot, Reddit, and third-party reviews (ToolCrush, Dupple, AItoolsbakery, ToolChase), verified August 2026. Every negative claim traces back to a real source. Prices change — check the official site before you buy.
 
 *Sources: headshotpro.com/pricing, aragon.ai/pricing, betterpic.io, proshoot.co, Trustpilot product pages, ToolCrush / Dupple / AItoolsbakery / ToolChase (verified August 2026). Figures as published; confirm on the official sites.*
+
+---
+
+## Affiliate disclosure
+
+This article contains affiliate links. If you buy through one, we may earn a commission. It does not affect our coverage, our scores, or what we say. We only write about tools we'd actually use.

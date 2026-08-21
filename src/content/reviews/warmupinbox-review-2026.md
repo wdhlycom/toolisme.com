@@ -167,4 +167,4 @@ We based this review on WarmupInbox's official pricing and feature pages, Trustp
 
 *Pricing and features verified August 2026. Source: warmupinbox.com/pricing.*
 
-**P.S.** WarmupInbox handles only one link of the cold-email chain — the middle one. The other two reviews in this series, **Snov.io** (finding the leads) and **Woodpecker** (sending the sequences), are on the way; I'll link them right here the moment they're live.
+**P.S.** WarmupInbox handles only one link of the cold-email chain — the middle one. The other two reviews in this series, [Snov.io](/reviews/software/snovio-review-2026) (finding the leads) and [Woodpecker](/reviews/software/woodpecker-review-2026) (sending the sequences), are both live now.

@@ -108,7 +108,7 @@ export default function HomePage() {
               {[
                 { value: String(reviews.length), label: 'Tools tested' },
                 { value: '4', label: 'Categories' },
-                { value: '100%', label: 'Hands-on' },
+                { value: 'Named', label: 'Reviewers, every piece' },
                 { value: '0', label: 'Paid reviews' },
               ].map((stat) => (
                 <div key={stat.label} className="text-center">
@@ -122,7 +122,7 @@ export default function HomePage() {
             <div className="mx-auto mt-7 grid max-w-4xl grid-cols-2 gap-3 border-t border-ink-200/60 pt-7 sm:grid-cols-4 dark:border-ink-700/60">
               {[
                 { icon: ShieldCheck, title: '100% Independent', subtitle: 'No vendor influence' },
-                { icon: Hand, title: 'Hands-On Testing', subtitle: 'Real workflows' },
+                { icon: Hand, title: 'Real Testing', subtitle: 'Hands-on or sourced' },
                 { icon: CalendarClock, title: 'Updated 2026', subtitle: 'Current pricing' },
                 { icon: BadgeCheck, title: 'No Paid Rankings', subtitle: 'Never for sale' },
               ].map((item) => (

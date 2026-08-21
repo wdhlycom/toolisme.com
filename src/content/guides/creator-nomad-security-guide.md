@@ -23,8 +23,8 @@ Security isn't about how important you are. It's about habits. And it isn't abou
 
 **When you pick a password manager, the real question is where your vault lives:**
 
-1. **Managed cloud sync** — phone, laptop, tablet, all of it, always available. [1Password](/reviews/security/1password-review-2026) is the standard here: smooth, polished, zero maintenance. Right choice if you don't want to babysit infrastructure.
-2. **Self-hosted / open source** — the vault lives on your own server, data stays in your hands. [Bitwarden](/reviews/security/bitwarden-review-2026) is the usual pick here. Right choice if you care about data sovereignty and don't mind a little setup.
+1. **Managed cloud sync** — phone, laptop, tablet, all of it, always available. 1Password is the standard here: smooth, polished, zero maintenance. Right choice if you don't want to babysit infrastructure.
+2. **Self-hosted / open source** — the vault lives on your own server, data stays in your hands. Bitwarden is the usual pick here. Right choice if you care about data sovereignty and don't mind a little setup.
 
 Neither is strictly better. **Want convenience, buy managed. Want ownership, self-host.**
 
@@ -46,7 +46,7 @@ Cafe, airport, and hotel Wi-Fi are the daily reality of any remote worker — an
 
 Free VPNs have to make money somehow. Usually it's ads, selling your bandwidth as exit nodes, or the logs themselves being the product. If you take privacy seriously, free VPN is the one category to avoid — use a reputable paid service, or just fall back to your phone's hotspot when you need quick coverage.
 
-💡 Want real-world speed and server tests on the mainstream VPNs? Our [2026 VPN comparison](/comparisons/best-vpn-2026) will fill in the numbers once it ships.
+💡 Want real-world speed and server tests on the mainstream VPNs? Our 2026 VPN comparison will fill in the numbers once it ships.
 
 ## Layer 3: Data Assets & the 3-2-1 Backup Rule
 

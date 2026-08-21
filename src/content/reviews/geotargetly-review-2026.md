@@ -12,7 +12,6 @@ ctaLabel: "Start Your 14-Day Free Trial"
 url: "https://geotargetly.com/?red=toolis"
 appCategory: "Business"
 operatingSystem: "Web"
-price: "$9"
 bestFor: "Cross-border store owners, agencies managing multi-country clients, going-global SaaS founders and creators"
 whoShouldSkip: "Single-market local sites, tiny traffic volumes, enterprise A/B testing teams"
 pricing: "$9–$279/mo (annual from $9)"
@@ -148,10 +147,6 @@ Two gotchas that follow: **VPN and proxy users will appear at the VPN server's l
 - **Lots of features = learning curve**: the dashboard can feel busy in week one while you wrap your head around rule logic.
 - **Overkill for purely local sites**: if location doesn't matter to the experience, skip it.
 
-## Quiz Note
-
-When this article ships with interactive elements, this section becomes a short **decision quiz**: "Is your traffic spread across countries? Do you need currency/language switching? Regional compliance popups?" — routing people to "redirect-only → Shopify app / full toolkit → Geo Targetly tiers / local site → skip it." That's the thinking; the component goes in at build time.
-
 ## Our Final Verdict
 
 **In one sentence**: Geo Targetly is the most complete, most affordable option in the geo-targeting category — from $9/month you get redirects, content personalization, currency and language swapping, popups, and compliance blocking, and for a cross-border store that ROI is hard to beat.
@@ -162,7 +157,5 @@ If you only need country redirects, a Shopify app is simpler. If you only need t
 > 14-day free trial · No credit card · Every feature unlocked
 > [ 🚀 Start your free trial → ]
 > Paste one line of code. In five minutes, every visitor sees their own version.
-
-<!-- CTA final card: keep the card format (question title + dot-separated bullets + amber button + closer), href = https://geotargetly.com/?red=toolis -->
 
 *Transparency: This review is research-based (Channel 2): official feature/pricing pages cross-checked against third-party reviews, August 2026. Affiliate links: see our [disclosure](/disclosure).*

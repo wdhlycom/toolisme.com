@@ -44,7 +44,7 @@ Want an aluminum, tri-mode, gasket-soft production board? We took a real test ru
 
 <a href="https://amzn.to/4xzfTk0" target="_blank" rel="sponsored noopener noreferrer" style="display:inline-block;background:#fbbf24;color:#0f172a;padding:12px 22px;border-radius:8px;font-weight:700;text-decoration:none;margin:10px 0;">👉 Check Keychron Q1 Max Price (Amazon) →</a>
 
-> 💡 **Keyboard decision logic (compiles into a dynamic Quiz):** answer the three questions — structure → connection → switch — in order, and you've locked in the right board. An interactive version feeds our web-based decision Quiz.
+> 💡 **Keyboard decision logic:** answer the three questions — structure → connection → switch — in order, and you've locked in the right board.
 
 ## Module 2: The Mouse — don't let "mouse hand" ruin your wrists
 
@@ -127,7 +127,7 @@ Allocation for three common budgets (excluding the computer), in the "input > di
 
 One more time: **keyboard & mouse first, then display, then connectivity and support.** Spend in that order and every dollar lands on a contact point your body actually feels.
 
-For the keyboard rabbit hole, start with our [how to choose a mechanical keyboard](/guides/how-to-choose-a-mechanical-keyboard) — compatibility through warranty, step by step. Our deep-dives on production custom keyboards (structure, switches, feel, side by side) are shipping soon — watch the [Hardware category](/reviews/hardware) or browse [all buyer's guides](/guides).
+For the keyboard rabbit hole, start with our [how to choose a mechanical keyboard](/guides/how-to-choose-a-mechanical-keyboard) — compatibility through warranty, step by step. Our deep-dive on the [Keychron Q1 Max](/reviews/hardware/keychron-q1-max-review-2026) — a production custom keyboard broken down on structure, switches, feel, and side by side — is live now. Watch the [Hardware category](/reviews/hardware) for more, or browse [all buyer's guides](/guides).
 
 > 💡 Like every guide here, hardware follows the same structure: framework first, checklist second, real testing last — the framework builds the map, the tests tell you if the specs actually feel good.
 
