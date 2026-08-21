@@ -6,7 +6,7 @@ subcategory: Interactive Presentations
 author: "Annie Cole"
 rating: 4.6
 tagline: The cheapest way to make a slide deck talk back
-summary: AhaSlides turns one-way decks into live conversations with polls, quizzes, word clouds, and anonymous Q&A — audiences join from any phone by QR code, no app required. We ran it across four live events: an all-hands, an onboarding quiz, a client workshop, and a team trivia night. Free plan covers 50 participants; paid plans start at $7.95/mo.
+summary: "AhaSlides turns one-way decks into live conversations with polls, quizzes, word clouds, and anonymous Q&A — audiences join from any phone by QR code, no app required. We ran it across four live events: an all-hands, an onboarding quiz, a client workshop, and a team trivia night. Free plan covers 50 participants; paid plans start at $7.95/mo."
 pros:
   - Zero learning curve — interactive slides drop into any deck in minutes
   - Audience joins by QR code; no app, no installs, no training
