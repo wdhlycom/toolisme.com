@@ -10,6 +10,8 @@ node_modules
 dist
 dist-ssr
 dist_old
+dist_old_*
+*.tsbuildinfo
 *.local
 
 .vscode/*
@@ -25,6 +27,9 @@ dist_old
 
 # WorkBuddy project data (tool-specific, not site source)
 .workbuddy/
+
+# Draft library — compiled sources in src/content are the deployable artifacts
+Reviews/
 
 # Temporary avatar candidates fetched during avatar selection
 public/avatars/candidates/
