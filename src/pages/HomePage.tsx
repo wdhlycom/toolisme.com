@@ -4,7 +4,7 @@ import { ArrowRight, Search, Star, Clock, TrendingUp, ShieldCheck, Hand, Calenda
 import CategoryCard from '@/components/CategoryCard'
 import ReviewCard from '@/components/ReviewCard'
 import ComparisonTable from '@/components/ComparisonTable'
-import { categories, reviews, editorialValues, heroTags, reviewPath, type CategorySlug } from '@/data/content'
+import { categories, reviews, comparisons, allArticles, editorialValues, reviewPath, type CategorySlug } from '@/data/content'
 import { guides } from '@/content/guides'
 
 const sectionJumpCls =
@@ -13,16 +13,25 @@ const sectionJumpCls =
 export default function HomePage() {
   const [search, setSearch] = useState('')
 
-  const filteredReviews = useMemo(() => {
+  // Search covers reviews + comparisons + guides (frontend filter over all content).
+  // Every field is null-guarded — a missing frontmatter field must never crash search.
+  const filteredResults = useMemo(() => {
     if (!search.trim()) return null
     const q = search.toLowerCase()
-    return reviews.filter(
+    const matchingReviews = allArticles.filter(
       (r) =>
-        r.name.toLowerCase().includes(q) ||
-        r.tagline.toLowerCase().includes(q) ||
-        r.subcategory.toLowerCase().includes(q) ||
-        r.summary.toLowerCase().includes(q),
+        (r.name || '').toLowerCase().includes(q) ||
+        (r.tagline || '').toLowerCase().includes(q) ||
+        (r.subcategory || '').toLowerCase().includes(q) ||
+        (r.summary || '').toLowerCase().includes(q),
     )
+    const matchingGuides = guides.filter(
+      (g) =>
+        (g.title || '').toLowerCase().includes(q) ||
+        (g.summary || '').toLowerCase().includes(q) ||
+        g.tags.some((t) => (t || '').toLowerCase().includes(q)),
+    )
+    return { reviews: matchingReviews, guides: matchingGuides }
   }, [search])
 
   const topPicks = reviews.filter((r) => r.editorsPick).slice(0, 3)
@@ -68,8 +77,8 @@ export default function HomePage() {
                 Smart minds leverage great tools.
               </h1>
               <p className="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-ink-600 text-pretty dark:text-ink-300">
-                We test, review, and filter the best SaaS &amp; AI tools to multiply your
-                productivity. Skip the trial and error.
+                Honest, hands-on reviews of the best SaaS &amp; AI tools — tested,
+                compared, and rated for real work. Skip the trial and error.
               </p>
 
               {/* Local search */}
@@ -87,18 +96,29 @@ export default function HomePage() {
                   />
                 </div>
 
-                {/* Popular tags */}
+                {/* Browse by category */}
                 <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
-                  <span className="text-xs font-medium text-ink-400 dark:text-ink-500">Popular:</span>
-                  {heroTags.map((tag) => (
-                    <button
-                      key={tag}
-                      onClick={() => setSearch(tag)}
+                  <span className="text-xs font-medium text-ink-400 dark:text-ink-500">Browse:</span>
+                  {categories.map((c) => (
+                    <Link
+                      key={c.slug}
+                      to={`/reviews/${c.slug}`}
                       className="rounded-full bg-ink-100 px-3 py-1 text-xs font-semibold text-ink-600 transition-colors hover:bg-ink-900 hover:text-white dark:bg-ink-800 dark:text-ink-300 dark:hover:bg-accent-600 dark:hover:text-white"
                     >
-                      {tag}
-                    </button>
+                      {c.name}
+                    </Link>
                   ))}
+                </div>
+
+                {/* Primary CTA */}
+                <div className="mt-5 flex items-center justify-center">
+                  <Link
+                    to="/reviews"
+                    className="inline-flex items-center gap-2 rounded-full bg-amber-400 px-6 py-3 text-sm font-bold text-ink-950 shadow-md shadow-amber-400/30 transition-all hover:bg-accent-600 hover:text-white hover:shadow-lg hover:shadow-accent-600/30 active:scale-[0.98]"
+                  >
+                    Browse all reviews
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
                 </div>
               </div>
             </div>
@@ -106,8 +126,8 @@ export default function HomePage() {
             {/* Trust stats */}
             <div className="mx-auto mt-9 grid max-w-4xl grid-cols-2 gap-6 border-t border-ink-200/60 pt-7 sm:grid-cols-4 dark:border-ink-700/60">
               {[
-                { value: String(reviews.length), label: 'Tools tested' },
-                { value: '4', label: 'Categories' },
+                { value: String(reviews.length + comparisons.length), label: 'Articles published' },
+                { value: String(categories.length), label: 'Categories' },
                 { value: 'Named', label: 'Reviewers, every piece' },
                 { value: '0', label: 'Paid reviews' },
               ].map((stat) => (
@@ -145,37 +165,89 @@ export default function HomePage() {
       </section>
 
       {/* Search results — transient overlay while typing */}
-      {filteredReviews && (
+      {filteredResults && (
         <section className="bg-ink-50 py-16 lg:py-20 dark:bg-ink-900">
           <div className="container-page">
             <h2 className="section-title">
-              {filteredReviews.length > 0
+              {filteredResults.reviews.length + filteredResults.guides.length > 0
                 ? `Results for "${search}"`
                 : `No results for "${search}"`}
             </h2>
-            {filteredReviews.length > 0 ? (
-              <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                {filteredReviews.map((review) => (
-                  <ReviewCard key={review.slug} review={review} />
-                ))}
+
+            {filteredResults.guides.length > 0 && (
+              <div className="mt-8">
+                <h3 className="text-sm font-semibold uppercase tracking-widest text-ink-500 dark:text-ink-400">
+                  Guides
+                </h3>
+                <div className="mt-4 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                  {filteredResults.guides.map((g) => (
+                    <Link
+                      key={g.slug}
+                      to={`/guides/${g.slug}`}
+                      className="card-hover group flex flex-col gap-1 p-5"
+                    >
+                      <h4 className="font-serif text-lg font-medium tracking-tight text-ink-900 group-hover:text-accent-700 dark:text-ink-100 dark:group-hover:text-accent-400">
+                        {g.title}
+                      </h4>
+                      <p className="text-sm leading-relaxed text-ink-600 line-clamp-2 dark:text-ink-400">
+                        {g.summary}
+                      </p>
+                      <span className="mt-1 text-xs font-medium text-ink-400">
+                        {g.readTime} min read
+                      </span>
+                    </Link>
+                  ))}
+                </div>
               </div>
-            ) : (
-              <p className="mt-6 text-ink-500 dark:text-ink-400">
-                Try a different keyword, or{' '}
-                <button
-                  onClick={() => setSearch('')}
-                  className="font-semibold text-accent-700 hover:text-accent-900 dark:text-accent-400 dark:hover:text-accent-300"
-                >
-                  clear the search
-                </button>
-                .
-              </p>
+            )}
+
+            {filteredResults.reviews.length > 0 && (
+              <div className="mt-8">
+                <h3 className="text-sm font-semibold uppercase tracking-widest text-ink-500 dark:text-ink-400">
+                  Reviews &amp; comparisons
+                </h3>
+                <div className="mt-4 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                  {filteredResults.reviews.map((review) => (
+                    <ReviewCard key={review.slug} review={review} />
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {filteredResults.reviews.length === 0 && filteredResults.guides.length === 0 && (
+              <div className="mt-6">
+                <p className="text-ink-500 dark:text-ink-400">
+                  No results for "{search}" — try a different keyword, or browse by
+                  category instead:
+                </p>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {categories.map((c) => (
+                    <Link
+                      key={c.slug}
+                      to={`/reviews/${c.slug}`}
+                      className="rounded-full bg-ink-100 px-3 py-1 text-xs font-semibold text-ink-600 transition-colors hover:bg-ink-900 hover:text-white dark:bg-ink-800 dark:text-ink-300 dark:hover:bg-accent-600 dark:hover:text-white"
+                    >
+                      {c.name}
+                    </Link>
+                  ))}
+                </div>
+                <p className="mt-4 text-sm text-ink-400 dark:text-ink-500">
+                  Or{' '}
+                  <button
+                    onClick={() => setSearch('')}
+                    className="font-semibold text-accent-700 hover:text-accent-900 dark:text-accent-400 dark:hover:text-accent-300"
+                  >
+                    clear the search
+                  </button>
+                  .
+                </p>
+              </div>
             )}
           </div>
         </section>
       )}
 
-      {!filteredReviews && (
+      {!filteredResults && (
         <>
           {/* ===== 2. Buying Guide — "How to choose the right tool" ===== */}
           <section className="bg-ink-50 py-20 lg:py-28 dark:bg-ink-900">
@@ -339,47 +411,60 @@ export default function HomePage() {
               </div>
 
               <div className="mt-10 space-y-1">
-                {recentReviews.map((review, i) => (
-                  <Link
-                    key={review.slug}
-                    to={reviewPath(review)}
-                    className="group flex items-center gap-4 border-b border-ink-100 py-5 transition-colors hover:bg-ink-50/50 dark:border-ink-800 dark:hover:bg-ink-900/50"
-                  >
-                    <span className="hidden w-8 font-serif text-2xl font-medium text-ink-300 sm:block dark:text-ink-600">
-                      {String(i + 1).padStart(2, '0')}
-                    </span>
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2">
-                        <span className={`rounded-full px-2.5 py-0.5 text-xs font-semibold ${
-                          categories.find((c) => c.slug === review.category)?.accentClass
-                        }`}>
-                          {review.subcategory}
-                        </span>
-                        {review.editorsPick && (
-                          <span className="inline-flex items-center gap-1 rounded-full bg-ink-900 px-2 py-0.5 text-xs font-semibold text-white dark:bg-accent-600">
-                            <Star className="h-2.5 w-2.5 fill-current" />
-                            Pick
-                          </span>
-                        )}
+                {recentReviews.map((review, i) => {
+                  const cat = categories.find((c) => c.slug === review.category)
+                  return (
+                    <div
+                      key={review.slug}
+                      className="group flex items-center gap-4 border-b border-ink-100 py-5 transition-colors hover:bg-ink-50/50 dark:border-ink-800 dark:hover:bg-ink-900/50"
+                    >
+                      <span className="hidden w-8 font-serif text-2xl font-medium text-ink-300 sm:block dark:text-ink-600">
+                        {String(i + 1).padStart(2, '0')}
+                      </span>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2">
+                          {cat && (
+                            <Link
+                              to={`/reviews/${review.category}`}
+                              className={`rounded-full px-2.5 py-0.5 text-xs font-semibold transition-opacity hover:opacity-70 ${cat.accentClass}`}
+                            >
+                              {cat.name}
+                            </Link>
+                          )}
+                          {review.editorsPick && (
+                            <span className="inline-flex items-center gap-1 rounded-full bg-ink-900 px-2 py-0.5 text-xs font-semibold text-white dark:bg-accent-600">
+                              <Star className="h-2.5 w-2.5 fill-current" />
+                              Pick
+                            </span>
+                          )}
+                        </div>
+                        <Link to={reviewPath(review)}>
+                          <h3 className="mt-1.5 font-serif text-lg font-medium tracking-tight text-ink-900 group-hover:text-accent-700 dark:text-ink-100 dark:group-hover:text-accent-400">
+                            {review.name} Review 2026
+                          </h3>
+                        </Link>
+                        <p className="mt-0.5 truncate text-sm text-ink-500 dark:text-ink-400">{review.tagline}</p>
                       </div>
-                      <h3 className="mt-1.5 font-serif text-lg font-medium tracking-tight text-ink-900 group-hover:text-accent-700 dark:text-ink-100 dark:group-hover:text-accent-400">
-                        {review.name} Review 2026
-                      </h3>
-                      <p className="mt-0.5 truncate text-sm text-ink-500 dark:text-ink-400">{review.tagline}</p>
+                      <div className="hidden flex-shrink-0 items-center gap-4 sm:flex">
+                        <span className="flex items-center gap-1 text-xs font-medium text-ink-400 dark:text-ink-500">
+                          <Clock className="h-3.5 w-3.5" />
+                          {review.readTime} min
+                        </span>
+                        <span className="flex items-center gap-1 text-sm font-semibold text-ink-700 dark:text-ink-300">
+                          <Star className="h-4 w-4 fill-sand-400 text-sand-400" />
+                          {review.rating.toFixed(1)}
+                        </span>
+                      </div>
+                      <Link
+                        to={reviewPath(review)}
+                        aria-label={`Read ${review.name} review`}
+                        className="flex-shrink-0"
+                      >
+                        <ArrowRight className="h-5 w-5 text-ink-300 transition-transform group-hover:translate-x-1 group-hover:text-accent-600 dark:text-ink-600" />
+                      </Link>
                     </div>
-                    <div className="hidden flex-shrink-0 items-center gap-4 sm:flex">
-                      <span className="flex items-center gap-1 text-xs font-medium text-ink-400 dark:text-ink-500">
-                        <Clock className="h-3.5 w-3.5" />
-                        {review.readTime} min
-                      </span>
-                      <span className="flex items-center gap-1 text-sm font-semibold text-ink-700 dark:text-ink-300">
-                        <Star className="h-4 w-4 fill-sand-400 text-sand-400" />
-                        {review.rating.toFixed(1)}
-                      </span>
-                    </div>
-                    <ArrowRight className="h-5 w-5 flex-shrink-0 text-ink-300 transition-transform group-hover:translate-x-1 group-hover:text-accent-600 dark:text-ink-600" />
-                  </Link>
-                ))}
+                  )
+                })}
               </div>
             </div>
           </section>

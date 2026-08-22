@@ -43,7 +43,7 @@ See the extension in action — searching LinkedIn, previewing emails with verif
 
 <video src="/reviews/snovio-demo.mp4" controls poster="/reviews/snovio-intro.png" style="width:100%;border-radius:12px;margin:10px 0;" preload="metadata"></video>
 
-## The verdict, in one sentence
+## TL;DR — The verdict in one sentence
 
 **Snov.io is the best-value all-in-one for cold-email acquisition right now**: from $39/month (annual billing), you get prospecting + verification + warm-up + sequences + a free CRM — most of the starter-stack bill, gone. It's built for budget-conscious B2B teams and solo sellers who don't want to babysit three tools. But it has a **credit-system temperament** — heavy users need to plan their upgrade path.
 
@@ -58,7 +58,8 @@ See the extension in action — searching LinkedIn, previewing emails with verif
 
 **Best for** budget-conscious B2B teams and solo sellers. **Skip it** if you're a high-volume agency (50,000+ credits/month) or need phone data and credit rollover.
 
-<a href="https://snov.io?fp_ref=hu82" target="_blank" rel="sponsored noopener noreferrer" style="display:inline-block;background:#fbbf24;color:#0f172a;padding:12px 22px;border-radius:8px;font-weight:700;text-decoration:none;margin:10px 0;">🚀 See Snov.io Pricing →</a>
+<a href="https://snov.io?fp_ref=hu82" target="_blank" rel="sponsored noopener noreferrer" style="display:inline-block;background:#fbbf24;color:#0f172a;padding: 12px 22px;border-radius:8px;font-weight:700;text-decoration:none;margin:10px 0;">🚀 See Snov.io Pricing →</a>
+<p style="font-size:0.8rem;color:#94a3b8;margin-top:-6px;">Free plan includes 50 credits — sign-up takes ~30 seconds, no credit card required</p>
 
 ## What we actually ran (hands-on)
 
@@ -108,7 +109,7 @@ Multi-branch logic, AI writing, unlimited follow-ups — all present. Open-rate 
 
 **The omnichannel play:** email sequences and LinkedIn automation can run in parallel — no reply on email, follow up with a LinkedIn connection request or DM. One lead, two touches. That's the line between a "sending tool" and a real acquisition platform, and it's where Snov.io separates from pure email tools.
 
-**The real pitfall (LinkedIn costs extra):** LinkedIn automation is **not included** — it's a $69/mo per-slot add-on. If you're planning a LinkedIn DM matrix, budget for it.
+**The real pitfall (LinkedIn costs extra):** LinkedIn automation is **not included** — it's a $69/mo per-slot add-on. If you're planning a LinkedIn DM matrix, budget for it. **If you need LinkedIn automation on more than one slot, the math starts favoring Pro S ($99/mo, unlimited warm-up + full feature set) over stacking add-ons on Starter** — compare both before you commit.
 
 ### 3. The free CRM (a pleasant surprise)
 
@@ -131,7 +132,7 @@ Up to 20 pipelines with 100 stages each, synced with Google Calendar. As a freeb
 | Pro L        | $369    | $276         | 50,000     | 100,000       | Unlimited     |
 | Ultra        | $738    | $553.50      | 100,000    | 200,000       | Unlimited     |
 
-Annual billing saves 25% flat. Every paid plan includes unlimited team seats, campaigns, follow-ups, and monthly sends. Recipients are charged on first contact; follow-ups in the same billing period are free. **Key catch:** Starter includes only 3 warm-up slots — wanting more mailboxes warmed means stepping up to Pro S, so factor that upgrade into your budget.
+Annual billing saves 25% flat. Every paid plan includes unlimited team seats, campaigns, follow-ups, and monthly sends. Recipients are charged on first contact; follow-ups in the same billing period are free. **Key catch:** Starter includes only 3 warm-up slots — wanting more mailboxes warmed means stepping up to Pro S, so factor that upgrade into your budget. **Running more than 3 mailboxes? Go straight to Pro S ($99/mo) — unlimited warm-up slots plus A/B testing, Spintax, and API access make it the better long-term buy than Starter + add-ons.**
 
 ![Snov.io official pricing page: Trial/Starter/Pro/Ultra tiers](/reviews/snovio-pricing.png)
 
@@ -150,11 +151,11 @@ We compared it head-to-head against the most classic alternative, Hunter.io (pri
 
 | Dimension             | Snov.io                                          | Hunter.io                                          | Winner                                  |
 | --------------------- | ------------------------------------------------ | -------------------------------------------------- | --------------------------------------- |
-| Feature completeness  | Find + verify + warm + sequence + CRM + LinkedIn | Focused on find + verify; warm-up is a paid add-on | **Snov.io** (true all-in-one)           |
-| LinkedIn scraping     | Native Chrome extension                          | No longer supports bulk scraping                   | **Snov.io**                             |
-| Same-tier entry price | Starter $39/mo, **3 warm-up slots included**     | Starter $49/mo, warm-up purchased separately       | **Snov.io** (cheaper, warm-up included) |
-| Built-in CRM          | Free on all plans                                | No native CRM                                      | **Snov.io**                             |
-| Data accuracy         | Balanced across EU/US + Asia                     | Deeper in EU/US enterprise domains                 | Tie / depends on market                 |
+| Feature completeness  | Find + verify + warm + sequence + CRM + LinkedIn | Focused on find + verify; warm-up is a paid add-on | <span style="background:#fbbf24;color:#0f172a;font-weight:700;padding:2px 10px;border-radius:9999px;">Snov.io</span> |
+| LinkedIn scraping     | Native Chrome extension                          | No longer supports bulk scraping                   | <span style="background:#fbbf24;color:#0f172a;font-weight:700;padding:2px 10px;border-radius:9999px;">Snov.io</span> |
+| Same-tier entry price | Starter $39/mo, **3 warm-up slots included**     | Starter $49/mo, warm-up purchased separately       | <span style="background:#fbbf24;color:#0f172a;font-weight:700;padding:2px 10px;border-radius:9999px;">Snov.io</span> |
+| Built-in CRM          | Free on all plans                                | No native CRM                                      | <span style="background:#fbbf24;color:#0f172a;font-weight:700;padding:2px 10px;border-radius:9999px;">Snov.io</span> |
+| Data accuracy         | Balanced across EU/US + Asia                     | Deeper in EU/US enterprise domains                 | <span style="background:#e2e8f0;color:#334155;font-weight:700;padding:2px 10px;border-radius:9999px;">Tie</span> |
 
 **Bottom line:** if all you need is "find emails and send sequences," Hunter's focus is fine. But the moment you touch cold email, warm-up becomes non-negotiable — and Hunter sells it as an **add-on**, while Snov.io **bundles it**. On budget alone, that's decisive.
 
@@ -176,8 +177,11 @@ But Snov.io has a twist: it **can do the other two stages itself** (warm-up and 
 For how to pick the other two links in the chain (pure warm-up vs pro sending), see our [WarmupInbox review](/reviews/software/warmupinbox-review-2026) and [Woodpecker review](/reviews/software/woodpecker-review-2026) — both live now.
 
 <a href="https://snov.io?fp_ref=hu82" target="_blank" rel="sponsored noopener noreferrer" style="display:inline-block;background:#fbbf24;color:#0f172a;padding:12px 22px;border-radius:8px;font-weight:700;text-decoration:none;margin:10px 0;">🚀 Claim your 50 free credits →</a>
+<p style="font-size:0.8rem;color:#94a3b8;margin-top:-6px;">50 free credits on sign-up — no credit card, ~30 seconds to register</p>
 
 ## The final decision tree
+
+<div id="snovio-decision-tree"></div>
 
 - **New to cold email, want one tool end-to-end** → Snov.io Starter ($39/mo). Burn the free 50 credits first; upgrade once you're comfortable.
 - **Solo seller / small team, under 5,000 recipients a month** → Starter is enough; just don't waste credits on verification.

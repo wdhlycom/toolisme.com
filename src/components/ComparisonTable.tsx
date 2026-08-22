@@ -55,9 +55,14 @@ export default function ComparisonTable({ category }: { category?: CategorySlug 
 
                 {/* Category */}
                 <td className="px-4 py-5">
-                  <span className={`rounded-full px-2.5 py-1 text-xs font-semibold ${category?.accentClass}`}>
-                    {review.subcategory}
-                  </span>
+                  {category && (
+                    <Link
+                      to={`/reviews/${review.category}`}
+                      className={`rounded-full px-2.5 py-1 text-xs font-semibold transition-opacity hover:opacity-70 ${category.accentClass}`}
+                    >
+                      {category.name}
+                    </Link>
+                  )}
                 </td>
 
                 {/* Rating */}

@@ -4,6 +4,9 @@ import { createRoot } from 'react-dom/client'
 import { ArrowLeft, Clock, Tag, ArrowRight, ListOrdered } from 'lucide-react'
 import { guides, renderMarkdown } from '@/content/guides'
 import { categories, authorDetails } from '@/data/content'
+import { usePageMeta, truncateMeta } from '@/hooks/usePageMeta'
+import AuthorBox from '@/components/AuthorBox'
+import { shortBio } from '@/utils/authorBio'
 import HardwareKeyboardQuiz from '@/components/HardwareKeyboardQuiz'
 
 const SITE_BASE = 'https://toolisme.com'
@@ -17,6 +20,13 @@ export default function GuideDetailPage() {
   const guide = guides.find((g) => g.slug === slug)
   const isHardware = slug === 'remote-workstation-hardware-guide' || slug === 'how-to-choose-a-mechanical-keyboard'
   const authorDetail = authorDetails.find((a) => a.name === guide?.author)
+
+  // Per-page <title> + meta description (SEO): guide pages no longer share
+  // the static index.html title across all URLs.
+  usePageMeta(
+    guide ? `${guide.title} | Toolisme` : 'Toolisme — Smart minds leverage great tools',
+    guide ? truncateMeta(guide.summary) : undefined,
+  )
 
   const [activeSection, setActiveSection] = useState('')
 
@@ -123,23 +133,29 @@ export default function GuideDetailPage() {
             </h1>
 
             {/* Author byline */}
-            <div className="mt-3 flex items-center gap-2.5 text-sm">
+            <div className="mt-4 flex items-start gap-3">
               {authorDetail ? (
                 <>
                   <img
                     src={authorDetail.avatar}
                     alt={authorDetail.name}
-                    className="h-8 w-8 flex-shrink-0 rounded-full object-cover"
+                    className="h-10 w-10 flex-shrink-0 rounded-full object-cover"
                   />
-                  <span className="text-ink-500 dark:text-ink-400">
-                    By{' '}
-                    <Link
-                      to={`/author/${authorDetail.slug}`}
-                      className="font-semibold text-ink-700 hover:text-accent-700 dark:text-ink-300 dark:hover:text-accent-400"
-                    >
-                      {authorDetail.name}
-                    </Link>
-                  </span>
+                  <div className="min-w-0">
+                    <p className="text-sm text-ink-500 dark:text-ink-400">
+                      By{' '}
+                      <Link
+                        to={`/author/${authorDetail.slug}`}
+                        className="font-semibold text-ink-700 hover:text-accent-700 dark:text-ink-300 dark:hover:text-accent-400"
+                      >
+                        {authorDetail.name}
+                      </Link>
+                      <span className="text-ink-400 dark:text-ink-500"> · {authorDetail.role}</span>
+                    </p>
+                    <p className="mt-1 max-w-2xl text-sm leading-relaxed text-ink-600 dark:text-ink-300">
+                      {shortBio(authorDetail.about)}
+                    </p>
+                  </div>
                 </>
               ) : guide.author ? (
                 <span className="text-ink-500 dark:text-ink-400">By {guide.author}</span>
@@ -232,6 +248,9 @@ export default function GuideDetailPage() {
                 All buyer's guides
               </Link>
             </div>
+
+            {/* Author bio box — E-E-A-T trust signal */}
+            {authorDetail && <AuthorBox author={authorDetail} />}
           </div>
         </div>
       </section>

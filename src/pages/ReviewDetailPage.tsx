@@ -7,7 +7,10 @@ import {
 } from 'lucide-react'
 import { reviews, comparisons, categories, reviewPath, comparisonPath, type ToolReview, getAuthor, authorDetails } from '@/data/content'
 import { renderMarkdown } from '@/content/markdownReviews'
+import { usePageMeta, truncateMeta } from '@/hooks/usePageMeta'
 import ReviewCard from '@/components/ReviewCard'
+import AuthorBox from '@/components/AuthorBox'
+import { shortBio } from '@/utils/authorBio'
 import AiHeadshotQuiz from '@/components/AiHeadshotQuiz'
 import AhaSlidesDecisionMatrix from '@/components/AhaSlidesDecisionMatrix'
 import TubeMagicQuiz from '@/components/TubeMagicQuiz'
@@ -128,6 +131,15 @@ export default function ReviewDetailPage({ comparison = false }: { comparison?: 
   const isWiziShop = !comparison && slug === 'wizishop-review-2026'
   const isGeotargetly = !comparison && slug === 'geotargetly-review-2026'
   const [activeSection, setActiveSection] = useState('overview')
+
+  // Per-page <title> + meta description (SEO): article pages no longer share
+  // the static index.html title across all URLs.
+  usePageMeta(
+    review
+      ? `${comparison ? review.name : `${review.name} Review 2026`} | Toolisme`
+      : 'Toolisme — Smart minds leverage great tools',
+    review ? truncateMeta(review.summary) : undefined,
+  )
 
   // For markdown articles, build TOC from h2 headings
   const markdownToc = useMemo(() => {
@@ -310,21 +322,27 @@ export default function ReviewDetailPage({ comparison = false }: { comparison?: 
 
             {/* Author byline */}
             {authorDetail && (
-              <div className="mt-3 flex items-center gap-2.5 text-sm">
+              <div className="mt-4 flex items-start gap-3">
                 <img
                   src={authorDetail.avatar}
                   alt={authorDetail.name}
-                  className="h-8 w-8 flex-shrink-0 rounded-full object-cover"
+                  className="h-10 w-10 flex-shrink-0 rounded-full object-cover"
                 />
-                <span className="text-ink-500">
-                  By{' '}
-                  <Link
-                    to={`/author/${authorDetail.slug}`}
-                    className="font-semibold text-ink-700 hover:text-accent-700"
-                  >
-                    {authorDetail.name}
-                  </Link>
-                </span>
+                <div className="min-w-0">
+                  <p className="text-sm text-ink-500 dark:text-ink-400">
+                    By{' '}
+                    <Link
+                      to={`/author/${authorDetail.slug}`}
+                      className="font-semibold text-ink-700 hover:text-accent-700 dark:text-ink-300 dark:hover:text-accent-400"
+                    >
+                      {authorDetail.name}
+                    </Link>
+                    <span className="text-ink-400 dark:text-ink-500"> · {authorDetail.role}</span>
+                  </p>
+                  <p className="mt-1 max-w-2xl text-sm leading-relaxed text-ink-600 dark:text-ink-300">
+                    {shortBio(authorDetail.about)}
+                  </p>
+                </div>
               </div>
             )}
             <p className="mt-3 text-lg leading-relaxed text-ink-600 text-pretty">
@@ -668,6 +686,9 @@ export default function ReviewDetailPage({ comparison = false }: { comparison?: 
               </Link>
               .
             </p>
+
+            {/* Author bio box — E-E-A-T trust signal */}
+            {authorDetail && <AuthorBox author={authorDetail} />}
           </div>
         </div>
       </section>

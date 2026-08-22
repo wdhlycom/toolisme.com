@@ -3,6 +3,8 @@ title: "Geo Targetly Review 2026: One Line of Code, a Localized Storefront for E
 slug: "geotargetly-review-2026"
 name: "Geo Targetly"
 category: "software"
+subcategory: "Geo-targeting & Localization"
+tagline: "One line of JS, a localized storefront for every country"
 date: "2026-08-16"
 author: "Annie Cole"
 rating: 4.5

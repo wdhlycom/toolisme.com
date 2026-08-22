@@ -84,15 +84,6 @@ const baseCategories: Category[] = [
   },
 ]
 
-export const heroTags: string[] = [
-  'Project Management',
-  'Video Editing',
-  'VPN',
-  'AI Writing',
-  'Productivity',
-  'Paraphraser',
-]
-
 const _allArticles: ToolReview[] = [
     ...markdownReviews.map((r) => ({
     slug: r.slug,

@@ -22,7 +22,7 @@ readTime: 11
 bestFor: "Small teams just starting outbound, B2B companies that care about domain safety, agencies juggling multiple clients"
 whoShouldSkip: "Teams that want maximum volume at the lowest per-email cost, or heavy image/video visual personalization"
 keyAdvantage: "Domain safety as the default — unlimited inboxes + free warm-up + deliverability monitor"
-editorsPick: true
+editorsPick: false
 featured: false
 author: "Annie Cole"
 ctaLabel: "Start Your 14-Day Free Trial (No Credit Card)"

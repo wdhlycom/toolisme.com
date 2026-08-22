@@ -22,7 +22,7 @@ readTime: 9
 bestFor: "Budget-first individuals and small teams warming 1-2 established mailboxes — solo sellers, freelancers, small agencies"
 whoShouldSkip: "Anyone warming a brand-new domain (<6 months) who will blindly accept the defaults; large agencies that need deep diagnostics or a reputation health score"
 keyAdvantage: "Lowest real entry barrier + real inbox network + credit-card-free trial"
-editorsPick: true
+editorsPick: false
 featured: false
 author: "Annie Cole"
 ctaLabel: "Try WarmupInbox Free (7 Days, No Credit Card)"
