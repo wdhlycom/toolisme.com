@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import { ArrowRight, Star, Clock, Award } from 'lucide-react'
 import type { ToolReview } from '@/data/content'
 import { categories, articlePath } from '@/data/content'
@@ -9,8 +8,8 @@ export default function ReviewCard({ review }: { review: ToolReview }) {
   const cat = categoryMap[review.category]
 
   return (
-    <Link
-      to={articlePath(review)}
+    <a
+      href={articlePath(review)}
       className="card-hover group flex flex-col overflow-hidden"
       aria-label={`Read ${review.name} review`}
     >
@@ -58,6 +57,6 @@ export default function ReviewCard({ review }: { review: ToolReview }) {
           </span>
         </div>
       </div>
-    </Link>
+    </a>
   )
 }

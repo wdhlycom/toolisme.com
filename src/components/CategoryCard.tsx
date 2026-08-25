@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
 import type { Category } from '@/data/content'
 import * as Icons from 'lucide-react'
@@ -8,8 +7,8 @@ export default function CategoryCard({ category }: { category: Category }) {
   const Icon = (Icons as unknown as Record<string, LucideIcon>)[category.icon] ?? Icons.Sparkles
 
   return (
-    <Link
-      to={`/reviews/${category.slug}`}
+    <a
+      href={`/reviews/${category.slug}`}
       className="card-hover group relative flex flex-col overflow-hidden p-6"
     >
       <div
@@ -35,6 +34,6 @@ export default function CategoryCard({ category }: { category: Category }) {
           <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
         </span>
       </div>
-    </Link>
+    </a>
   )
 }

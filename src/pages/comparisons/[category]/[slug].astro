@@ -1,0 +1,21 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import ReviewArticle from '@/components/ReviewArticle.astro'
+
+export async function getStaticPaths() {
+  const { comparisons } = await import('@/data/content')
+  return comparisons.map((r) => ({
+    params: { category: r.category, slug: r.slug },
+    props: { review: r, comparison: true },
+  }))
+}
+
+const { review, comparison } = Astro.props
+---
+
+<Layout
+  title={`${review.name} | Toolisme`}
+  description={review.summary.slice(0, 160)}
+>
+  <ReviewArticle review={review} comparison={comparison} />
+</Layout>

@@ -1,0 +1,126 @@
+---
+import { ArrowLeft, Clock, Tag, ListOrdered, ArrowRight, Link as LinkIcon } from 'lucide-react'
+import { guides, renderMarkdown } from '@/content/guides'
+import { categories, authorDetails } from '@/data/content'
+import { shortBio } from '@/utils/authorBio'
+import AuthorBox from '@/components/AuthorBox'
+import HardwareKeyboardQuiz from '@/components/HardwareKeyboardQuiz'
+
+export async function getStaticPaths() {
+  return guides.map((g) => ({ params: { slug: g.slug }, props: { guide: g } }))
+}
+
+const { guide } = Astro.props
+const SITE_BASE = 'https://toolisme.com'
+const authorDetail = authorDetails.find((a) => a.name === guide.author)
+const isHardware = guide.slug === 'remote-workstation-hardware-guide' || guide.slug === 'how-to-choose-a-mechanical-keyboard'
+
+// Add ids + scroll-mt to markdown h2 headings so the sticky TOC anchors work.
+function slugifyHeading(text: string): string {
+  return text.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '')
+}
+function addHeadingIds(html: string): string {
+  return html.replace(/<h2(?![^>]*id=)[^>]*>([\s\S]*?)<\/h2>/gi, (match, inner: string) => {
+    const label = inner.replace(/<[^>]+>/g, '')
+    return `<h2 id="${slugifyHeading(label)}" class="scroll-mt-24">${inner}</h2>`
+  })
+}
+
+const markdownHtml = addHeadingIds(
+  renderMarkdown(guide.markdownBody).replace(/<div id="hardware-keyboard-quiz"><\/div>/g, ''),
+)
+
+const relatedGuides = guides
+  .filter((g) => g.slug !== guide.slug && g.tags.some((t) => guide.tags.includes(t)))
+  .slice(0, 3)
+
+const toc = (guide.markdownBody.match(/^## (.+)$/gm) || []).map((h: string) => {
+  const label = h.replace(/^## /, '')
+  const id = label.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '')
+  return { id, label }
+})
+import Layout from '@/layouts/Layout.astro'
+---
+<Layout title="Guides — Toolisme" description="Step-by-step buyer's guides to help you choose the right tools.">
+
+<article>
+  {authorDetail && (
+    <script type="application/ld+json" set:html={JSON.stringify({ '@context': 'https://schema.org', '@type': 'Person', name: authorDetail.name, url: `${SITE_BASE}/author/${authorDetail.slug}` })} />
+  )}
+
+  <header class="relative overflow-hidden bg-white dark:bg-ink-950">
+    <div class="absolute inset-0 bg-grid mask-fade-b opacity-60"></div>
+    <div class="container-page relative py-16 sm:py-20">
+      <div class="max-w-3xl">
+        <nav class="mb-6 flex items-center gap-1.5 text-xs font-medium text-ink-400 dark:text-ink-500">
+          <a href="/" class="hover:text-ink-700 dark:hover:text-ink-300">Home</a>
+          <ArrowRight class="h-3 w-3" />
+          <a href="/guides" class="hover:text-ink-700 dark:hover:text-ink-300">Guides</a>
+          {guide.tags[0] && (<><ArrowRight class="h-3 w-3" /><a href={`/guides?tag=${guide.tags[0]}`} class="hover:text-ink-700 dark:hover:text-ink-300">{categories.find((c) => c.slug === guide.tags[0])?.name ?? guide.tags[0]}</a></>)}
+        </nav>
+        <div class="flex flex-wrap gap-1.5">
+          {guide.tags.map((tag) => (
+            <span class={`inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-semibold ${categories.find((c) => c.slug === tag)?.accentClass ?? 'bg-ink-100 text-ink-600'}`}><Tag class="h-3 w-3" />{categories.find((c) => c.slug === tag)?.name ?? tag}</span>
+          ))}
+        </div>
+        <h1 class="mt-5 font-serif text-4xl font-medium tracking-tight text-ink-900 text-balance dark:text-ink-100 sm:text-5xl">{guide.title}</h1>
+        {authorDetail ? (
+          <div class="mt-4 flex items-start gap-3">
+            <img src={authorDetail.avatar} alt={authorDetail.name} class="h-10 w-10 flex-shrink-0 rounded-full object-cover" />
+            <div class="min-w-0">
+              <p class="text-sm text-ink-500 dark:text-ink-400">By <a href={`/author/${authorDetail.slug}`} class="font-semibold text-ink-700 hover:text-accent-700 dark:text-ink-300 dark:hover:text-accent-400">{authorDetail.name}</a><span class="text-ink-400 dark:text-ink-500"> · {authorDetail.role}</span></p>
+              <p class="mt-1 max-w-2xl text-sm leading-relaxed text-ink-600 dark:text-ink-300">{shortBio(authorDetail.about)}</p>
+            </div>
+          </div>
+        ) : guide.author ? (<span class="mt-4 block text-ink-500 dark:text-ink-400">By {guide.author}</span>) : null}
+        <p class="mt-4 text-lg leading-relaxed text-ink-600 text-pretty dark:text-ink-300">{guide.summary}</p>
+        <div class="mt-6 flex flex-wrap items-center gap-4 text-sm text-ink-500 dark:text-ink-400">
+          <span class="flex items-center gap-1.5"><Clock class="h-4 w-4" />{guide.readTime} min read</span>
+          <span>{new Date(guide.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="container-page py-14">
+    <div class="mx-auto flex max-w-6xl gap-10">
+      {toc.length > 0 && (
+        <aside class="hidden w-56 flex-shrink-0 lg:block">
+          <div class="sticky top-24">
+            <div class="flex items-center gap-2"><ListOrdered class="h-4 w-4 text-accent-600" /><h3 class="text-xs font-semibold uppercase tracking-widest text-ink-500">Contents</h3></div>
+            <nav class="mt-4 space-y-1 border-l border-ink-200 dark:border-ink-700">
+              {toc.map((s) => (<a href={`#${s.id}`} class="block border-l-2 border-transparent py-2 pl-4 text-sm text-ink-500 transition-colors hover:text-ink-900 dark:text-ink-400 dark:hover:text-ink-300">{s.label}</a>))}
+            </nav>
+          </div>
+        </aside>
+      )}
+      <div class="min-w-0 flex-1">
+        <div class="prose-toolisme max-w-none" set:html={markdownHtml} />
+        {isHardware && <HardwareKeyboardQuiz client:visible />}
+        <div class="mt-12 border-t border-ink-200 pt-8 dark:border-ink-800">
+          <a href="/guides" class="inline-flex items-center gap-2 text-sm font-semibold text-accent-700 hover:text-accent-900 dark:text-accent-400 dark:hover:text-accent-300"><ArrowLeft class="h-4 w-4" />All buyer's guides</a>
+        </div>
+        {authorDetail && <AuthorBox author={authorDetail} />}
+      </div>
+    </div>
+  </section>
+
+  {relatedGuides.length > 0 && (
+    <section class="border-t border-ink-200/70 bg-white py-16 dark:border-ink-700/70 dark:bg-ink-950">
+      <div class="container-page">
+        <h2 class="section-title">More guides</h2>
+        <div class="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {relatedGuides.map((g) => (
+            <a href={`/guides/${g.slug}`} class="card-hover group flex flex-col p-6">
+              <h3 class="font-serif text-lg font-medium tracking-tight text-ink-900 group-hover:text-accent-700 dark:text-ink-100 dark:group-hover:text-accent-400">{g.title}</h3>
+              <p class="mt-2 flex-1 text-sm leading-relaxed text-ink-600 line-clamp-2 dark:text-ink-300">{g.summary}</p>
+              <span class="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-accent-700 group-hover:text-accent-900 dark:text-accent-400 dark:group-hover:text-accent-300">Read guide<ArrowRight class="h-4 w-4 transition-transform group-hover:translate-x-0.5" /></span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+</article>
+
+</Layout>

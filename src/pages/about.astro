@@ -1,0 +1,230 @@
+---
+import {
+  FlaskConical,
+  ShieldCheck,
+  Feather,
+  BadgeCheck,
+  ArrowRight,
+  Mail,
+  Clock,
+  MapPin,
+} from 'lucide-react'
+import PageHeader from '@/components/PageHeader'
+import ContactForm from '@/components/ContactForm'
+
+const milestones = [
+  {
+    year: '2023',
+    title: 'The time tax',
+    description:
+      'Our founder kept paying the same tax — weeks lost testing, comparing, and switching between tools that all promised to save time. That frustration became the seed of Toolisme.',
+  },
+  {
+    year: '2024',
+    title: 'The review lab',
+    description:
+      'Those real-world tests and hard-won insights were organized into a personal lab: minimalist, self-funded, and ruthlessly honest about what works and what does not.',
+  },
+  {
+    year: '2025',
+    title: 'Toolisme, for everyone',
+    description:
+      'We opened the lab to the public — a warm, efficient harbor in a cluttered software market, built to help you find the tools that actually fit.',
+  },
+]
+
+const testingPrinciples = [
+  {
+    title: 'Self-funded testing',
+    description:
+      'We buy every tool ourselves and use it long-term, just like a regular user. No vendor "paid praise," no sponsored scores.',
+    icon: 'FlaskConical',
+  },
+  {
+    title: 'Zero client data',
+    description:
+      'When we test SaaS and digital tools, we never use real customer or reader data — only our own mock data and internal files. Your privacy stays respected.',
+    icon: 'ShieldCheck',
+  },
+  {
+    title: 'Minimalist, deep insights',
+    description:
+      'We skip the jargon and fluff, giving you straightforward results, side-by-side pros and cons, and ready-to-use recommendations.',
+    icon: 'Feather',
+  },
+  {
+    title: 'Affiliate transparency',
+    description:
+      'Some links earn us a small commission. It never influences our ratings, and every cent goes back into testing the next batch of tools.',
+    icon: 'BadgeCheck',
+  },
+]
+
+const iconMap = { FlaskConical, ShieldCheck, Feather, BadgeCheck }
+import Layout from '@/layouts/Layout.astro'
+---
+<Layout title="About Toolisme — We test tools so you don't have to" description="Toolisme is an independent review lab built on one idea — helping you stop wasting time choosing tools through real, self-funded testing, not hype.">
+
+<PageHeader
+  eyebrow="About Toolisme"
+  title="We test tools so you don't have to"
+  description="Toolisme is an independent review lab built on one idea — helping you stop wasting time choosing tools through real, self-funded testing, not hype."
+  breadcrumbs={[{ label: 'About' }]}
+/>
+
+{/* Mission */}
+<section class="container-prose py-16">
+  <div class="prose-toolisme">
+    <h2>Our story</h2>
+    <p>
+      Hello, fellow traveler. Welcome to Toolisme. Unlike the cold, robotic "best software" lists scattered across the web, this is a personal lab — built on one stubborn mission: helping you stop wasting time choosing tools.
+    </p>
+    <p>
+      The idea was born from my own frustration. I'm not a hardcore geek who loves tinkering with code; I just hold very high standards for the software I use, and I love minimalism and efficiency. Over the years, chasing SaaS and everyday tools that actually save time, I felt like a guinea pig — burning far too much precious time just testing, comparing, and switching. So I decided: let me be the one to trial and error, so you can simply take the results and run.
+    </p>
+    <p>
+      Our philosophy is simple — "If It Exists, It Has a Reason." Every tool that survives today's brutal market exists for a reason and has its own strength. It's almost impossible to crown one tool as objectively "the best"; what's perfect for someone else may be a tedious burden for you. That's why we stay strictly pragmatic: we never chase the latest hyped release, and we dissect each tool through hands-on, subjective testing to show you the real pros and cons.
+    </p>
+    <p>
+      And here's the promise that keeps us honest: when you buy through some of our links we may earn a small commission — but the moment we recommended a subpar tool just for the money, we'd betray Toolisme's whole purpose and lose you. Those cents go straight back into testing the next batch of tools. We don't define what's best. We help you find what's best for you.
+    </p>
+  </div>
+</section>
+
+{/* How we work */}
+<section class="border-y border-ink-200/70 bg-white py-20 dark:border-ink-700/70 dark:bg-ink-950">
+  <div class="container-page">
+    <p class="eyebrow mb-3 text-center">Our testing promise</p>
+    <h2 class="section-title text-center">How we test</h2>
+    <p class="mx-auto mt-4 max-w-xl text-center text-ink-600 text-pretty dark:text-ink-300">
+      The same principles guide every review, so you always know what went into a score.
+    </p>
+
+    <div class="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+      {testingPrinciples.map((value, i) => {
+        const Icon = iconMap[value.icon] ?? ShieldCheck
+        return (
+          <div class="relative">
+            <span class="absolute -top-3 -left-1 font-serif text-5xl font-medium text-ink-100 dark:text-ink-800">
+              {String(i + 1).padStart(2, '0')}
+            </span>
+            <div class="relative">
+              <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-ink-100 text-ink-700 dark:bg-ink-800 dark:text-ink-300">
+                <Icon class="h-6 w-6" />
+              </div>
+              <h3 class="mt-4 font-serif text-lg font-medium text-ink-900 dark:text-ink-100">
+                {value.title}
+              </h3>
+              <p class="mt-2 text-sm leading-relaxed text-ink-600 dark:text-ink-300">
+                {value.description}
+              </p>
+            </div>
+          </div>
+        )
+      })}
+    </div>
+  </div>
+</section>
+
+{/* Timeline */}
+<section class="container-page py-20">
+  <p class="eyebrow mb-3">Our journey</p>
+  <h2 class="section-title">How we got here</h2>
+
+  <div class="mt-12 space-y-8">
+    {milestones.map((m, i) => (
+      <div class="relative flex gap-6 pb-8 last:pb-0">
+        {i < milestones.length - 1 && (
+          <div class="absolute left-[27px] top-14 bottom-0 w-px bg-ink-200 dark:bg-ink-700"></div>
+        )}
+        <div class="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-full bg-ink-900 font-serif text-sm font-medium text-white dark:bg-accent-600">
+          {m.year}
+        </div>
+        <div class="pt-1">
+          <h3 class="font-serif text-xl font-medium text-ink-900 dark:text-ink-100">{m.title}</h3>
+          <p class="mt-2 max-w-2xl leading-relaxed text-ink-600 dark:text-ink-300">{m.description}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+{/* CTA */}
+<section class="border-t border-ink-200/70 bg-ink-50 py-16 dark:border-ink-700/70 dark:bg-ink-900">
+  <div class="container-page text-center">
+    <h2 class="section-title">Meet the people behind the reviews</h2>
+    <p class="mx-auto mt-4 max-w-lg text-ink-600 text-pretty dark:text-ink-300">
+      A small, independent team of writers, researchers, and developers.
+    </p>
+    <a href="/editorial-team" class="btn-primary mt-8">
+      View the editorial team
+      <ArrowRight class="h-4 w-4" />
+    </a>
+  </div>
+</section>
+
+{/* Contact — merged here from the standalone Contact page */}
+<section id="contact" class="border-t border-ink-200/70 bg-white py-16 dark:border-ink-700/70 dark:bg-ink-950">
+  <div class="container-page">
+    <p class="eyebrow mb-3">Get in touch</p>
+    <h2 class="section-title">Contact Toolisme</h2>
+    <p class="mt-3 max-w-xl text-sm text-ink-500 dark:text-ink-400">
+      Have a question, a tool to suggest, or a correction to flag? We read every message and respond within two business days.
+    </p>
+  </div>
+  <div class="container-page mt-10">
+    <div class="grid gap-12 lg:grid-cols-5">
+      <div class="lg:col-span-3">
+        <ContactForm client:load />
+      </div>
+      <div class="lg:col-span-2">
+        <div class="space-y-6">
+          <div class="card p-6">
+            <div class="flex items-center gap-3">
+              <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-accent-50 text-accent-700 dark:bg-accent-950 dark:text-accent-300">
+                <Mail class="h-5 w-5" />
+              </span>
+              <div>
+                <h3 class="text-sm font-semibold text-ink-900 dark:text-ink-100">Email us</h3>
+                <a href="mailto:master@toolisme.com" class="text-sm text-ink-500 transition-colors hover:text-accent-700 dark:text-ink-400">
+                  master@toolisme.com
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="card p-6">
+            <div class="flex items-center gap-3">
+              <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-sage-50 text-sage-700 dark:bg-sage-950 dark:text-sage-300">
+                <Clock class="h-5 w-5" />
+              </span>
+              <div>
+                <h3 class="text-sm font-semibold text-ink-900 dark:text-ink-100">Response time</h3>
+                <p class="text-sm text-ink-500 dark:text-ink-400">Within 2 business days</p>
+              </div>
+            </div>
+          </div>
+          <div class="card p-6">
+            <div class="flex items-center gap-3">
+              <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-sand-50 text-sand-700 dark:bg-sand-950 dark:text-sand-300">
+                <MapPin class="h-5 w-5" />
+              </span>
+              <div>
+                <h3 class="text-sm font-semibold text-ink-900 dark:text-ink-100">Location</h3>
+                <p class="text-sm text-ink-500 dark:text-ink-400">Remote-first, operating globally</p>
+              </div>
+            </div>
+          </div>
+          <div class="rounded-2xl bg-ink-900 p-6 text-white">
+            <h3 class="font-serif text-lg font-medium">Press & partnerships</h3>
+            <p class="mt-2 text-sm leading-relaxed text-ink-300">
+              For media inquiries, syndication, or tool-maker partnerships, contact
+              us at partnerships@toolisme.com.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</Layout>

@@ -1,11 +1,6 @@
-import { Link } from 'react-router-dom'
 import type { AuthorDetail } from '@/data/content'
 import { shortBio } from '@/utils/authorBio'
 
-/**
- * Compact author box shown at the bottom of article pages — an E-E-A-T signal.
- * Bio text comes from the existing authorDetails data; nothing is invented.
- */
 export default function AuthorBox({ author }: { author: AuthorDetail }) {
   const socials = author.socials.filter((s) => s.url && s.url !== '#')
 
@@ -28,12 +23,12 @@ export default function AuthorBox({ author }: { author: AuthorDetail }) {
             {shortBio(author.about)}
           </p>
           <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
-            <Link
-              to={`/author/${author.slug}`}
+            <a
+              href={`/author/${author.slug}`}
               className="font-semibold text-accent-700 hover:text-accent-900 dark:text-accent-400 dark:hover:text-accent-300"
             >
               View full bio →
-            </Link>
+            </a>
             {socials.map((s) => (
               <a
                 key={s.label}

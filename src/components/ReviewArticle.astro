@@ -1,0 +1,289 @@
+---
+import { Star, Clock, Check, X, ArrowRight, Rocket, Users, Tag, ChevronRight, ShieldCheck, UserCheck, UserX, ListOrdered } from 'lucide-react'
+import type { ToolReview } from '@/data/content'
+import { categories, reviewPath, comparisonPath } from '@/data/content'
+import { renderMarkdown } from '@/content/markdownReviews'
+import AuthorBox from '@/components/AuthorBox'
+import BufferDecisionTree from '@/components/BufferDecisionTree'
+import AiHeadshotQuiz from '@/components/AiHeadshotQuiz'
+import AhaSlidesDecisionMatrix from '@/components/AhaSlidesDecisionMatrix'
+import TubeMagicQuiz from '@/components/TubeMagicQuiz'
+import SnovioDecisionTree from '@/components/SnovioDecisionTree'
+import WiziShopDecisionTree from '@/components/WiziShopDecisionTree'
+import GeoTargetlyDecisionTree from '@/components/GeoTargetlyDecisionTree'
+import WarmupInboxDecisionTree from '@/components/WarmupInboxDecisionTree'
+
+interface Props {
+  review: ToolReview
+  comparison?: boolean
+}
+
+const { review, comparison = false } = Astro.props
+const SITE_BASE = 'https://toolisme.com'
+
+const HEADSHOT_CARDS = [
+  { name: 'HeadshotPro', url: 'https://www.headshotpro.com/?via=toolisme', tagline: 'Best for Teams & Consistency', colors: 'border-blue-400 bg-blue-50 dark:bg-blue-950/30', btn: 'bg-blue-600 hover:bg-blue-500', text: 'text-blue-700 dark:text-blue-400' },
+  { name: 'Aragon.ai', url: 'https://www.aragon.ai/?via=toolisme', tagline: 'Fastest & Fewest Selfies', colors: 'border-emerald-400 bg-emerald-50 dark:bg-emerald-950/30', btn: 'bg-emerald-600 hover:bg-emerald-500', text: 'text-emerald-700 dark:text-emerald-400' },
+  { name: 'BetterPic', url: 'https://betterpic.link/hu-liangyu', tagline: '4K & Anti-Wax Face', colors: 'border-violet-400 bg-violet-50 dark:bg-violet-950/30', btn: 'bg-violet-600 hover:bg-violet-500', text: 'text-violet-700 dark:text-violet-400' },
+  { name: 'Proshoot', url: 'https://www.proshoot.co?ref=toolisme', tagline: 'Best Likeness Match', colors: 'border-orange-400 bg-orange-50 dark:bg-orange-950/30', btn: 'bg-orange-600 hover:bg-orange-500', text: 'text-orange-700 dark:text-orange-400' },
+]
+
+function buildArticleSchema(r: ToolReview, url: string, author?: { name: string; slug: string }) {
+  const priceMatch = (r.pricing || '').match(/\d+(\.\d+)?/)
+  const freeTier = /^free/i.test(r.pricing || '')
+  const price = freeTier ? 0 : priceMatch ? parseFloat(priceMatch[0]) : undefined
+  const firstImage = r.markdownBody?.match(/(?:src="([^"]+)"|!\[[^\]]*\]\(([^)]+)\))/)
+  const image = firstImage ? SITE_BASE + (firstImage[1] || firstImage[2]) : undefined
+  const app: Record<string, unknown> = {
+    '@type': 'SoftwareApplication',
+    name: r.name,
+    description: r.summary,
+    applicationCategory: r.appCategory || r.subcategory || 'Productivity',
+    operatingSystem: r.operatingSystem || 'Web',
+  }
+  if (url) app.url = url
+  if (image) app.image = image
+  if (price !== undefined) {
+    app.offers = { '@type': 'Offer', priceCurrency: 'USD', price, description: r.pricing, availability: 'https://schema.org/InStock' }
+  }
+  app.aggregateRating = { '@type': 'AggregateRating', ratingValue: r.rating, bestRating: 5, ratingCount: 1 }
+  const reviewNode: Record<string, unknown> = {
+    '@type': 'Review',
+    name: `${r.name} Review 2026`,
+    reviewRating: { '@type': 'Rating', ratingValue: r.rating, bestRating: 5 },
+    author: author ? { '@type': 'Person', name: author.name, url: `${SITE_BASE}/author/${author.slug}` } : { '@type': 'Organization', name: 'Toolisme' },
+    reviewBody: r.summary,
+    datePublished: r.date,
+    itemReviewed: { '@type': 'SoftwareApplication', name: r.name },
+    positiveNotes: { '@type': 'ItemList', itemListElement: (r.pros || []).map((p, i) => ({ '@type': 'ListItem', position: i + 1, name: p })) },
+    negativeNotes: { '@type': 'ItemList', itemListElement: (r.cons || []).map((c, i) => ({ '@type': 'ListItem', position: i + 1, name: c })) },
+  }
+  return { '@context': 'https://schema.org', '@graph': [app, reviewNode] }
+}
+
+const category = categories.find((c) => c.slug === review.category)
+const { getAuthor } = await import('@/data/content')
+const authorDetail = review.author ? getAuthor(review.author) : undefined
+
+// The markdown bodies contain empty placeholder <div id="..."> that the old SPA
+// hydrated with createRoot. In Astro we render the matching quiz as an island,
+// so we strip those empty placeholders to keep the static body clean.
+const QUIZ_PLACEHOLDERS = /<div id="(buffer-decision-tree|ai-headshot-quiz|ahaslides-decision-matrix|tubemagic-quiz|snovio-decision-tree|warmupinbox-decision-tree|wizishop-decision-tree|hardware-keyboard-quiz)"><\/div>/g
+function stripQuizPlaceholders(html: string): string {
+  return html.replace(QUIZ_PLACEHOLDERS, '')
+}
+
+function slugifyHeading(text: string): string {
+  return text.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '')
+}
+
+// Add ids + scroll-mt to markdown h2 headings so the sticky TOC anchors work.
+function addHeadingIds(html: string): string {
+  return html.replace(/<h2(?![^>]*id=)[^>]*>([\s\S]*?)<\/h2>/gi, (match, inner: string) => {
+    const label = inner.replace(/<[^>]+>/g, '')
+    return `<h2 id="${slugifyHeading(label)}" class="scroll-mt-24">${inner}</h2>`
+  })
+}
+
+const markdownToc = review.markdownBody
+  ? (review.markdownBody.match(/^## (.+)$/gm) || []).map((h) => {
+      const label = h.replace(/^## /, '')
+      return { id: slugifyHeading(label), label }
+    })
+  : []
+const fallbackToc = [
+  { id: 'overview', label: 'Overview' },
+  { id: 'features', label: 'Features' },
+  { id: 'pricing', label: 'Pricing' },
+  { id: 'pros-cons', label: 'Pros & Cons' },
+]
+const toc = markdownToc.length > 0 ? markdownToc : fallbackToc
+
+const renderedMarkdown = review.markdownBody ? addHeadingIds(stripQuizPlaceholders(renderMarkdown(review.markdownBody))) : ''
+const articleSchema = buildArticleSchema(review, `${SITE_BASE}${comparison ? comparisonPath(review) : reviewPath(review)}`, authorDetail || undefined)
+const isAiHeadshot = comparison && review.slug === 'ai-headshot-tools-comparison-2026'
+const isAhaSlides = review.slug === 'ahaslides-review-2026'
+const isTubeMagic = comparison && review.slug === 'tubemagic-vs-subscribr-2026'
+const isSnovio = review.slug === 'snovio-review-2026'
+const isWarmupinbox = review.slug === 'warmupinbox-review-2026'
+const isBuffer = review.slug === 'buffer-review-2026'
+const isWiziShop = review.slug === 'wizishop-review-2026'
+const isGeotargetly = review.slug === 'geotargetly-review-2026'
+---
+
+<article>
+  <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+
+  <header class="bg-white dark:bg-ink-950">
+    <div class="container-page pt-6 pb-2">
+      <nav class="flex items-center gap-1.5 text-xs font-medium text-ink-400">
+        <a href="/" class="hover:text-ink-700">Home</a>
+        <ChevronRight class="h-3.5 w-3.5" />
+        <a href={comparison ? `/comparisons/${review.category}` : `/reviews/${review.category}`} class="hover:text-ink-700">{category?.name}</a>
+        <ChevronRight class="h-3.5 w-3.5" />
+        <a href={comparison ? comparisonPath(review) : reviewPath(review)} class="font-semibold text-ink-600 hover:text-ink-900 dark:hover:text-ink-200">{comparison ? review.name : `${review.name} Review 2026`}</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="bg-white dark:bg-ink-950">
+    <div class="container-page pt-3 pb-2">
+      <div class="mx-auto max-w-3xl">
+        {review.editorsPick && (
+          <span class="inline-flex items-center gap-1 rounded-full bg-ink-900 px-2.5 py-1 text-xs font-semibold text-white">
+            <Star class="h-3 w-3 fill-current" /> Editor's Pick
+          </span>
+        )}
+        <h1 class="mt-3 font-serif text-4xl font-medium leading-tight tracking-tight text-ink-900 sm:text-5xl">{review.name} Review 2026: {review.tagline}</h1>
+        {authorDetail && (
+          <div class="mt-4 flex items-start gap-3">
+            <img src={authorDetail.avatar} alt={authorDetail.name} class="h-10 w-10 flex-shrink-0 rounded-full object-cover" />
+            <div class="min-w-0">
+              <p class="text-sm text-ink-500 dark:text-ink-400">
+                By <a href={`/author/${authorDetail.slug}`} class="font-semibold text-ink-700 hover:text-accent-700 dark:text-ink-300 dark:hover:text-accent-400">{authorDetail.name}</a>
+                <span class="text-ink-400 dark:text-ink-500"> · {authorDetail.role}</span>
+              </p>
+              <p class="mt-1 max-w-2xl text-sm leading-relaxed text-ink-600 dark:text-ink-300">{authorDetail.about.slice(0, 140)}</p>
+            </div>
+          </div>
+        )}
+        <p class="mt-3 text-lg leading-relaxed text-ink-600 text-pretty">{review.summary}</p>
+        <div class="mt-6 flex flex-wrap items-center gap-4 text-sm">
+          <span class="flex items-center gap-1.5 font-semibold text-ink-900"><Star class="h-5 w-5 fill-sand-400 text-sand-400" />{review.rating.toFixed(1)} / 5</span>
+          <span class="flex items-center gap-1.5 text-ink-500"><Clock class="h-4 w-4" />{review.readTime} min read</span>
+          <span class="flex items-center gap-1.5 text-ink-500"><Tag class="h-4 w-4" />{review.pricing}</span>
+          <span class="flex items-center gap-1.5 text-ink-500"><Users class="h-4 w-4" />{review.bestFor}</span>
+          <span class="text-ink-400">{new Date(review.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-ink-50 dark:bg-ink-950">
+    <div class="container-page pt-6 pb-8">
+      <div class="mx-auto max-w-3xl overflow-hidden rounded-2xl border border-ink-200 bg-white shadow-sm dark:border-ink-700 dark:bg-ink-900">
+        <div class="flex flex-wrap items-center gap-2 border-b border-ink-100 bg-ink-50 px-6 py-3">
+          <ShieldCheck class="h-4 w-4 text-accent-600" />
+          <span class="text-xs font-semibold uppercase tracking-widest text-ink-500">Quick Verdict · TL;DR</span>
+          {review.verdictBadge && (<span class="ml-auto inline-flex items-center rounded-full bg-amber-400 px-3 py-1 text-xs font-bold text-ink-900 dark:bg-amber-300 dark:text-ink-950">{review.verdictBadge}</span>)}
+        </div>
+        <div class="grid gap-6 p-6 sm:grid-cols-3">
+          <div>
+            <div class="flex items-center gap-2"><Star class="h-4 w-4 fill-sand-400 text-sand-400" /><h3 class="text-sm font-semibold text-ink-900">Our Verdict</h3></div>
+            <p class="mt-2 text-sm leading-relaxed text-ink-600">{review.summary}</p>
+          </div>
+          <div>
+            <div class="flex items-center gap-2"><UserCheck class="h-4 w-4 text-sage-600" /><h3 class="text-sm font-semibold text-ink-900">Who It's For</h3></div>
+            <p class="mt-2 text-sm leading-relaxed text-ink-600">{review.bestFor}</p>
+          </div>
+          <div>
+            <div class="flex items-center gap-2"><UserX class="h-4 w-4 text-red-500" /><h3 class="text-sm font-semibold text-ink-900">Who Should Skip</h3></div>
+            <p class="mt-2 text-sm leading-relaxed text-ink-600">{review.whoShouldSkip}</p>
+          </div>
+        </div>
+        <div class="border-t border-ink-100 bg-sage-50 px-6 py-4">
+          {isAiHeadshot ? (
+            <div class="flex flex-wrap items-center justify-end gap-x-5 gap-y-2">
+              <span class="mr-auto text-xs font-medium uppercase tracking-widest text-ink-400 dark:text-ink-500">Top picks</span>
+              {HEADSHOT_CARDS.map((t) => (<a href={t.url} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-sm font-semibold text-accent-700 hover:text-accent-900 dark:text-accent-400 dark:hover:text-accent-300">{t.name}<ArrowRight class="h-4 w-4" /></a>))}
+            </div>
+          ) : (
+            <a href={review.url} target="_blank" rel="sponsored noopener noreferrer" class="inline-flex w-full items-center justify-center gap-2 rounded-full bg-amber-400 px-6 py-3 text-sm font-bold text-ink-950 shadow-md shadow-amber-400/30 transition-all hover:bg-accent-600 hover:text-white hover:shadow-lg hover:shadow-accent-600/30 active:scale-[0.98] sm:w-auto">
+              {review.ctaLabel ? `🚀 ${review.ctaLabel}` : 'Check Latest Price'}<ArrowRight class="h-4 w-4" />
+            </a>
+          )}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="container-page py-16">
+    <div class="mx-auto flex max-w-6xl gap-10">
+      {/* Sticky Table of Contents */}
+      <aside class="hidden w-56 flex-shrink-0 lg:block">
+        <div class="sticky top-24">
+          <div class="flex items-center gap-2">
+            <ListOrdered class="h-4 w-4 text-accent-600" />
+            <h3 class="text-xs font-semibold uppercase tracking-widest text-ink-500 dark:text-ink-400">
+              Contents
+            </h3>
+          </div>
+          <nav class="mt-4 space-y-1 border-l border-ink-200 dark:border-ink-700">
+            {toc.map((s) => (
+              <a
+                href={`#${s.id}`}
+                class="block border-l-2 border-transparent py-2 pl-4 text-sm text-ink-500 transition-colors hover:text-ink-900 dark:text-ink-400 dark:hover:text-ink-300"
+              >
+                {s.label}
+              </a>
+            ))}
+          </nav>
+        </div>
+      </aside>
+
+      <div class="min-w-0 flex-1">
+        {renderedMarkdown ? (
+          <div class="prose-toolisme max-w-none" set:html={renderedMarkdown} />
+        ) : (
+          <div class="prose-toolisme max-w-none">
+            <div id="overview" class="scroll-mt-24"><h2>Overview</h2><p>{review.summary}</p></div>
+            <div id="features" class="scroll-mt-24"><h2>Features</h2></div>
+            <div id="pricing" class="scroll-mt-24"><h2>Pricing</h2><p>{review.name} is priced at <strong>{review.pricing}</strong>.</p></div>
+            <div id="pros-cons" class="scroll-mt-24"><h2>Pros &amp; Cons</h2></div>
+          </div>
+        )}
+
+        {review.markdownBody && (review.pros?.length || review.cons?.length) && (
+          <div class="not-prose mt-12">
+            <h2 class="font-serif text-2xl font-medium tracking-tight text-ink-900">Pros &amp; Cons</h2>
+            <div class="mt-6 grid gap-4 sm:grid-cols-2">
+              <div class="overflow-hidden rounded-2xl border-2 border-sage-200 bg-sage-50 dark:border-sage-800 dark:bg-sage-950">
+                <div class="flex items-center gap-2 border-b border-sage-200 bg-sage-100 px-5 py-3 dark:border-sage-800 dark:bg-sage-900">
+                  <span class="flex h-7 w-7 items-center justify-center rounded-full bg-sage-600 text-white"><Check class="h-4 w-4" /></span>
+                  <h3 class="font-serif text-lg font-medium text-sage-900 dark:text-sage-100">Pros</h3>
+                </div>
+                <ul class="space-y-3 p-5">
+                  {(review.pros || []).map((pro) => (<li class="flex items-start gap-2.5 text-sm text-ink-700"><Check class="mt-0.5 h-4 w-4 flex-shrink-0 text-sage-600" />{pro}</li>))}
+                </ul>
+              </div>
+              <div class="overflow-hidden rounded-2xl border-2 border-red-200 bg-red-50 dark:border-red-900 dark:bg-red-950">
+                <div class="flex items-center gap-2 border-b border-red-200 bg-red-100 px-5 py-3">
+                  <span class="flex h-7 w-7 items-center justify-center rounded-full bg-red-600 text-white"><X class="h-4 w-4" /></span>
+                  <h3 class="font-serif text-lg font-medium text-red-900 dark:text-red-100">Cons</h3>
+                </div>
+                <ul class="space-y-3 p-5">
+                  {(review.cons || []).map((con) => (<li class="flex items-start gap-2.5 text-sm text-ink-700"><X class="mt-0.5 h-4 w-4 flex-shrink-0 text-red-500" />{con}</li>))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {isAhaSlides && <AhaSlidesDecisionMatrix client:visible />}
+        {isTubeMagic && <TubeMagicQuiz client:visible />}
+        {isSnovio && <SnovioDecisionTree client:visible />}
+        {isWarmupinbox && <WarmupInboxDecisionTree client:visible />}
+        {isBuffer && <BufferDecisionTree client:visible />}
+        {isWiziShop && <WiziShopDecisionTree client:visible />}
+        {isGeotargetly && <GeoTargetlyDecisionTree client:visible />}
+        {isAiHeadshot && <AiHeadshotQuiz client:visible />}
+
+        <div class="not-prose mt-12">
+          <a href={review.url} target="_blank" rel="sponsored noopener noreferrer" class="group mx-auto flex w-full max-w-2xl items-center gap-4 rounded-2xl bg-amber-400 px-6 py-5 text-ink-950 shadow-md shadow-amber-400/30 transition-all hover:bg-accent-600 hover:text-white hover:shadow-lg hover:shadow-accent-600/30 active:scale-[0.98]">
+            <span class="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl bg-white/30"><Rocket class="h-5 w-5" /></span>
+            <span class="flex-1">
+              <span class="block text-base font-bold leading-tight">{review.ctaLabel ? `🚀 ${review.ctaLabel}` : 'Check Latest Price'}</span>
+              <span class="mt-0.5 block text-xs font-medium opacity-90">{review.pricing} · {review.bestFor}</span>
+            </span>
+            <ArrowRight class="h-5 w-5 flex-shrink-0 transition-transform group-hover:translate-x-1" />
+          </a>
+        </div>
+        <p class="not-prose mt-3 text-center text-xs text-ink-400">
+          Some links on this page are affiliate links. <a href="/disclosure" class="font-medium text-ink-600 hover:text-ink-900">Read our disclosure</a>.
+        </p>
+
+        {authorDetail && <AuthorBox author={authorDetail} />}
+      </div>
+    </div>
+  </section>
+</article>

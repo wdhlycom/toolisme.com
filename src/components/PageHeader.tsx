@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import { ChevronRight } from 'lucide-react'
 
 interface PageHeaderProps {
@@ -22,16 +21,16 @@ export default function PageHeader({
       <div className="container-page relative py-16 sm:py-20">
         {breadcrumbs && breadcrumbs.length > 0 && (
           <nav className="mb-6 flex items-center gap-1.5 text-xs font-medium text-ink-400 dark:text-ink-500">
-            <Link to="/" className="hover:text-ink-700 dark:hover:text-ink-300">
+            <a href="/" className="hover:text-ink-700 dark:hover:text-ink-300">
               Home
-            </Link>
+            </a>
             {breadcrumbs.map((crumb) => (
               <span key={crumb.label} className="flex items-center gap-1.5">
                 <ChevronRight className="h-3.5 w-3.5" />
                 {crumb.to ? (
-                  <Link to={crumb.to} className="hover:text-ink-700 dark:hover:text-ink-300">
+                  <a href={crumb.to} className="hover:text-ink-700 dark:hover:text-ink-300">
                     {crumb.label}
-                  </Link>
+                  </a>
                 ) : (
                   <span className="text-ink-600 dark:text-ink-300">{crumb.label}</span>
                 )}
