@@ -31,10 +31,6 @@ dist_old_*
 # Astro build cache
 .astro/
 
-# Draft library — compiled sources in src/content are the deployable artifacts
-# NOTE: anchored to repo root (leading slash) so it does NOT match src/pages/reviews/
-/Reviews/
-
 # Temporary avatar candidates fetched during avatar selection
 public/avatars/candidates/
 
