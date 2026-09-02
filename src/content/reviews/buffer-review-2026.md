@@ -26,7 +26,7 @@ keyAdvantage: "Compresses multi-platform publishing into three steps: connect, q
 editorsPick: true
 featured: false
 ctaLabel: "Get 14 Days Free — No Card"
-author: "Trueer Quinn"
+author: "Annie Cole"
 ---
 
 # Buffer Review: From "Posting Every Day" to "Queueing Once a Week"
