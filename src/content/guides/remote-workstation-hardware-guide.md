@@ -6,7 +6,7 @@ tags:
 summary: "You spend 8+ hours a day at this desk. Money spent on the points of contact — keyboard, mouse, monitor, chair — pays back in hands, wrists, neck and focus. Budget in this order: input, display, connectivity, support."
 date: "2026-08-15"
 readTime: 15
-author: Trueer
+author: "Trueer Quinn"
 ---
 
 We sit at a desk 8+ hours a day. Count it up and the keyboard, mouse, monitor, and chair are the devices we touch longer than anything else we own. Yet most people happily spend thousands on the computer itself, then cheap out on the things their body actually touches — a $15 keyboard, a screen that strains the eyes after two hours, a chair that hurts.

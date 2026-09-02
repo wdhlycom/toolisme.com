@@ -62,7 +62,7 @@ const jsonLd = {
       '@id': 'https://toolisme.com/#organization',
       name: 'Toolisme',
       description:
-        'An independent review site that tests SaaS, AI, creator, security, and hardware tools hands-on against a published scoring rubric. Reader-supported through affiliate commissions — no pay-for-play reviews.',
+        'An independent review site that tests SaaS, AI, creator, security, and hardware tools hands-on where possible, and otherwise aggregates cited user feedback — always scored against a published rubric and clearly labeled. Reader-supported through affiliate commissions — no pay-for-play reviews.',
       url: 'https://toolisme.com',
       sameAs: [
         'https://twitter.com/toolisme',
@@ -182,9 +182,21 @@ import Layout from '@/layouts/Layout.astro'
         <div id="testing" class="scroll-mt-24">
           <h2>How We Test</h2>
           <p>
-            Every tool on Toolisme is used hands-on by a real person, on real accounts we pay
-            for ourselves. No vendor-supplied demos, no press kits standing in for
-            experience.
+            We test what we genuinely can, and we say so plainly when we can't. Some tools on
+            Toolisme are reviewed hands-on by a real person, on real accounts we pay for
+            ourselves — no vendor-supplied demos, no press kits standing in for experience.
+          </p>
+          <p>
+            But not every tool can be run that way: some are too costly, some are login-walled,
+            some require accounts or usage we don't have. In those cases we don't pretend to
+            have tested them. We base the review on official documentation, independent
+            testing, and sourced user feedback, and we label it clearly as research rather
+            than hands-on.
+          </p>
+          <p>
+            Every review states which of these it is — hands-on, research-based, or a mix of
+            both — up front and again in its methodology section, so you always know whether
+            the reviewer actually ran the tool.
           </p>
           <p>
             Our test environment mirrors a working reader's setup: a current Windows and
@@ -194,11 +206,12 @@ import Layout from '@/layouts/Layout.astro'
             observe network behavior without contaminating our main systems.
           </p>
           <p>
-            We live with each tool for at least two full weeks of daily use before scoring.
-            Longer for steep learning curves or seasonal use. During that window we collect
-            hard evidence: dated screenshots of core workflows, exported outputs, tickets
-            we file ourselves, and billing receipts. If we claim a feature is broken, slow, or
-            exceptional, there's a screenshot or log behind it.
+            For tools we do test hands-on, we use each one inside a real workflow — often over
+            a week or more of daily use — rather than a quick demo click-through. When a test
+            is long, we say how long. During that window we collect the evidence we can: dated
+            screenshots of core workflows, exported outputs, and billing receipts. If we claim
+            a feature is broken, slow, or exceptional, there's a screenshot or log behind it —
+            and when there isn't, we say so instead of implying otherwise.
           </p>
         </div>
 
@@ -280,8 +293,12 @@ import Layout from '@/layouts/Layout.astro'
         <div id="authors" class="scroll-mt-24">
           <h2>Who Writes</h2>
           <p>
-            Toolisme reviews are written by editors with domain experience — people who have used or deeply researched the tools they write about, and who aggregate real user feedback where direct testing isn't possible.
-            Many come from engineering, security, or creative production backgrounds rather than marketing.
+            Toolisme reviews are written by editors who match their beat: software to Annie
+            Cole, creators and hardware to Trueer, and security to Bill Hartman, all under our
+            editor-in-chief's oversight. Where a reviewer can test a tool hands-on, they do;
+            where they can't, they aggregate and cite sourced user feedback and say which is
+            which. Each editor's background, expertise, and working method are described on
+            their author page.
           </p>
           <p>
             Every review carries the author's name and the date it was last verified. That

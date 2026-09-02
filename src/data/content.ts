@@ -203,7 +203,7 @@ export const authorDetails: AuthorDetail[] = [
   },
   {
     slug: 'trueer',
-    name: 'Trueer',
+    name: 'Trueer Quinn',
     role: 'Creators & Hardware Editor',
     location: 'Melbourne, Victoria, Australia',
     avatar: '/avatars/trueer-quinn.jpg',
@@ -233,8 +233,8 @@ export const authorDetails: AuthorDetail[] = [
   },
 ]
 
-export const getAuthor = (slug: string): AuthorDetail | undefined =>
-  authorDetails.find((a) => a.slug === slug)
+export const getAuthor = (id: string): AuthorDetail | undefined =>
+  authorDetails.find((a) => a.slug === id || a.name === id)
 
 export const teamMembers: TeamMember[] = [
   {
@@ -266,7 +266,7 @@ export const teamMembers: TeamMember[] = [
     authorPage: true,
   },
   {
-    name: 'Trueer',
+    name: 'Trueer Quinn',
     slug: 'trueer',
     role: 'Creators & Hardware Editor',
     bio: "Trueer is our Creators & Hardware Editor. A visual artist turned tech reviewer, he brings a creator's perspective to video, audio, and hardware reviews. His creative work has appeared in three digital art exhibitions.",

@@ -32,7 +32,7 @@ ctaLabel: "Try WarmupInbox Free (7 Days, No Credit Card)"
 
 You just bought a shiny new domain. Day one, you fire off 200 cold emails. What happens? Not the spam folder — Gmail flags you as a suspicious sender outright. Your domain reputation starts at zero, and it stays there for months.
 
-That's not fear-mongering. We've helped a client rescue a domain like that; it took six weeks just waiting for Google to clear the flag.
+That's not fear-mongering. It's the scenario cold-email veterans describe again and again — and one that can take weeks to climb back from, because Google doesn't clear a flag quickly.
 
 The iron law of cold email: **if it never reaches the inbox, the best copy in the world is worthless.** New domains and fresh mailboxes have no sending history, and mailbox providers simply don't trust them. WarmupInbox exists for exactly this job — it "warms up" your mailbox, makes it look like a real person, and slowly builds the reputation that gets you delivered.
 

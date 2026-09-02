@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { Menu, X, Info, Sun, Moon, ChevronDown } from 'lucide-react'
+import { Menu, X, Sun, Moon, ChevronDown } from 'lucide-react'
 
 type NavChild = { to: string; label: string }
 type NavLinkItem = { to: string; label: string; children?: NavChild[] }
@@ -39,7 +39,7 @@ function isActive(pathname: string, to: string): boolean {
 
 /**
  * Global site header — a React island hydrated on every page.
- * Reproduces the original SPA header: affiliate-disclosure strip, logo,
+ * Reproduces the original SPA header: logo,
  * full nav with hover dropdowns (Comparisons/Reviews), dark-mode toggle and
  * a mobile accordion menu. Uses plain <a> links (full page loads in SSG).
  */
@@ -94,32 +94,14 @@ export default function SiteHeader() {
         scrolled ? 'shadow-md' : ''
       }`}
     >
-      {/* Affiliate disclosure strip — always visible */}
-      <div className="bg-ink-900/80 text-ink-300 dark:bg-ink-100/80 dark:text-ink-500">
-        <div className="container-page flex items-center justify-center gap-2 py-1.5 text-center">
-          <Info className="hidden h-3 w-3 flex-shrink-0 text-ink-400 sm:block" />
-          <p className="text-[11px] leading-tight tracking-wide">
-            <span className="font-semibold text-ink-200 dark:text-ink-700">Disclosure:</span> We are
-            reader-supported. When you buy through links on our site, we may earn an affiliate
-            commission at no extra cost to you.{' '}
-            <a
-              href="/disclosure"
-              className="font-semibold text-accent-400 underline underline-offset-2 hover:text-accent-300 dark:text-accent-700 dark:hover:text-accent-900"
-            >
-              Learn More
-            </a>
-          </p>
-        </div>
-      </div>
-
       {/* Main nav — solid contrasting band: dark in light mode, light in dark mode */}
-      <div className="border-t border-white/10 dark:border-ink-200/70">
-        <nav className="container-page flex h-16 items-center justify-between">
+      <div className="">
+        <nav className="container-page flex h-14 items-center justify-between md:h-16">
           <a href="/" className="group flex items-center gap-2.5">
             <img
               src="/logo.png"
               alt="Toolisme"
-              className="h-9 w-9 rounded-full object-cover transition-transform group-hover:scale-105"
+              className="h-8 w-8 rounded-full object-cover transition-transform group-hover:scale-105 md:h-9 md:w-9"
             />
             <span className="font-serif text-xl font-medium tracking-tight text-white dark:text-ink-900">
               Toolisme
@@ -237,6 +219,12 @@ export default function SiteHeader() {
                 )}
               </div>
             ))}
+            <a
+              href="/disclosure"
+              className="mt-2 block rounded-lg px-4 py-2.5 text-xs font-medium text-ink-400 transition-colors hover:bg-white/10 hover:text-white dark:text-ink-500 dark:hover:bg-ink-100 dark:hover:text-ink-900"
+            >
+              Affiliate Disclosure
+            </a>
           </div>
         </div>
       )}

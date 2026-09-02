@@ -30,17 +30,13 @@ ctaLabel: "Start Your 14-Day Free Trial (No Credit Card)"
 
 # Woodpecker Review 2026: Cold Email That Lands Without Torching Your Domain
 
-Last month we helped a friend's SaaS team look at their outbound. They excitedly imported 3,000 emails, hit send, and the next day their domain was blacklisted.
-
-The reason was stupid-simple: the list was full of hard-bounce addresses. Once the sending servers flagged "invalid-address ratio too high," their sender reputation got dumped straight into the spam pile. Their old tool never verified, never warned.
+The most common cold-email disaster goes like this: a team imports a few thousand addresses, hits send, and wakes up to a blacklisted domain. The reason is usually stupid-simple — a list full of hard-bounce addresses. Once the sending servers flag "invalid-address ratio too high," the sender's reputation gets dumped straight into the spam pile, and a tool that never verified the list never warned them.
 
 That's the most expensive tuition in cold email. It's not the software that costs you — it's the domain. Kill a domain and half a year of cold-email assets go to zero.
 
-So the first criterion for picking a cold email tool isn't "how fast does it send." It's "will it keep my domain alive."
+So the first criterion for picking a cold email tool isn't "how fast does it send." It's "will it keep my domain alive." Woodpecker is built around that exact question.
 
-We moved them over to Woodpecker. Not because it's flashy, but because it treats "don't kill the domain" as the whole point. Below is the dashboard we looked at together the day after migration: 5,000 prospects loaded, 4,642 delivered, a 9.2% reply rate with 227 marked "interested" — what a healthy sender reputation looks like in practice.
-
-![Our friend's Woodpecker campaigns dashboard the day after migration — 5,000 prospects, 4,642 delivered, 9.2% replies (227 interested, 114 maybe later, 91 not interested)](/reviews/woodpecker-intro.png)
+This review is research-based, not hands-on: we did not migrate a live campaign of our own. What follows is drawn from Woodpecker's official documentation, pricing page, and real-user feedback across G2, Capterra, Trustpilot, and Reddit (collected August 2026).
 
 ## The Verdict in One Sentence
 
@@ -72,11 +68,11 @@ Cold email has two big failure points: getting detected as a script, and your do
 
 - **Human-like sending.** Random delays between sends, send times spread out — Gmail and Outlook can't instantly tell it's a bot.
 - **Adaptive throttling.** When bounce rates start climbing, it eases off the gas instead of plowing through.
-- **Free email verification (Bounce Shield).** It checks the list before sending and keeps hard bounces out of the queue. On our migration, it flagged a batch of invalid addresses right after import — they never touched the sending queue, and the domain survived. (That same 3,000-row import that killed their old domain made it through Woodpecker without a single hard bounce hitting the sending servers.)
+- **Free email verification (Bounce Shield).** It checks the list before sending and keeps hard bounces out of the queue. Users report it flagging a batch of invalid addresses right after import, before they ever touch the sending queue.
 - **Free warm-up.** New inboxes build reputation gradually, no separate warm-up tool to buy.
-- **Deliverability Monitor.** Sends your domains into green/yellow/red tiers and alerts you when reputation dips. Our primary domain has stayed green the whole time, which is a load off. (We don't have a screenshot of the tier panel itself, but the campaign stats below — same domain, next month — back the green claim up: 4,692 sent, 209 replies, 52 hard bounces, 137 marked "interested.")
+- **Deliverability Monitor.** Sends your domains into green/yellow/red tiers and alerts you when reputation dips. Users who keep their lists clean report holding a green tier, which is the whole point of the tool.
 
-![The same domain, the month after: campaign performance over time — 4,692 emails sent, 3,517 delivered, 2,269 views, 209 replies, 52 hard bounces, 137 interested (1.1% bounce rate, 4.5% reply rate). The flat bounce line is what "primary domain stays green" looks like in real numbers.](/reviews/woodpecker-verdict.png)
+![The Woodpecker campaign dashboard — a sample campaign with deliverability and reply metrics, shown to illustrate what a healthy sender reputation looks like](/reviews/woodpecker-verdict.png)
 
 Compliance is real too: GDPR and CCPA, ISO-certified storage, CASA Tier 2, Google compliance partner (oAuth 2), plus 2FA.
 
@@ -84,9 +80,9 @@ Developers get looked after as well: built-in Claude AI, MCP server, CLI, plus A
 
 <a href="https://woodpecker.co/?red=toolis" target="_blank" rel="sponsored noopener noreferrer" style="display:inline-block;background:#fbbf24;color:#0f172a;padding:10px 20px;border-radius:8px;font-weight:700;text-decoration:none;margin:10px 0;">Want to test your own domain's deliverability first? Start the free 14-day trial →</a>
 
-## Features, Broken Down (and What We Hit)
+## Features, Broken Down
 
-**Email sequences + condition logic.** It routes follow-ups based on opens, clicks, replies. A/B tests up to 5 variants, with spintax for personalization. Our first sequence went from connecting an inbox to running in about 10 minutes — the editor below is the actual screen we built it in: campaign "SaaS in Portugal", one email step with a `{{FIRST_NAME}}` placeholder and a 2-day delay before the next step.
+**Email sequences + condition logic.** It routes follow-ups based on opens, clicks, replies. A/B tests up to 5 variants, with spintax for personalization. Reviewers report connecting an inbox to a running sequence in about 10 minutes — the editor below shows a sample campaign with a `{{FIRST_NAME}}` placeholder and a delay between steps.
 
 **Unlimited inboxes.** This is the most practical thing about it. Most tools charge per extra mailbox; Woodpecker doesn't — connect as many as you want on the same plan. Inbox-rotation teams save real money here.
 
@@ -98,7 +94,7 @@ Developers get looked after as well: built-in Claude AI, MCP server, CLI, plus A
 2. **Free warm-up is solid, not magic.** Some users report emails still landing in spam after warming up. If the domain's history is already bad, no tool resurrects it — warm-up maintains reputation, it doesn't revive it.
 3. **Cancellation gets complaints.** Quite a few Trustpilot reviews gripe about the cancellation process once a card is on file. Our advice: use the full 14-day no-card trial before committing, keep screenshots when you cancel, and if it's a short project, pay with a virtual card (like Privacy.com) or set a calendar reminder.
 
-![The sequence editor — the first campaign "SaaS in Portugal" built in about 10 minutes, with a {{FIRST_NAME}} placeholder and a 2-day delay between steps](/reviews/woodpecker-feature.png)
+![The Woodpecker sequence editor — a sample campaign with a {{FIRST_NAME}} placeholder and a delay between steps](/reviews/woodpecker-feature.png)
 
 ## Pricing (verified August 2026)
 
@@ -152,7 +148,7 @@ The 14-day no-credit-card trial is enough to run 500 contacts through the Delive
 - Pricing and features verified **August 2026**, source [woodpecker.co/pricing](https://woodpecker.co/pricing) (live official prices; promos fluctuate — the official page wins).
 - Ratings from G2 (4.4/5) and Capterra (4.5/5) active-user reviews; Trustpilot (~2.9/5) low scores concentrate on billing and cancellation, not sending quality — included honestly in the cons.
 - Real-user signal: G2, Capterra, Trustpilot, Reddit cold-email threads, and several 2026 independent reviews.
-- This post contains affiliate links. We may earn a commission if you sign up through them; it doesn't change the price you pay. We write from real experience and don't flip conclusions for commission.
+- This post contains affiliate links. We may earn a commission if you sign up through them; it doesn't change the price you pay. We don't flip conclusions for commission.
 
 ---
 
