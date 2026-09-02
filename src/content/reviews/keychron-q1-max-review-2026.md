@@ -24,7 +24,7 @@ bestFor: "Mac users, writers and office typists, anyone who wants all-aluminum g
 whoShouldSkip: "People used to low-profile boards or sore wrists who won't add a wrist rest; anyone needing wireless low-latency gaming; budget buyers who want the same spec for less"
 keyAdvantage: "Ships the 'custom keyboard' config and multi-system compatibility as a mass-market standard — flagship out of the box"
 editorsPick: true
-author: "Trueer"
+author: "Trueer Quinn"
 ---
 
 # Keychron Q1 Max Review: the Barrier-Lowering Custom Board That Keeps the Height
